@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Cut | Barbería de Élite — Quito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c96a;
+            --gold-dim: rgba(201,168,76,0.15);
+            --dark: #080808;
+            --surface: #0f0f0f;
+            --surface2: #161616;
+            --surface3: #1c1c1c;
+            --text: #d4d0c8;
+            --text-dim: #6b6660;
+            --text-muted: #3a3632;
+            --orange: #c4622d;
+            --orange-light: #e07040;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ── Noise ── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 1000; opacity: 0.35;
+        }
+
+        /* ── Cursor ── */
+        .cursor {
+            width: 10px; height: 10px;
+            background: var(--gold); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+        }
+        .cursor-ring {
+            width: 36px; height: 36px;
+            border: 1px solid rgba(201,168,76,0.45);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transition: all 0.14s ease;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 26px 60px;
+            background: linear-gradient(to bottom, rgba(8,8,8,0.97) 0%, transparent 100%);
+        }
+        .nav-logo {
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .nav-logo-main {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem; letter-spacing: 6px;
+            color: var(--gold); text-transform: uppercase;
+        }
+        .nav-logo-sub {
+            font-size: 0.58rem; letter-spacing: 5px;
+            color: var(--text-dim); text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-cta {
+            padding: 11px 28px;
+            background: transparent;
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .nav-cta:hover { background: var(--gold-dim); border-color: var(--gold); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex; align-items: flex-end;
+            padding: 0 60px 90px;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 55% at 75% 35%, rgba(196,98,45,0.14) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 15% 65%, rgba(201,168,76,0.07) 0%, transparent 60%),
+                linear-gradient(165deg, #100d0a 0%, #080808 60%);
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 0%, transparent 100%);
+        }
+        /* Decorative scissors watermark */
+        .hero-watermark {
+            position: absolute; right: 6%; top: 50%;
+            transform: translateY(-50%) rotate(-15deg);
+            font-size: clamp(160px, 22vw, 320px);
+            opacity: 0.04; pointer-events: none; user-select: none;
+            line-height: 1;
+        }
+        /* Big text watermark */
+        .hero-bg-text {
+            position: absolute; right: -30px; bottom: 60px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(100px, 16vw, 220px);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(201,168,76,0.06);
+            line-height: 1; pointer-events: none; user-select: none;
+            white-space: nowrap;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 760px; }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 12px;
+            margin-bottom: 22px;
+        }
+        .hero-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+        .hero-eyebrow-text {
+            font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(72px, 11vw, 150px);
+            line-height: 0.88; letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+        .hero-title .line1 { display: block; color: var(--text-dim); font-size: 0.42em; letter-spacing: 8px; margin-bottom: 6px; }
+        .hero-title .line2 { display: block; color: #fff; }
+        .hero-title .line3 { display: block; color: var(--gold); }
+
+        .hero-meta {
+            display: flex; align-items: center; gap: 30px;
+            margin-bottom: 46px;
+        }
+        .hero-meta-divider { width: 1px; height: 40px; background: var(--text-muted); }
+        .hero-meta-item { text-align: center; }
+        .hero-meta-num {
+            font-family: 'Cinzel', serif; font-size: 1.6rem;
+            color: var(--gold); line-height: 1;
+        }
+        .hero-meta-label {
+            font-size: 0.6rem; letter-spacing: 3px; color: var(--text-dim);
+            text-transform: uppercase; margin-top: 4px;
+        }
+
+        .hero-actions { display: flex; gap: 18px; align-items: center; }
+        .btn-gold {
+            padding: 16px 38px;
+            background: linear-gradient(135deg, var(--gold) 0%, #a07828 100%);
+            color: #000; text-decoration: none;
+            font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.3); }
+        .btn-outline {
+            padding: 15px 34px;
+            border: 1px solid rgba(201,168,76,0.35);
+            color: var(--gold); text-decoration: none;
+            font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover { background: var(--gold-dim); border-color: var(--gold); }
+
+        .scroll-hint {
+            position: absolute; right: 60px; bottom: 90px;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            writing-mode: vertical-rl;
+            font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .scroll-hint-line {
+            width: 1px; height: 55px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+        /* ── DIVIDER ── */
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+            margin: 0 60px;
+        }
+
+        /* ── SECTION HEADER ── */
+        .section-header {
+            display: flex; align-items: center; gap: 18px;
+            margin-bottom: 70px;
+        }
+        .section-num {
+            font-family: 'Cinzel', serif; font-size: 0.68rem;
+            color: var(--orange); letter-spacing: 3px;
+        }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(34px, 4.5vw, 56px);
+            letter-spacing: 4px; color: #fff;
+        }
+        .section-rule {
+            flex: 1; height: 1px;
+            background: linear-gradient(to right, rgba(201,168,76,0.25), transparent);
+        }
+
+        /* ── SERVICES ── */
+        .services { padding: 120px 60px; background: var(--dark); }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: rgba(201,168,76,0.07);
+        }
+
+        .svc {
+            background: var(--surface); padding: 54px 44px;
+            position: relative; overflow: hidden;
+            transition: background 0.35s;
+        }
+        .svc:hover { background: var(--surface2); }
+        .svc::before {
+            content: ''; position: absolute;
+            bottom: -50px; left: 50%; transform: translateX(-50%);
+            width: 70%; height: 100px;
+            background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .svc:hover::before { opacity: 1; }
+        .svc::after {
+            content: ''; position: absolute; inset: 0;
+            border: 1px solid transparent;
+            pointer-events: none; transition: border-color 0.4s;
+        }
+        .svc:hover::after { border-color: rgba(201,168,76,0.25); }
+
+        .svc-num {
+            font-family: 'Cinzel', serif; font-size: 0.62rem;
+            letter-spacing: 4px; color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        .svc-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
+        .svc-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.9rem; letter-spacing: 2px; color: #fff;
+            margin-bottom: 16px; line-height: 1;
+        }
+        .svc-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.85; }
+        .svc-price {
+            margin-top: 32px;
+            font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold);
+        }
+        .svc-price span { font-size: 0.68rem; color: var(--text-dim); font-family: 'Inter', sans-serif; }
+
+        /* ── GALLERY / PORTFOLIO ── */
+        .gallery { padding: 120px 60px; background: linear-gradient(180deg, var(--dark) 0%, #0a0806 100%); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            grid-template-rows: 280px 280px;
+            gap: 3px;
+        }
+
+        .gallery-item {
+            position: relative; overflow: hidden;
+            background: var(--surface);
+        }
+        .gallery-item:first-child {
+            grid-row: 1 / 3;
+        }
+
+        .gallery-bg {
+            position: absolute; inset: 0;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover .gallery-bg { transform: scale(1.04); }
+
+        /* Different atmospheric gradients for each cell */
+        .g1 .gallery-bg { background: radial-gradient(ellipse 80% 70% at 40% 40%, rgba(196,98,45,0.3) 0%, rgba(201,168,76,0.1) 40%, transparent 80%), linear-gradient(160deg,#1a1008,#0a0804); }
+        .g2 .gallery-bg { background: radial-gradient(ellipse 90% 80% at 60% 60%, rgba(201,168,76,0.2) 0%, transparent 70%), linear-gradient(200deg,#120e06,#080808); }
+        .g3 .gallery-bg { background: radial-gradient(ellipse at 30% 70%, rgba(196,98,45,0.2) 0%, transparent 60%), linear-gradient(180deg,#100c06,#0a0808); }
+        .g4 .gallery-bg { background: radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.15) 0%, transparent 60%), linear-gradient(140deg,#0e0a06,#090808); }
+        .g5 .gallery-bg { background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(196,98,45,0.18) 0%, transparent 70%), linear-gradient(180deg,#110c08,#080808); }
+
+        /* Pattern overlays */
+        .gallery-item::before {
+            content: ''; position: absolute; inset: 0; z-index: 1;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(201,168,76,0.025) 0px, rgba(201,168,76,0.025) 1px,
+                transparent 1px, transparent 16px
+            );
+        }
+
+        .gallery-overlay {
+            position: absolute; inset: 0; z-index: 2;
+            background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 50%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-label {
+            font-size: 0.65rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--gold);
+        }
+        .gallery-caption {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem; letter-spacing: 2px; color: #fff;
+            margin-top: 6px;
+        }
+
+        /* Big icon overlay per cell */
+        .gallery-icon {
+            position: absolute; z-index: 1;
+            font-size: 5rem; opacity: 0.06;
+            pointer-events: none;
+        }
+        .g1 .gallery-icon { top: 30%; left: 50%; transform: translate(-50%,-50%) rotate(-10deg); font-size: 8rem; }
+        .g2 .gallery-icon { top: 35%; left: 50%; transform: translate(-50%,-50%); }
+        .g3 .gallery-icon { top: 40%; left: 50%; transform: translate(-50%,-50%) rotate(10deg); }
+        .g4 .gallery-icon { top: 40%; left: 50%; transform: translate(-50%,-50%); }
+        .g5 .gallery-icon { top: 40%; left: 50%; transform: translate(-50%,-50%) rotate(-8deg); }
+
+        /* ── PROCESS ── */
+        .process { padding: 120px 60px; background: var(--dark); }
+
+        .process-steps {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            position: relative;
+        }
+        .process-steps::before {
+            content: ''; position: absolute;
+            top: 36px; left: 12%; right: 12%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), rgba(201,168,76,0.3), transparent);
+        }
+
+        .step {
+            padding: 0 30px 0 0;
+            position: relative;
+        }
+        .step-num {
+            width: 72px; height: 72px;
+            border: 1px solid rgba(201,168,76,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif; font-size: 1.1rem;
+            color: var(--gold); margin-bottom: 28px;
+            background: var(--dark);
+            position: relative; z-index: 2;
+            transition: all 0.3s;
+        }
+        .step:hover .step-num {
+            background: var(--gold-dim);
+            border-color: var(--gold);
+        }
+        .step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem; letter-spacing: 2px; color: #fff;
+            margin-bottom: 12px;
+        }
+        .step-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.8; }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials { padding: 120px 60px; background: linear-gradient(180deg, #0a0806 0%, var(--dark) 100%); }
+
+        .testi-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: rgba(201,168,76,0.06);
+        }
+
+        .testi {
+            background: var(--surface); padding: 46px 40px;
+            position: relative; transition: background 0.3s;
+        }
+        .testi:hover { background: var(--surface2); }
+
+        .testi-stars {
+            display: flex; gap: 4px; margin-bottom: 24px;
+        }
+        .star { color: var(--gold); font-size: 0.85rem; }
+
+        .testi-quote {
+            font-size: 0.88rem; color: var(--text);
+            line-height: 1.85; margin-bottom: 30px;
+            font-style: italic;
+        }
+        .testi-quote::before { content: '"'; color: var(--gold); font-size: 1.4rem; line-height: 0; vertical-align: -6px; margin-right: 4px; }
+
+        .testi-author {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .testi-avatar {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--gold-dim);
+            border: 1px solid rgba(201,168,76,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif; font-size: 0.85rem;
+            color: var(--gold);
+        }
+        .testi-name {
+            font-family: 'Cinzel', serif; font-size: 0.8rem;
+            letter-spacing: 2px; color: #fff;
+        }
+        .testi-role { font-size: 0.68rem; letter-spacing: 2px; color: var(--text-dim); margin-top: 3px; }
+
+        /* ── BOOKING ── */
+        .booking { padding: 120px 60px; background: var(--dark); position: relative; overflow: hidden; }
+
+        .booking-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 50% 90%, rgba(196,98,45,0.12) 0%, transparent 70%);
+        }
+
+        .booking-inner {
+            position: relative; max-width: 820px; margin: 0 auto; text-align: center;
+        }
+        .booking-eyebrow {
+            display: inline-flex; align-items: center; gap: 12px;
+            margin-bottom: 24px;
+        }
+        .booking-eyebrow-line { width: 28px; height: 1px; background: var(--orange-light); }
+        .booking-eyebrow-text {
+            font-size: 0.68rem; letter-spacing: 5px; color: var(--orange-light);
+            text-transform: uppercase;
+        }
+        .booking-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(52px, 8vw, 112px);
+            letter-spacing: 3px; line-height: 0.9;
+            color: #fff; margin-bottom: 28px;
+        }
+        .booking-title .gold { color: var(--gold); }
+        .booking-sub {
+            font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;
+            max-width: 460px; margin: 0 auto 50px;
+        }
+        .booking-actions { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+
+        .booking-info {
+            display: flex; justify-content: center; gap: 50px;
+            margin-top: 60px; padding-top: 50px;
+            border-top: 1px solid rgba(201,168,76,0.1);
+        }
+        .info-item { text-align: center; }
+        .info-icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
+        .info-label { font-size: 0.65rem; letter-spacing: 4px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+        .info-value { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--text); letter-spacing: 2px; }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 44px 60px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px;
+        }
+        .footer-logo-wrap { display: flex; flex-direction: column; gap: 3px; }
+        .footer-logo { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; letter-spacing: 5px; }
+        .footer-sub-logo { font-size: 0.58rem; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; }
+        .footer-back {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .footer-back:hover { color: var(--gold); }
+        .footer-back::before { content: '←'; }
+
+        /* ── ANIMATIONS ── */
+        .fade-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.22s; }
+        .delay-3 { transition-delay: 0.34s; }
+        .delay-4 { transition-delay: 0.46s; }
+
+        /* WhatsApp flotante */
+        .wa-float { position:fixed; bottom:32px; right:32px; z-index:800; display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .wa-float-label { background:#111; border:1px solid rgba(37,211,102,0.3); color:#aaa; font-size:0.68rem; letter-spacing:2px; padding:8px 16px; white-space:nowrap; opacity:0; transform:translateX(10px); transition:all 0.3s; }
+        .wa-float:hover .wa-float-label { opacity:1; transform:translateX(0); }
+        .wa-float-btn { width:56px; height:56px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; animation:waPulse 2.5s ease-in-out infinite; transition:transform 0.3s; }
+        .wa-float:hover .wa-float-btn { transform:scale(1.1); }
+        @keyframes waPulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 0 rgba(37,211,102,0.3);} 50%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 10px rgba(37,211,102,0);} }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
+            nav { padding: 20px 30px; }
+            .nav-links { display: none; }
+            section, .services, .gallery, .process, .testimonials, .booking { padding: 80px 30px; }
+            .hero { padding: 0 30px 70px; }
+            .services-grid, .testi-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+            .gallery-item:first-child { grid-row: auto; }
+            .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .process-steps::before { display: none; }
+            footer { flex-direction: column; gap: 16px; text-align: center; }
+            .booking-info { flex-direction: column; gap: 30px; }
+            .scroll-hint { display: none; }
+        }
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .hero-meta { flex-wrap: wrap; gap: 16px; }
+        }
+
+        /* ── Chatbot ── */
+        .chat-bubble{position:fixed;bottom:100px;right:32px;z-index:799;width:48px;height:48px;background:linear-gradient(135deg,#c9a84c,#a07828);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,0.4);transition:transform 0.3s;}
+        .chat-bubble:hover{transform:scale(1.1);}
+        .chat-bubble .chat-badge{position:absolute;top:-4px;right:-4px;background:#e74c3c;color:#fff;font-size:0.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
+        .chat-window{position:fixed;bottom:160px;right:32px;z-index:798;width:340px;background:#0f0f0f;border:1px solid rgba(201,168,76,0.2);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.7);max-height:480px;}
+        .chat-window.open{display:flex;}
+        .chat-header{background:linear-gradient(135deg,#1a1500,#0f0f0f);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(201,168,76,0.15);}
+        .chat-avatar{width:38px;height:38px;background:linear-gradient(135deg,#c9a84c,#a07828);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+        .chat-header-info{flex:1;}
+        .chat-header-name{font-family:'Cinzel',serif;font-size:0.82rem;letter-spacing:2px;color:#c9a84c;}
+        .chat-header-status{font-size:0.62rem;color:#25D366;letter-spacing:1px;margin-top:2px;}
+        .chat-close{background:none;border:none;color:#6b6660;cursor:pointer;font-size:1.1rem;padding:4px;transition:color 0.2s;}
+        .chat-close:hover{color:#c9a84c;}
+        .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.2) transparent;}
+        .chat-messages::-webkit-scrollbar{width:4px;}
+        .chat-messages::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.2);border-radius:2px;}
+        .msg{max-width:85%;padding:10px 14px;border-radius:2px;font-size:0.8rem;line-height:1.6;}
+        .msg.bot{background:#1a1a1a;color:#d4d0c8;align-self:flex-start;border-left:2px solid rgba(201,168,76,0.4);}
+        .msg.user{background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.1));color:#e8c96a;align-self:flex-end;border-right:2px solid rgba(201,168,76,0.6);}
+        .msg.typing{background:#1a1a1a;color:#6b6660;align-self:flex-start;font-style:italic;}
+        .chat-options{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(201,168,76,0.08);}
+        .chat-opt{background:none;border:1px solid rgba(201,168,76,0.25);color:#c9a84c;font-size:0.68rem;letter-spacing:2px;padding:7px 14px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;font-family:'Inter',sans-serif;}
+        .chat-opt:hover{background:rgba(201,168,76,0.1);border-color:#c9a84c;}
+        .chat-input-row{display:flex;border-top:1px solid rgba(201,168,76,0.1);}
+        .chat-input{flex:1;background:#0a0a0a;border:none;color:#d4d0c8;padding:12px 16px;font-size:0.8rem;font-family:'Inter',sans-serif;outline:none;}
+        .chat-input::placeholder{color:#3a3632;}
+        .chat-send{background:linear-gradient(135deg,#c9a84c,#a07828);border:none;color:#000;padding:0 18px;cursor:pointer;font-size:1rem;transition:opacity 0.2s;}
+        .chat-send:hover{opacity:0.85;}
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut%20%F0%9F%92%88" target="_blank" class="wa-float" title="Reservar por WhatsApp">
+        <span class="wa-float-label">¡Reservar por WhatsApp!</span>
+        <div class="wa-float-btn">💬</div>
+    </a>
+
+    <!-- Chatbot -->
+    <div class="chat-bubble" id="chatBubble" onclick="toggleChat()" title="Asistente virtual">
+        🤖<span class="chat-badge">1</span>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-avatar">✂</div>
+            <div class="chat-header-info">
+                <div class="chat-header-name">Golden Cut</div>
+                <div class="chat-header-status">● Asistente en línea</div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-options" id="chatOptions"></div>
+        <div class="chat-input-row">
+            <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendUserMsg()">
+            <button class="chat-send" onclick="sendUserMsg()">➤</button>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">
+            <div class="nav-logo-main">Golden Cut</div>
+            <div class="nav-logo-sub">Barbería · Quito</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#testimonios">Opiniones</a></li>
+        </ul>
+        <a href="#reservar" class="nav-cta">Reservar Cita</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-watermark">✂</div>
+        <div class="hero-bg-text">GOLDEN CUT</div>
+
+        <div class="hero-content">
+            <div class="hero-eyebrow fade-up">
+                <div class="hero-eyebrow-line"></div>
+                <div class="hero-eyebrow-text">Est. 2019 · Quito, Ecuador</div>
+            </div>
+
+            <h1 class="hero-title fade-up delay-1">
+                <span class="line1">Barbería de Élite</span>
+                <span class="line2">Golden</span>
+                <span class="line3">Cut</span>
+            </h1>
+
+            <div class="hero-meta fade-up delay-2">
+                <div class="hero-meta-item">
+                    <div class="hero-meta-num">500+</div>
+                    <div class="hero-meta-label">Clientes</div>
+                </div>
+                <div class="hero-meta-divider"></div>
+                <div class="hero-meta-item">
+                    <div class="hero-meta-num">5★</div>
+                    <div class="hero-meta-label">Calificación</div>
+                </div>
+                <div class="hero-meta-divider"></div>
+                <div class="hero-meta-item">
+                    <div class="hero-meta-num">6+</div>
+                    <div class="hero-meta-label">Años</div>
+                </div>
+            </div>
+
+            <div class="hero-actions fade-up delay-3">
+                <a href="#reservar" class="btn-gold">Reservar Ahora</a>
+                <a href="#servicios" class="btn-outline">Ver Servicios</a>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <div class="scroll-hint-line"></div>
+            Scroll
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- SERVICES -->
+    <section class="services" id="servicios">
+        <div class="section-header fade-up">
+            <span class="section-num">01 /</span>
+            <h2 class="section-title">Servicios</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="services-grid">
+            <div class="svc fade-up">
+                <div class="svc-num">001</div>
+                <span class="svc-icon">✂</span>
+                <h3 class="svc-name">Corte<br>Clásico</h3>
+                <p class="svc-desc">Corte preciso adaptado a tu estilo y tipo de cabello. Incluye lavado, secado y acabado profesional con productos premium.</p>
+                <div class="svc-price">$12 <span>/ sesión</span></div>
+            </div>
+            <div class="svc fade-up delay-1">
+                <div class="svc-num">002</div>
+                <span class="svc-icon">🪒</span>
+                <h3 class="svc-name">Afeitado<br>Premium</h3>
+                <p class="svc-desc">Afeitado con navaja recta, toalla caliente y bálsamo regenerador. La experiencia de barbería clásica reinventada.</p>
+                <div class="svc-price">$15 <span>/ sesión</span></div>
+            </div>
+            <div class="svc fade-up delay-2">
+                <div class="svc-num">003</div>
+                <span class="svc-icon">👑</span>
+                <h3 class="svc-name">Corte &<br>Barba</h3>
+                <p class="svc-desc">Combo completo de corte de cabello más diseño y perfilado de barba. El tratamiento estrella de Golden Cut.</p>
+                <div class="svc-price">$22 <span>/ sesión</span></div>
+            </div>
+            <div class="svc fade-up delay-3">
+                <div class="svc-num">004</div>
+                <span class="svc-icon">💆</span>
+                <h3 class="svc-name">Ritual<br>Capilar</h3>
+                <p class="svc-desc">Tratamiento hidratante profundo, masaje capilar relajante y aplicación de aceites esenciales para cabello y cuero cabelludo.</p>
+                <div class="svc-price">$18 <span>/ sesión</span></div>
+            </div>
+            <div class="svc fade-up">
+                <div class="svc-num">005</div>
+                <span class="svc-icon">🎨</span>
+                <h3 class="svc-name">Color &<br>Mechas</h3>
+                <p class="svc-desc">Coloración moderna con técnicas actuales. Mechas, degradados y tratamiento de color con productos de alta gama libres de amoniaco.</p>
+                <div class="svc-price">desde $30 <span>/ sesión</span></div>
+            </div>
+            <div class="svc fade-up delay-1">
+                <div class="svc-num">006</div>
+                <span class="svc-icon">⚡</span>
+                <h3 class="svc-name">Pack<br>VIP</h3>
+                <p class="svc-desc">Corte + barba + ritual capilar + bebida de bienvenida. La experiencia premium completa para el caballero que exige lo mejor.</p>
+                <div class="svc-price">$40 <span>/ sesión</span></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="galeria">
+        <div class="section-header fade-up">
+            <span class="section-num">02 /</span>
+            <h2 class="section-title">Nuestro Trabajo</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item g1 fade-up">
+                <div class="gallery-bg"></div>
+                <span class="gallery-icon">✂</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-label">Corte Clásico</div>
+                    <div class="gallery-caption">The Signature Cut</div>
+                </div>
+            </div>
+            <div class="gallery-item g2 fade-up delay-1">
+                <div class="gallery-bg"></div>
+                <span class="gallery-icon">🪒</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-label">Afeitado</div>
+                    <div class="gallery-caption">Navaja Recta</div>
+                </div>
+            </div>
+            <div class="gallery-item g3 fade-up delay-2">
+                <div class="gallery-bg"></div>
+                <span class="gallery-icon">👑</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-label">Combo Premium</div>
+                    <div class="gallery-caption">Corte & Barba</div>
+                </div>
+            </div>
+            <div class="gallery-item g4 fade-up delay-1">
+                <div class="gallery-bg"></div>
+                <span class="gallery-icon">🎨</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-label">Color</div>
+                    <div class="gallery-caption">Mechas & Degradado</div>
+                </div>
+            </div>
+            <div class="gallery-item g5 fade-up delay-2">
+                <div class="gallery-bg"></div>
+                <span class="gallery-icon">💆</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-label">Ritual</div>
+                    <div class="gallery-caption">Tratamiento Capilar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- PROCESS -->
+    <section class="process">
+        <div class="section-header fade-up">
+            <span class="section-num">03 /</span>
+            <h2 class="section-title">Tu Experiencia</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="process-steps">
+            <div class="step fade-up">
+                <div class="step-num">I</div>
+                <div class="step-title">Reserva Online</div>
+                <p class="step-desc">Elige tu servicio, barbero y horario desde tu celular en segundos. Sin llamadas, sin esperas.</p>
+            </div>
+            <div class="step fade-up delay-1">
+                <div class="step-num">II</div>
+                <div class="step-title">Bienvenida VIP</div>
+                <p class="step-desc">Llega a un espacio premium. Bebida de bienvenida y consulta de estilo personalizada con tu barbero.</p>
+            </div>
+            <div class="step fade-up delay-2">
+                <div class="step-num">III</div>
+                <div class="step-title">El Ritual</div>
+                <p class="step-desc">Corte preciso, productos de alta gama y técnicas actualizadas. Cada detalle diseñado para ti.</p>
+            </div>
+            <div class="step fade-up delay-3">
+                <div class="step-num">IV</div>
+                <div class="step-title">Resultado Final</div>
+                <p class="step-desc">Sales renovado, con estilo y confianza. Consejos de mantenimiento para prolongar tu look.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonios">
+        <div class="section-header fade-up">
+            <span class="section-num">04 /</span>
+            <h2 class="section-title">Opiniones</h2>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="testi-grid">
+            <div class="testi fade-up">
+                <div class="testi-stars">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testi-quote">El mejor corte que me han hecho en años. El ambiente es increíble y el servicio es de otro nivel. Ya no voy a ningún otro lugar.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">MR</div>
+                    <div>
+                        <div class="testi-name">Marcos R.</div>
+                        <div class="testi-role">Cliente frecuente</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi fade-up delay-1">
+                <div class="testi-stars">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testi-quote">El Pack VIP es una experiencia completamente diferente. El masaje capilar es relajante y el resultado del corte es perfecto. Lo recomiendo siempre.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">DS</div>
+                    <div>
+                        <div class="testi-name">Diego S.</div>
+                        <div class="testi-role">Cliente VIP</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi fade-up delay-2">
+                <div class="testi-stars">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testi-quote">Vine por el afeitado con navaja y quedé impresionado. La atención al detalle, la precisión del barbero... esto es lo que diferencia a Golden Cut.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">AP</div>
+                    <div>
+                        <div class="testi-name">Andrés P.</div>
+                        <div class="testi-role">Nuevo cliente</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING CTA -->
+    <section class="booking" id="reservar">
+        <div class="booking-glow"></div>
+        <div class="booking-inner">
+            <div class="booking-eyebrow fade-up">
+                <div class="booking-eyebrow-line"></div>
+                <div class="booking-eyebrow-text">Disponibilidad inmediata</div>
+                <div class="booking-eyebrow-line"></div>
+            </div>
+            <h2 class="booking-title fade-up delay-1">
+                Reserva Tu<br>
+                <span class="gold">Cita Ahora</span>
+            </h2>
+            <p class="booking-sub fade-up delay-2">
+                Tu mejor versión te espera. Agenda en segundos y vive la experiencia Golden Cut.
+            </p>
+            <div class="booking-actions fade-up delay-3">
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut%20%F0%9F%92%88" class="btn-gold" target="_blank">Reservar por WhatsApp</a>
+                <a href="/cdn-cgi/l/email-protection#75060100111c1a5b1407015b051d1c191c05351218141c195b161a18" class="btn-outline">Enviar Correo</a>
+            </div>
+
+            <div class="booking-info fade-up delay-4">
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div class="info-label">Ubicación</div>
+                    <div class="info-value">Quito, Ecuador</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🕐</span>
+                    <div class="info-label">Horario</div>
+                    <div class="info-value">Lun–Sáb · 9am–8pm</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div class="info-label">Teléfono</div>
+                    <div class="info-value">+593 968 352 133</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo-wrap">
+            <div class="footer-logo">Golden Cut</div>
+            <div class="footer-sub-logo">Barbería de Élite · Quito</div>
+        </div>
+        <div>© 2025 · Todos los derechos reservados</div>
+        <a href="index.html" class="footer-back">Volver al portafolio</a>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Cursor
+        const cursor = document.getElementById('cursor');
+        const ring   = document.getElementById('cursorRing');
+        let mx=0, my=0, rx=0, ry=0;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx - 5 + 'px';
+            cursor.style.top  = my - 5 + 'px';
+        });
+        function animRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx - 18 + 'px';
+            ring.style.top  = ry - 18 + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+
+        document.querySelectorAll('a, button, .svc, .gallery-item, .testi, .step').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.style.transform   = 'scale(1.8)';
+                ring.style.borderColor = 'rgba(201,168,76,0.85)';
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.style.transform   = 'scale(1)';
+                ring.style.borderColor = 'rgba(201,168,76,0.45)';
+            });
+        });
+
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+        setTimeout(() => {
+            document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+        }, 100);
+
+        // ── Chatbot Golden Cut ──────────────────────────────
+        const RESPONSES = {
+            precios: { msg: "💰 Nuestros servicios van desde <strong>$12 el corte clásico</strong> hasta $40 el Pack VIP completo. ¿Te interesa alguno en especial?", opts: ["Ver todos los servicios","Reservar ahora","¿Qué incluye el Pack VIP?"] },
+            servicios: { msg: "✂ Ofrecemos:<br>• Corte Clásico — $12<br>• Afeitado Premium — $15<br>• Corte & Barba — $22<br>• Ritual Capilar — $18<br>• Color & Mechas — desde $30<br>• Pack VIP — $40", opts: ["Reservar cita","¿Cuánto tiempo tarda?","Contacto"] },
+            tiempo: { msg: "⏱ Cada sesión dura entre <strong>30 y 60 minutos</strong> según el servicio. Reserva con anticipación para asegurar tu hora. ¡Atendemos Lun–Sáb de 9am a 8pm!", opts: ["Reservar ahora","Ver servicios"] },
+            contacto: { msg: "📱 Puedes reservar por <strong>WhatsApp al +593 968 352 133</strong> o visítanos en Quito. Horario: Lun–Sáb 9am–8pm.", opts: ["Abrir WhatsApp","Ver servicios"] },
+            vip: { msg: "👑 El <strong>Pack VIP ($40)</strong> incluye: corte + barba + ritual capilar + bebida de bienvenida. La experiencia completa para el caballero que exige lo mejor.", opts: ["Reservar Pack VIP","Ver todos los servicios"] },
+            default: { msg: "¡Hola! 👋 Bienvenido a <strong>Golden Cut Barbería</strong>. ¿En qué puedo ayudarte hoy?", opts: ["Ver servicios y precios","Reservar cita","Horarios y ubicación","Pack VIP"] }
+        };
+        const KEYWORDS = {
+            precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],
+            servici:["servicios"],corte:["servicios"],barba:["servicios"],afeitad:["servicios"],
+            tiemp:["tiempo"],horas:["tiempo"],dura:["tiempo"],minutos:["tiempo"],
+            contact:["contacto"],whatsapp:["contacto"],llamar:["contacto"],ubicaci:["contacto"],
+            vip:["vip"],"pack":["vip"]
+        };
+        let chatOpen=false,firstOpen=true;
+        function toggleChat(){
+            chatOpen=!chatOpen;
+            document.getElementById('chatWindow').classList.toggle('open',chatOpen);
+            if(chatOpen){
+                document.querySelector('.chat-badge').style.display='none';
+                if(firstOpen){firstOpen=false;addBotMsg(RESPONSES.default.msg,RESPONSES.default.opts);}
+                setTimeout(()=>document.getElementById('chatInput').focus(),200);
+            }
+        }
+        function addBotMsg(text,opts=[],delay=0){
+            const box=document.getElementById('chatMessages');
+            if(delay>0){const t=document.createElement('div');t.className='msg typing';t.id='typing';t.textContent='Escribiendo...';box.appendChild(t);box.scrollTop=box.scrollHeight;}
+            setTimeout(()=>{
+                document.getElementById('typing')?.remove();
+                const el=document.createElement('div');el.className='msg bot';el.innerHTML=text;
+                box.appendChild(el);box.scrollTop=box.scrollHeight;renderOpts(opts);
+            },delay||0);
+        }
+        function renderOpts(opts){
+            const c=document.getElementById('chatOptions');c.innerHTML='';
+            opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOption(o);c.appendChild(b);});
+        }
+        function handleOption(txt){
+            const box=document.getElementById('chatMessages');
+            const u=document.createElement('div');u.className='msg user';u.textContent=txt;
+            box.appendChild(u);box.scrollTop=box.scrollHeight;
+            document.getElementById('chatOptions').innerHTML='';
+            const t=txt.toLowerCase();
+            if(t.includes('whatsapp')||t.includes('reservar')||t.includes('abrir')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut%20%F0%9F%92%88','_blank');addBotMsg('¡Perfecto! Te abrí WhatsApp para tu reserva. ¡Hasta pronto! 💈',[],400);return;}
+            const key=Object.keys(KEYWORDS).find(k=>t.includes(k));
+            const resp=key?RESPONSES[KEYWORDS[key]]:{ msg:"Para más información escríbenos por WhatsApp, te respondemos en minutos 😊",opts:["Abrir WhatsApp","Ver servicios"] };
+            addBotMsg(resp.msg,resp.opts,700);
+        }
+        function sendUserMsg(){
+            const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';
+            const box=document.getElementById('chatMessages');
+            const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;
+            document.getElementById('chatOptions').innerHTML='';
+            const t=txt.toLowerCase();
+            const key=Object.keys(KEYWORDS).find(k=>t.includes(k));
+            const resp=key?RESPONSES[KEYWORDS[key]]:{msg:"Entiendo 😊 Para ayudarte mejor, escríbenos directamente por WhatsApp. ¡Respondemos rápido!",opts:["Abrir WhatsApp","Ver servicios","¿Cuánto cuesta?"]};
+            addBotMsg(resp.msg,resp.opts,800);
+        }
+        // ── Fin Chatbot ──────────────────────────────────────
+    </script>
+</body>
+</html>
