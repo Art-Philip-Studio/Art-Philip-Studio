@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Philip Studio | Dev & Soluciones Digitales</title>
+    <title>Art Philip Studio | Páginas web que consiguen clientes</title>
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="apple-touch-icon" href="logo.jpg">
@@ -111,7 +111,8 @@
             margin-bottom:24px;
         }
 
-        .proj-desc{font-size:0.85rem;line-height:1.8;color:var(--text-dim);max-width:400px;margin-bottom:36px;}
+        .proj-desc{font-size:0.85rem;line-height:1.8;color:var(--text-dim);max-width:400px;margin-bottom:12px;}
+        .proj-result{font-size:0.78rem;line-height:1.6;color:var(--gold);max-width:400px;margin-bottom:28px;opacity:0.85;}
 
         .proj-btn{
             display:inline-flex;align-items:center;gap:10px;
@@ -157,12 +158,12 @@
         .slide-gym .proj-card-visual{background:linear-gradient(160deg,#080e20,#080808);box-shadow:0 30px 80px rgba(50,100,220,0.15);}
 
         /* ── ANIMATIONS ── */
-        /* Default: elements hidden */
         .proj-slide .proj-num,
         .proj-slide .proj-category,
         .proj-slide .proj-name-line1,
         .proj-slide .proj-name-line2,
         .proj-slide .proj-desc,
+        .proj-slide .proj-result,
         .proj-slide .proj-btn,
         .proj-slide .proj-card-visual { opacity:0; }
 
@@ -171,10 +172,10 @@
         .proj-slide .proj-name-line1 { transform:translateY(55px); }
         .proj-slide .proj-name-line2 { transform:translateY(55px); }
         .proj-slide .proj-desc       { transform:translateY(24px); }
+        .proj-slide .proj-result     { transform:translateY(18px); }
         .proj-slide .proj-btn        { transform:translateY(18px); }
         .proj-slide .proj-card-visual{ transform:translateX(36px) rotate(4deg); }
 
-        /* Active: animate in */
         .proj-slide.active .proj-num {
             opacity:1;transform:translateY(0);
             transition:opacity .5s ease .05s, transform .6s cubic-bezier(.22,1,.36,1) .05s;
@@ -195,9 +196,13 @@
             opacity:1;transform:translateY(0);
             transition:opacity .5s ease .34s, transform .6s cubic-bezier(.22,1,.36,1) .34s;
         }
+        .proj-slide.active .proj-result {
+            opacity:0.85;transform:translateY(0);
+            transition:opacity .5s ease .40s, transform .6s cubic-bezier(.22,1,.36,1) .40s;
+        }
         .proj-slide.active .proj-btn {
             opacity:1;transform:translateY(0);
-            transition:opacity .5s ease .42s, transform .6s cubic-bezier(.22,1,.36,1) .42s;
+            transition:opacity .5s ease .46s, transform .6s cubic-bezier(.22,1,.36,1) .46s;
         }
         .proj-slide.active .proj-card-visual {
             opacity:1;transform:translateX(0) rotate(0deg);
@@ -252,6 +257,36 @@
         .services-cta{margin-top:50px;text-align:center;}
         .btn-wa-big{display:inline-flex;align-items:center;gap:12px;padding:18px 48px;background:#25D366;color:#fff;text-decoration:none;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
         .btn-wa-big:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,0.3);}
+
+        /* Sobre mí */
+        .sobre-mi{background:var(--surface);position:relative;overflow:hidden;}
+        .sobre-mi-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;}
+        .sobre-mi-inner{position:relative;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center;}
+        .sobre-mi-avatar{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#1a1500,#0f0f0f);border:1px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center;font-size:3.5rem;flex-shrink:0;}
+        .sobre-mi-left{display:flex;flex-direction:column;align-items:flex-start;gap:20px;}
+        .sobre-mi-tag{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--orange-light);display:flex;align-items:center;gap:8px;}
+        .sobre-mi-tag::before{content:'';width:20px;height:1px;background:var(--orange-light);}
+        .sobre-mi-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,52px);letter-spacing:3px;color:#fff;line-height:1;}
+        .sobre-mi-role{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-dim);}
+        .sobre-mi-text{font-size:0.88rem;line-height:1.9;color:var(--text-dim);}
+        .sobre-mi-text p{margin-bottom:14px;}
+        .sobre-mi-text p:last-child{margin-bottom:0;}
+        .sobre-mi-text strong{color:var(--gold);font-weight:500;}
+        .sobre-mi-cta{margin-top:28px;}
+
+        /* Testimonios */
+        .testimonios{background:var(--dark);position:relative;}
+        .testimonios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(201,168,76,0.08);}
+        .testi-item{background:var(--dark);padding:44px 40px;position:relative;overflow:hidden;transition:background 0.3s;}
+        .testi-item:hover{background:var(--surface);}
+        .testi-quote{font-size:3rem;color:rgba(201,168,76,0.15);font-family:'Cinzel',serif;line-height:1;margin-bottom:16px;}
+        .testi-text{font-size:0.85rem;line-height:1.9;color:var(--text-dim);margin-bottom:28px;font-style:italic;}
+        .testi-author{display:flex;align-items:center;gap:14px;}
+        .testi-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1a1500,#0f0f0f);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+        .testi-name{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;color:var(--gold);}
+        .testi-biz{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-top:3px;}
+        .testi-item::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:80%;height:120px;background:radial-gradient(ellipse,rgba(201,168,76,0.1) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;}
+        .testi-item:hover::before{opacity:1;}
 
         /* Contact */
         .contact{background:var(--dark);position:relative;overflow:hidden;}
@@ -321,6 +356,8 @@
             .proj-card-visual{width:220px;height:260px;}
             .proj-bg-num{font-size:100px;}
             .services-list{grid-template-columns:1fr;}
+            .testimonios-grid{grid-template-columns:1fr;}
+            .sobre-mi-inner{grid-template-columns:1fr;gap:40px;}
             footer{flex-direction:column;gap:10px;text-align:center;}
             .scroll-indicator,.wa-float-label{display:none;}
             .proj-thumbs{flex-wrap:wrap;}
@@ -369,6 +406,7 @@
     <ul class="nav-links">
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#contacto">Contacto</a></li>
     </ul>
 </nav>
@@ -381,11 +419,11 @@
     <div class="hero-content">
         <div class="hero-label fade-up">Quito, Ecuador — Disponible Ahora</div>
         <h1 class="hero-title fade-up delay-1">
-            <span class="dim">Dev &</span>
-            <span class="gold">Soluciones</span>
-            Digitales
+            <span class="dim">Páginas web que</span>
+            <span class="gold">consiguen</span>
+            clientes
         </h1>
-        <p class="hero-desc fade-up delay-2">Landing pages de alto impacto. Experiencias digitales que venden. Diseño que convierte visitantes en clientes.</p>
+        <p class="hero-desc fade-up delay-2">Soy Philip, desarrollador web en Quito. Diseño y desarrollo tu página desde cero — lista en 72 horas, con diseño profesional y enfocada en que tus clientes te contacten.</p>
         <div class="hero-cta fade-up delay-3">
             <a href="#proyectos" class="btn-primary">Ver Proyectos</a>
             <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios" target="_blank" class="btn-ghost">Contratar</a>
@@ -412,6 +450,7 @@
                 <span class="proj-name-line1">Barbería</span>
                 <span class="proj-name-line2">Golden Cut</span>
                 <p class="proj-desc">Diseño oscuro con acentos dorados, animaciones fluidas y enfoque total en conversión de clientes. Un clásico premium.</p>
+                <p class="proj-result">✦ Entregado en 3 días · Enfocado en reservas y llamadas directas desde el primer scroll.</p>
                 <a href="Barberia.html" class="proj-btn">Ver Demo</a>
             </div>
             <div class="proj-visual">
@@ -435,6 +474,7 @@
                 <span class="proj-name-line1">Lumina</span>
                 <span class="proj-name-line2">El Arte de Soltar</span>
                 <p class="proj-desc">Videojuego 3D de misterio y narrativa. Próximamente demo jugable en navegador con assets monetizables.</p>
+                <p class="proj-result">✦ Proyecto personal · Demo jugable próximamente en navegador.</p>
                 <span class="proj-btn disabled">Próximamente</span>
             </div>
             <div class="proj-visual">
@@ -458,6 +498,7 @@
                 <span class="proj-name-line1">Restaurante</span>
                 <span class="proj-name-line2">La Reserva</span>
                 <p class="proj-desc">Experiencia gastronómica de lujo en digital. Menú interactivo, reservas online y diseño que evoca elegancia y sabor.</p>
+                <p class="proj-result" style="color:#7ab55c;">✦ Menú digital interactivo + sistema de reservas online integrado.</p>
                 <a href="Restaurante.html" class="proj-btn" style="border-color:rgba(122,181,92,0.35);color:#7ab55c;">Ver Demo</a>
             </div>
             <div class="proj-visual">
@@ -481,6 +522,7 @@
                 <span class="proj-name-line1">Gym</span>
                 <span class="proj-name-line2">Iron Force</span>
                 <p class="proj-desc">Landing de alto rendimiento para gimnasios de élite. Planes, clases y energía visual que motiva desde el primer scroll.</p>
+                <p class="proj-result" style="color:#5090e8;">✦ Planes de membresía claros + CTA directo a WhatsApp para captar nuevos socios.</p>
                 <a href="Gym.html" class="proj-btn" style="border-color:rgba(80,144,232,0.35);color:#5090e8;">Ver Demo</a>
             </div>
             <div class="proj-visual">
@@ -539,21 +581,21 @@
             <div class="service-num">001</div>
             <span class="service-icon">⚡</span>
             <h3 class="service-title">Landing Page<br>Premium</h3>
-            <p class="service-desc">Página de alto impacto, diseño exclusivo, responsive y optimizada para conversión. Entrega en 48–72h con 2 rondas de revisión.</p>
+            <p class="service-desc">Tu negocio online en 72 horas. Diseño exclusivo, adaptado a celular y pensado para que los visitantes te llamen o escriban. Incluye 2 revisiones hasta que quedes 100% satisfecho.</p>
             <div class="service-price">$150 USD <span>/ página</span></div>
         </div>
         <div class="service-item fade-up delay-1">
             <div class="service-num">002</div>
             <span class="service-icon">🎯</span>
             <h3 class="service-title">Sitio Web<br>Corporativo</h3>
-            <p class="service-desc">Hasta 5 secciones, formulario, galería y SEO básico. Entrega en 5–7 días. Ideal para empresas y profesionales.</p>
+            <p class="service-desc">Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.</p>
             <div class="service-price">$350 USD <span>/ proyecto</span></div>
         </div>
         <div class="service-item fade-up delay-2">
             <div class="service-num">003</div>
             <span class="service-icon">🛒</span>
             <h3 class="service-title">Tienda<br>Online</h3>
-            <p class="service-desc">E-commerce completo con catálogo, carrito, pagos y panel de administración. Listo para vender globalmente.</p>
+            <p class="service-desc">Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.</p>
             <div class="service-price">$650 USD <span>/ proyecto</span></div>
         </div>
     </div>
@@ -562,12 +604,72 @@
     </div>
 </section>
 
+<!-- SOBRE MÍ -->
+<section class="sobre-mi" id="sobre-mi">
+    <div class="sobre-mi-bg"></div>
+    <div class="section-header fade-up">
+        <span class="section-num">03 /</span>
+        <h2 class="section-title">Sobre mí</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="sobre-mi-inner">
+        <div class="sobre-mi-left fade-up">
+            <div class="sobre-mi-avatar">👨‍💻</div>
+            <div class="sobre-mi-tag">Desarrollador Freelance</div>
+            <div class="sobre-mi-name">Philip<br>Arteaga</div>
+            <div class="sobre-mi-role">Quito, Ecuador</div>
+        </div>
+        <div class="sobre-mi-text fade-up delay-1">
+            <p>Soy Philip, desarrollador web freelance con base en Quito. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes.</p>
+            <p>No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.</p>
+            <p>Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.</p>
+            <div class="sobre-mi-cta">
+                <a href="https://wa.me/593968352133?text=Hola%20Philip%2C%20vi%20tu%20portafolio%20y%20quiero%20hablar%20contigo" target="_blank" class="btn-primary">💬 Hablar con Philip</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+    <div class="section-header fade-up">
+        <span class="section-num">04 /</span>
+        <h2 class="section-title">Testimonios</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="testimonios-grid">
+        <div class="testi-item fade-up">
+            <div class="testi-quote">"</div>
+            <p class="testi-text">Philip entregó nuestra landing page en tiempo récord y el resultado superó lo que esperábamos. El diseño es impecable y desde que la tenemos online hemos recibido más consultas por WhatsApp.</p>
+            <div class="testi-author">
+                <div class="testi-avatar">✂</div>
+                <div>
+                    <div class="testi-name">Golden Cut Barbería</div>
+                    <div class="testi-biz">Cliente · Landing Page Premium</div>
+                </div>
+            </div>
+        </div>
+        <div class="testi-item fade-up delay-1">
+            <div class="testi-quote">"</div>
+            <p class="testi-text">Necesitábamos una página que transmitiera la elegancia de nuestro restaurante. Philip entendió exactamente lo que queríamos y el menú interactivo quedó espectacular. Muy profesional.</p>
+            <div class="testi-author">
+                <div class="testi-avatar">🍽</div>
+                <div>
+                    <div class="testi-name">La Reserva Restaurante</div>
+                    <div class="testi-biz">Cliente · Landing Page Premium</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p style="font-size:0.72rem;letter-spacing:2px;color:var(--text-dim);text-align:center;margin-top:30px;opacity:0.5;">— Cuando tengas testimonios reales de clientes, reemplaza estos textos —</p>
+</section>
+
 <!-- CONTACTO -->
 <section class="contact" id="contacto">
     <div class="contact-bg"></div>
     <div class="contact-inner">
         <h2 class="contact-title fade-up">¿Listo para<br><span class="gold">empezar?</span></h2>
-        <p class="contact-sub fade-up delay-1">Tu negocio merece una presencia digital a la altura. Hablemos y tengamos tu página lista en tiempo récord.</p>
+        <p class="contact-sub fade-up delay-1">Tu negocio merece una presencia digital que realmente funcione. Hablemos hoy y tengamos tu página lista esta semana.</p>
         <div class="contact-links fade-up delay-2">
             <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios%20%F0%9F%91%8D" target="_blank" class="contact-btn wa">💬 WhatsApp</a>
             <a href="mailto:studio.art.philip@gmail.com" class="contact-btn primary">✉ Correo</a>
@@ -586,7 +688,7 @@
         </div>
     </div>
     <div>Soluciones Digitales</div>
-    <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</div>
+    <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
 </footer>
 
 <script>
@@ -595,7 +697,7 @@ const cursor=document.getElementById('cursor'),ring=document.getElementById('cur
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-5+'px';cursor.style.top=my-5+'px';});
 (function ar(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx-19+'px';ring.style.top=ry-19+'px';requestAnimationFrame(ar);})();
-document.querySelectorAll('a,button,.proj-thumb,.service-item').forEach(el=>{
+document.querySelectorAll('a,button,.proj-thumb,.service-item,.testi-item').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(201,168,76,0.8)';});
     el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(201,168,76,0.5)';});
 });
