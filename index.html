@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Art Philip Studio | Páginas web que consiguen clientes</title>
-<link rel="icon" type="image/jpeg" href="logo.jpg">
-<link rel="shortcut icon" href="logo.jpg">
-<link rel="apple-touch-icon" href="logo.jpg">
+<link rel="icon" type="image/jpeg" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -108,7 +108,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-circle-wrap:hover .logo-circle,.logo-circle-wrap.flipped .logo-circle{transform:rotateY(180deg);}
 .logo-face{position:absolute;width:100%;height:100%;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .logo-face-front{background:linear-gradient(145deg,#1a1500,#0f0d08);}
-.logo-face-front img{width:100%;height:100%;object-fit:contain;padding:24px;}
+.logo-face-front img{width:100%;height:100%;object-fit:contain;padding:8;}
 .logo-face-back{background:linear-gradient(145deg,#0a0a00,#1a1200);transform:rotateY(180deg);flex-direction:column;gap:4px;}
 .clock-display{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;}
 .clock-time{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:var(--gold);line-height:1;text-shadow:0 0 20px rgba(201,168,76,.6);}
@@ -174,6 +174,123 @@ section.sec{padding:120px 60px;position:relative;}
 .demos-title .gd{color:var(--gold);}
 .demos-title .or{color:var(--orange);}
 .demos-sub{font-size:13px;color:var(--text-dim);font-weight:300;max-width:380px;margin:0 auto;}
+.demos-section { padding-bottom: 60px; }
+
+.demo-hero-img {
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 32px;
+  cursor: pointer;
+}
+.demo-thumbs {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+.demo-thumb {
+  width: 120px;
+  height: 75px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.3s cubic-bezier(.25,.46,.45,.94);
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.demo-thumb:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.6);
+}
+.demo-thumb.active {
+  border-color: var(--gold);
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(201,168,76,.3);
+}
+.demo-thumb-bg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+.demo-thumb-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+}
+.demo-thumb-label {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #fff;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+.demo-thumb-icon { 
+  display: none;
+}
+
+@media(max-width: 768px){
+  .demo-thumbs {
+    position: static;
+    margin-top: 16px;
+    justify-content: center;
+  }
+  .demo-thumb {
+    width: 90px;
+    height: 60px;
+  }
+  .demo-thumb-label { font-size: 9px; }
+}
+.demo-hero-bg {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.8s cubic-bezier(.25,.46,.45,.94), transform 0.8s cubic-bezier(.25,.46,.45,.94);
+  transform: scale(1);
+  background: #0a0a0a; /* Fondo mientras carga */
+}
+.demo-hero-bg iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none; /* Desactiva scroll dentro del iframe para que no interfiera */
+  transform: scale(0.5); /* Zoom out para que se vea la página completa */
+  transform-origin: top left;
+  width: 200%; /* Compensa el scale 0.5 */
+  height: 200%;
+}
+.demo-hero-img.fade-out.demo-hero-bg {
+  opacity: 0;
+  transform: scale(1.05);
+}
+.demo-hero-img.fade-out.demo-hero-overlay {
+  opacity: 0;
+}
+.demo-hero-img {
+  cursor: pointer;
+}
+
+/* En móvil quitamos el iframe y usamos captura para que no pese */
+@media(max-width: 768px){
+.demo-hero-bg iframe {
+   display: none!important;
+ }
+.demo-hero-bg {
+   background: var(--dark) url('demo-mobile-fallback.jpg') center/cover;
+ }
+}
 .carousel-scene{position:relative;height:420px;perspective:1400px;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none;}
 .carousel-scene:active{cursor:grabbing;}
 .carousel-track{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;}
@@ -511,74 +628,52 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
     <p class="demos-sub">Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.</p>
   </div>
 
-  <div class="carousel-scene" id="carouselScene">
-    <div class="carousel-track" id="carouselTrack">
+<!-- DEMOS SLIDER CON TRANSICIÓN COMO EL VIDEO -->
+<div class="demos-slider-wrap">
 
-      <div class="demo-card" data-pos="0" data-idx="0">
-        <div class="demo-preview dp-barberia">
-          <div class="dp-inner">
-            <div class="dp-icon">✂️</div>
-            <div class="dp-title">Golden Cut</div>
-            <div class="dp-sub">Barbería de Élite · Quito</div>
-            <div class="dp-tags"><span>Dark Theme</span><span>Reservas</span><span>Premium</span></div>
-          </div>
-        </div>
-        <div class="demo-info">
-          <div class="demo-tag">Landing Page · Completado</div>
-          <div class="demo-name">Barbería Golden Cut</div>
-          <div class="demo-action">
-            <div><div class="demo-type-lbl">Tipo</div><div class="demo-type-val">Landing Premium</div></div>
-            <a href="Barberia.html" target="_blank" class="demo-open-btn">Ver Demo ▶</a>
-          </div>
-        </div>
+  <div class="demo-hero-img" id="demoHeroWrap">
+    <div class="demo-hero-bg" id="demoHeroBg"></div>
+    <div class="demo-hero-overlay">
+      <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
+      <div class="demo-hero-sub" id="demoHeroSub">Landing Page · Dark Theme · Reservas</div>
+      <a href="Barberia.html" target="_blank" class="demo-hero-btn" id="demoHeroBtn">Ver Demo ▶</a>
+    </div>
+   
+<div class="demo-hero-img" id="demoHeroWrap">
+  <div class="demo-hero-bg" id="demoHeroBg"></div>
+  <div class="demo-hero-overlay">
+    <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
+    <div class="demo-hero-sub" id="demoHeroSub">Landing Page · Dark Theme · Reservas</div>
+    <a href="Barberia.html" target="_blank" class="demo-hero-btn" id="demoHeroBtn">Ver Demo ▶</a>
+  </div>
+
+  <div class="demo-thumbs">
+    <div class="demo-thumb active" onclick="selectDemo(0,this)">
+      <div class="demo-thumb-bg" style="background-image: url('demo-barberia.jpg');">
+        <div class="demo-thumb-label">GOLDEN CUT</div>
       </div>
-
-      <div class="demo-card" data-pos="1" data-idx="1">
-        <div class="demo-preview dp-restaurante">
-          <div class="dp-inner">
-            <div class="dp-icon">🍽️</div>
-            <div class="dp-title">La Reserva</div>
-            <div class="dp-sub">Restaurante Fine Dining</div>
-            <div class="dp-tags"><span>Elegante</span><span>Menú</span><span>Reservas</span></div>
-          </div>
-        </div>
-        <div class="demo-info">
-          <div class="demo-tag">Landing Page · Completado</div>
-          <div class="demo-name">Restaurante La Reserva</div>
-          <div class="demo-action">
-            <div><div class="demo-type-lbl">Tipo</div><div class="demo-type-val">Landing Premium</div></div>
-            <a href="Restaurante.html" target="_blank" class="demo-open-btn">Ver Demo ▶</a>
-          </div>
-        </div>
+    </div>
+    <div class="demo-thumb" onclick="selectDemo(1,this)">
+      <div class="demo-thumb-bg" style="background-image: url('demo-restaurante.jpg');">
+        <div class="demo-thumb-label">LA RESERVA</div>
       </div>
-
-      <div class="demo-card" data-pos="2" data-idx="2">
-        <div class="demo-preview dp-gym">
-          <div class="dp-inner">
-            <div class="dp-icon">💪</div>
-            <div class="dp-title">Iron Force</div>
-            <div class="dp-sub">Gym & Fitness Center</div>
-            <div class="dp-tags"><span>Energía</span><span>Planes</span><span>Bold</span></div>
-          </div>
-        </div>
-        <div class="demo-info">
-          <div class="demo-tag">Landing Page · Completado</div>
-          <div class="demo-name">Gym Iron Force</div>
-          <div class="demo-action">
-            <div><div class="demo-type-lbl">Tipo</div><div class="demo-type-val">Landing Premium</div></div>
-            <a href="Gym.html" target="_blank" class="demo-open-btn">Ver Demo ▶</a>
-          </div>
-        </div>
+    </div>
+    <div class="demo-thumb" onclick="selectDemo(2,this)">
+      <div class="demo-thumb-bg" style="background-image: url('demo-gym.jpg');">
+        <div class="demo-thumb-label">IRON FORCE</div>
       </div>
+    </div>
+  </div>
+</div>
 
+  <div class="demo-thumb" onclick="selectDemo(2,this)">
+    <div class="demo-thumb-bg dp-gym">
+      <div class="demo-thumb-icon">💪</div>
+      <div class="demo-thumb-label">Iron Force</div>
     </div>
   </div>
 
-  <div class="carousel-controls">
-    <button class="car-btn" id="carPrev" aria-label="Anterior">&#8592;</button>
-    <div class="car-dots" id="carDots"></div>
-    <button class="car-btn" id="carNext" aria-label="Siguiente">&#8594;</button>
-  </div>
+</div>
 </section>
 
 <!-- ✅ SECCIÓN PROYECTOS ELIMINADA COMPLETAMENTE -->
@@ -693,105 +788,87 @@ const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.targe
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
 // ── CARRUSEL DE DEMOS ── 
-(function(){
-  const cards = Array.from(document.querySelectorAll('.demo-card'));
-  const dotsEl = document.getElementById('carDots');
-  const btnPrev = document.getElementById('carPrev');
-  const btnNext = document.getElementById('carNext');
-  const scene   = document.getElementById('carouselScene');
-  const TOTAL   = cards.length;
-  let current   = 0;
-
-  // Crear dots
-  cards.forEach(function(_,i){
-    var d = document.createElement('div');
-    d.className = 'car-dot' + (i===0?' active':'');
-    d.addEventListener('click', function(){ goTo(i); });
-    dotsEl.appendChild(d);
-  });
-
-  function getPos(idx){
-    var diff = idx - current;
-    if(diff > Math.floor(TOTAL/2)) diff -= TOTAL;
-    if(diff < -Math.floor(TOTAL/2)) diff += TOTAL;
-    return diff;
+// ── CARRUSEL DE DEMOS ──
+// ── NUEVO SLIDER DEMOS ──
+var demosData = [
+  {
+    url: 'Barberia.html',
+    title: 'Barbería Golden Cut',
+    sub: 'Landing Page · Dark Theme · Reservas · Animado'
+  },
+  {
+    url: 'Restaurante.html',
+    title: 'Restaurante La Reserva', 
+    sub: 'Landing Page · Elegante · Menú 3D · Reservas'
+  },
+  {
+    url: 'Gym.html',
+    title: 'Gym Iron Force',
+    sub: 'Landing Page · Energía · Planes · Bold'
   }
+];
 
-  function render(){
-    cards.forEach(function(c,i){
-      var p = getPos(i);
-      var pos = Math.abs(p)>2 ? (p>0?'3':'-3') : String(p);
-      c.setAttribute('data-pos', pos);
-    });
-    document.querySelectorAll('.car-dot').forEach(function(d,i){
-      d.classList.toggle('active', i===current);
-    });
-  }
+var demoIdx = 0;
+var iframeLoaded = [false, false, false]; // Para cargar solo 1 vez cada iframe
 
-  function goTo(idx){
-    current = ((idx % TOTAL) + TOTAL) % TOTAL;
-    render();
-  }
+function selectDemo(idx, el) {
+  const d = demosData[idx];
+  const heroWrap = document.getElementById('demoHeroWrap');
+  const heroBg = document.getElementById('demoHeroBg');
 
-  // Flechas - click directo
-  btnPrev.onclick = function(){ goTo(current-1); };
-  btnNext.onclick = function(){ goTo(current+1); };
+  clearInterval(autoplayTimer);
+  startAutoplay();
 
-  // Click en cards laterales
-  cards.forEach(function(c,i){
-    c.addEventListener('click', function(e){
-      if(e.target.closest && e.target.closest('.demo-open-btn')) return;
-      if(getPos(i) !== 0) goTo(i);
-    });
-  });
+  heroWrap.classList.add('fade-out');
 
-  // Teclado
-  document.addEventListener('keydown', function(e){
-    var r = scene.getBoundingClientRect();
-    if(r.top < window.innerHeight && r.bottom > 0){
-      if(e.key==='ArrowRight'){ e.preventDefault(); goTo(current+1); }
-      if(e.key==='ArrowLeft'){  e.preventDefault(); goTo(current-1); }
-    }
-  });
+  setTimeout(() => {
+    // 1. Muestra la imagen primero para que no haya pantalla blanca
+    heroBg.style.backgroundImage = `url(${d.poster})`;
+    heroBg.innerHTML = '';
+    
+    // 2. Intenta cargar el iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = d.url;
+    iframe.onload = () => {
+      // Si cargó bien, quita la imagen de fondo
+      heroBg.style.backgroundImage = 'none';
+    };
+    iframe.onerror = () => {
+      // Si falló, se queda la imagen poster y no explota nada
+      console.log('El iframe no cargó, usando imagen');
+    };
+    
+    heroBg.appendChild(iframe);
 
-  // SWIPE TÁCTIL para móvil y tablet
-  var tX=0, tY=0;
-  scene.addEventListener('touchstart', function(e){
-    tX = e.touches[0].clientX;
-    tY = e.touches[0].clientY;
-  }, {passive:true});
+    document.getElementById('demoHeroTitle').textContent = d.title;
+    document.getElementById('demoHeroSub').textContent = d.sub;
+    document.getElementById('demoHeroBtn').href = d.url;
+    heroWrap.setAttribute('data-url', d.url);
+    heroWrap.classList.remove('fade-out');
+  }, 400);
 
-  scene.addEventListener('touchend', function(e){
-    var dx = e.changedTouches[0].clientX - tX;
-    var dy = e.changedTouches[0].clientY - tY;
-    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30){
-      if(dx < 0) goTo(current+1);
-      else        goTo(current-1);
-    }
-  }, {passive:true});
+  document.querySelectorAll('.demo-thumb').forEach(t => t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  demoIdx = idx;
+}
 
-  // Drag con mouse en escritorio
-  var mX=0, dragging=false, moved=false;
-  scene.addEventListener('mousedown', function(e){
-    if(e.target.closest && e.target.closest('.demo-open-btn')) return;
-    mX=e.clientX; dragging=true; moved=false;
-  });
-  document.addEventListener('mousemove', function(e){
-    if(!dragging) return;
-    if(Math.abs(e.clientX-mX) > 8) moved=true;
-  });
-  document.addEventListener('mouseup', function(e){
-    if(!dragging) return;
-    dragging=false;
-    if(moved){
-      var dx=e.clientX-mX;
-      if(Math.abs(dx)>40){ dx<0 ? goTo(current+1) : goTo(current-1); }
-    }
-    moved=false;
-  });
+// Click en el hero abre el demo en pestaña nueva
+document.getElementById('demoHeroWrap').addEventListener('click', function(e){
+  if(e.target.closest('.demo-hero-btn')) return;
+  const url = this.getAttribute('data-url');
+  if(url) window.open(url, '_blank');
+});
 
-  render();
-})();
+// Autoplay cada 6s - más tiempo para apreciar la animación
+var demoThumbs = document.querySelectorAll('.demo-thumb');
+setInterval(() => {
+  demoIdx = (demoIdx + 1) % demosData.length;
+  selectDemo(demoIdx, demoThumbs[demoIdx]);
+}, 6000);
+
+window.addEventListener('load', () => {
+  selectDemo(0, demoThumbs[0]);
+});
 
 const R={precios:{msg:"💰 Mis servicios:<br>• <strong>Landing Page Premium</strong> — $150<br>• <strong>Sitio Web Corporativo</strong> — $350<br>• <strong>Tienda Online</strong> — $650",opts:["Quiero cotizar","¿Cuánto tiempo?","Ver demos"]},tiempo:{msg:"⏱ Landing Page en <strong>48–72h</strong>. Sitio corporativo en <strong>5–7 días</strong>.",opts:["¿Cuánto cuesta?","Contratar ahora"]},servicios:{msg:"🎯 Landing Page $150 · Corporativo $350 · Tienda Online $650",opts:["Cotizar","¿Tiempo de entrega?"]},contacto:{msg:"📱 WhatsApp: <strong>+593 968 352 133</strong><br>✉ studio.art.philip@gmail.com",opts:["Abrir WhatsApp"]},demos:{msg:"🖥 Barbería Golden Cut · Restaurante La Reserva · Gym Iron Force — y más en camino.",opts:["¿Cuánto cuesta?","Contacto"]},default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Art Philip Studio</strong>. ¿En qué puedo ayudarte?",opts:["Ver servicios","¿Cuánto tiempo?","Ver demos","Contacto"]}};
 const K={precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],tiemp:["tiempo"],dias:["tiempo"],horas:["tiempo"],entrega:["tiempo"],servici:["servicios"],haces:["servicios"],contact:["contacto"],whatsapp:["contacto"],correo:["contacto"],demo:["demos"],proyect:["demos"],portafolio:["demos"]};
