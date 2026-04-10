@@ -178,12 +178,51 @@ section.sec{padding:120px 60px;position:relative;}
 
 .demo-hero-img {
   width: 100%;
-  height: 420px;
+  height: 80vh;
+  min-height: 500px;
   border-radius: 18px;
   overflow: hidden;
   position: relative;
   margin-bottom: 32px;
   cursor: pointer;
+}
+.demo-hero-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 36px;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
+  z-index: 5;
+}
+.demo-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px,5vw,52px);
+  letter-spacing: 3px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.demo-hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.demo-hero-btn {
+  display: inline-block;
+  padding: 11px 28px;
+  background: var(--gold);
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.15s;
+}
+.demo-hero-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
 }
 .demo-thumbs {
   position: absolute;
@@ -257,9 +296,10 @@ section.sec{padding:120px 60px;position:relative;}
 .demo-hero-bg {
   position: absolute;
   inset: 0;
-  transition: opacity 0.8s cubic-bezier(.25,.46,.45,.94), transform 0.8s cubic-bezier(.25,.46,.45,.94);
-  transform: scale(1);
-  background: #0a0a0a; /* Fondo mientras carga */
+  background-size: cover;
+  background-position: center top;
+  transition: opacity 0.8s ease;
+  opacity: 1;
 }
 .demo-hero-bg iframe {
   width: 100%;
@@ -271,7 +311,7 @@ section.sec{padding:120px 60px;position:relative;}
   width: 200%; /* Compensa el scale 0.5 */
   height: 200%;
 }
-.demo-hero-img.fade-out.demo-hero-bg {
+.demo-hero-img.fade-out .demo-hero-bg {
   opacity: 0;
   transform: scale(1.05);
 }
@@ -628,51 +668,33 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
     <p class="demos-sub">Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.</p>
   </div>
 
-<!-- DEMOS SLIDER CON TRANSICIÓN COMO EL VIDEO -->
-<div class="demos-slider-wrap">
-
-  <div class="demo-hero-img" id="demoHeroWrap">
-    <div class="demo-hero-bg" id="demoHeroBg"></div>
-    <div class="demo-hero-overlay">
-      <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
-      <div class="demo-hero-sub" id="demoHeroSub">Landing Page · Dark Theme · Reservas</div>
-      <a href="Barberia.html" target="_blank" class="demo-hero-btn" id="demoHeroBtn">Ver Demo ▶</a>
-    </div>
-   
-<div class="demo-hero-img" id="demoHeroWrap">
-  <div class="demo-hero-bg" id="demoHeroBg"></div>
+<!-- DEMOS SLIDER -->
+<div class="demo-hero-img" id="demoHeroWrap" data-url="Barberia.html">
+  <div class="demo-hero-bg" id="demoHeroBg"
+    style="background-image:url('Barberia-demo.jpg');background-size:cover;background-position:center;">
+  </div>
   <div class="demo-hero-overlay">
     <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
     <div class="demo-hero-sub" id="demoHeroSub">Landing Page · Dark Theme · Reservas</div>
     <a href="Barberia.html" target="_blank" class="demo-hero-btn" id="demoHeroBtn">Ver Demo ▶</a>
   </div>
-
   <div class="demo-thumbs">
     <div class="demo-thumb active" onclick="selectDemo(0,this)">
-      <div class="demo-thumb-bg" style="background-image: url('demo-barberia.jpg');">
+      <div class="demo-thumb-bg" style="background-image:url('Barberia-demo.jpg');">
         <div class="demo-thumb-label">GOLDEN CUT</div>
       </div>
     </div>
     <div class="demo-thumb" onclick="selectDemo(1,this)">
-      <div class="demo-thumb-bg" style="background-image: url('demo-restaurante.jpg');">
+      <div class="demo-thumb-bg" style="background-image:url('Restaurante-demo.jpg');">
         <div class="demo-thumb-label">LA RESERVA</div>
       </div>
     </div>
     <div class="demo-thumb" onclick="selectDemo(2,this)">
-      <div class="demo-thumb-bg" style="background-image: url('demo-gym.jpg');">
+      <div class="demo-thumb-bg" style="background-image:url('Gym-demo.jpg');">
         <div class="demo-thumb-label">IRON FORCE</div>
       </div>
     </div>
   </div>
-</div>
-
-  <div class="demo-thumb" onclick="selectDemo(2,this)">
-    <div class="demo-thumb-bg dp-gym">
-      <div class="demo-thumb-icon">💪</div>
-      <div class="demo-thumb-label">Iron Force</div>
-    </div>
-  </div>
-
 </div>
 </section>
 
@@ -793,53 +815,39 @@ document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 var demosData = [
   {
     url: 'Barberia.html',
+    img: 'Barberia-demo.jpg',
     title: 'Barbería Golden Cut',
     sub: 'Landing Page · Dark Theme · Reservas · Animado'
   },
   {
     url: 'Restaurante.html',
-    title: 'Restaurante La Reserva', 
-    sub: 'Landing Page · Elegante · Menú 3D · Reservas'
+    img: 'Restaurante-demo.jpg',
+    title: 'Restaurante La Reserva',
+    sub: 'Landing Page · Elegante · Menú · Reservas'
   },
   {
     url: 'Gym.html',
+    img: 'Gym-demo.jpg',
     title: 'Gym Iron Force',
     sub: 'Landing Page · Energía · Planes · Bold'
   }
 ];
 
 var demoIdx = 0;
-var iframeLoaded = [false, false, false]; // Para cargar solo 1 vez cada iframe
+var autoplayTimer;
 
 function selectDemo(idx, el) {
   const d = demosData[idx];
   const heroWrap = document.getElementById('demoHeroWrap');
   const heroBg = document.getElementById('demoHeroBg');
 
-  clearInterval(autoplayTimer);
-  startAutoplay();
-
   heroWrap.classList.add('fade-out');
 
   setTimeout(() => {
-    // 1. Muestra la imagen primero para que no haya pantalla blanca
-    heroBg.style.backgroundImage = `url(${d.poster})`;
     heroBg.innerHTML = '';
-    
-    // 2. Intenta cargar el iframe
-    const iframe = document.createElement('iframe');
-    iframe.src = d.url;
-    iframe.onload = () => {
-      // Si cargó bien, quita la imagen de fondo
-      heroBg.style.backgroundImage = 'none';
-    };
-    iframe.onerror = () => {
-      // Si falló, se queda la imagen poster y no explota nada
-      console.log('El iframe no cargó, usando imagen');
-    };
-    
-    heroBg.appendChild(iframe);
-
+    heroBg.style.backgroundImage = 'url(' + d.img + ')';
+    heroBg.style.backgroundSize = 'cover';
+    heroBg.style.backgroundPosition = 'center';
     document.getElementById('demoHeroTitle').textContent = d.title;
     document.getElementById('demoHeroSub').textContent = d.sub;
     document.getElementById('demoHeroBtn').href = d.url;
@@ -852,21 +860,24 @@ function selectDemo(idx, el) {
   demoIdx = idx;
 }
 
-// Click en el hero abre el demo en pestaña nueva
 document.getElementById('demoHeroWrap').addEventListener('click', function(e){
   if(e.target.closest('.demo-hero-btn')) return;
   const url = this.getAttribute('data-url');
   if(url) window.open(url, '_blank');
 });
 
-// Autoplay cada 6s - más tiempo para apreciar la animación
 var demoThumbs = document.querySelectorAll('.demo-thumb');
-setInterval(() => {
-  demoIdx = (demoIdx + 1) % demosData.length;
-  selectDemo(demoIdx, demoThumbs[demoIdx]);
-}, 6000);
 
-window.addEventListener('load', () => {
+function startAutoplay(){
+  autoplayTimer = setInterval(function(){
+    demoIdx = (demoIdx + 1) % demosData.length;
+    selectDemo(demoIdx, demoThumbs[demoIdx]);
+  }, 6000);
+}
+
+startAutoplay();
+
+window.addEventListener('load', function(){
   selectDemo(0, demoThumbs[0]);
 });
 
