@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Force Gym | Entrena Sin Límites — Quito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #1a6edb;
+            --blue-light: #3d8ef0;
+            --blue-dim: rgba(26,110,219,0.15);
+            --dark: #060810;
+            --surface: #0d0f18;
+            --surface2: #131620;
+            --surface3: #1a1d2a;
+            --text: #c8cfe0;
+            --text-dim: #525a70;
+            --text-muted: #282d3e;
+            --red: #e03030;
+            --red-light: #f04545;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height: 100%; min-height: 100%; }
+body { background: var(--dark); color: var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; cursor: auto; }
+
+        /* Noise */
+        body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.35; }
+
+        /* Cursor */
+        .cursor { width:10px;height:10px;background:var(--blue-light);border-radius:50%;position:fixed;pointer-events:none;z-index:9999; }
+        .cursor-ring { width:36px;height:36px;border:1px solid rgba(26,110,219,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all 0.14s ease; }
+
+        /* WhatsApp flotante */
+        .wa-float{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;align-items:center;gap:12px;text-decoration:none;}
+        .wa-float-label{background:#0d0f18;border:1px solid rgba(37,211,102,0.3);color:#888;font-size:0.68rem;letter-spacing:2px;padding:8px 16px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all 0.3s;}
+        .wa-float:hover .wa-float-label{opacity:1;transform:translateX(0);}
+        .wa-float-btn{width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;animation:waPulse 2.5s ease-in-out infinite;transition:transform 0.3s;}
+        .wa-float:hover .wa-float-btn{transform:scale(1.1);}
+        @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 0 rgba(37,211,102,0.3);}50%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 10px rgba(37,211,102,0);}}
+
+        /* Chatbot */
+        .chat-bubble{position:fixed;bottom:100px;right:32px;z-index:799;width:48px;height:48px;background:linear-gradient(135deg,var(--blue),#0e50b0);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(26,110,219,0.5);transition:transform 0.3s;}
+        .chat-bubble:hover{transform:scale(1.1);}
+        .chat-badge{position:absolute;top:-4px;right:-4px;background:#e03030;color:#fff;font-size:0.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
+        .chat-window{position:fixed;bottom:160px;right:32px;z-index:798;width:340px;background:#0d0f18;border:1px solid rgba(26,110,219,0.2);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.8);max-height:480px;}
+        .chat-window.open{display:flex;}
+        .chat-header{background:linear-gradient(135deg,#0a0e1a,#0d0f18);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(26,110,219,0.15);}
+        .chat-avatar{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),#0e50b0);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+        .chat-header-info{flex:1;}
+        .chat-header-name{font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--blue-light);text-transform:uppercase;}
+        .chat-header-status{font-size:0.62rem;color:#25D366;letter-spacing:1px;margin-top:2px;}
+        .chat-close{background:none;border:none;color:#525a70;cursor:pointer;font-size:1.1rem;padding:4px;transition:color 0.2s;}
+        .chat-close:hover{color:var(--blue-light);}
+        .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;scrollbar-width:thin;scrollbar-color:rgba(26,110,219,0.2) transparent;}
+        .chat-messages::-webkit-scrollbar{width:4px;}
+        .chat-messages::-webkit-scrollbar-thumb{background:rgba(26,110,219,0.2);border-radius:2px;}
+        .msg{max-width:85%;padding:10px 14px;border-radius:2px;font-size:0.8rem;line-height:1.6;}
+        .msg.bot{background:#13162088;color:var(--text);align-self:flex-start;border-left:2px solid rgba(26,110,219,0.5);}
+        .msg.user{background:rgba(26,110,219,0.15);color:#90b8f8;align-self:flex-end;border-right:2px solid rgba(26,110,219,0.6);}
+        .msg.typing{background:#13162088;color:#525a70;align-self:flex-start;font-style:italic;}
+        .chat-options{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(26,110,219,0.08);}
+        .chat-opt{background:none;border:1px solid rgba(26,110,219,0.3);color:var(--blue-light);font-size:0.65rem;letter-spacing:2px;padding:7px 12px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;font-family:'Inter',sans-serif;}
+        .chat-opt:hover{background:var(--blue-dim);border-color:var(--blue-light);}
+        .chat-input-row{display:flex;border-top:1px solid rgba(26,110,219,0.1);}
+        .chat-input{flex:1;background:#08090f;border:none;color:var(--text);padding:12px 16px;font-size:0.8rem;font-family:'Inter',sans-serif;outline:none;}
+        .chat-input::placeholder{color:#282d3e;}
+        .chat-send{background:linear-gradient(135deg,var(--blue),#0e50b0);border:none;color:#fff;padding:0 18px;cursor:pointer;font-size:1rem;transition:opacity 0.2s;}
+        .chat-send:hover{opacity:0.85;}
+
+        /* NAV */
+        nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:24px 60px;background:linear-gradient(to bottom,rgba(6,8,16,0.97) 0%,transparent 100%);}
+        .nav-logo-wrap{display:flex;flex-direction:column;gap:1px;}
+        .nav-logo-main{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:6px;color:#fff;text-transform:uppercase;line-height:1;}
+        .nav-logo-accent{color:var(--blue-light);}
+        .nav-logo-sub{font-size:0.55rem;letter-spacing:6px;color:var(--text-dim);text-transform:uppercase;}
+        .nav-links{display:flex;gap:40px;list-style:none;}
+        .nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;}
+        .nav-links a:hover{color:var(--blue-light);}
+        .nav-cta{padding:11px 28px;background:linear-gradient(135deg,var(--blue),#0e50b0);color:#fff;text-decoration:none;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;transition:all 0.3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,110,219,0.4);}
+
+        /* HERO */
+        .hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 90px;overflow:hidden;}
+        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 75% 30%,rgba(26,110,219,0.18) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 15% 70%,rgba(224,48,48,0.1) 0%,transparent 60%),linear-gradient(180deg,#0a0c14 0%,#060810 100%);}
+        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(26,110,219,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(26,110,219,0.05) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 0%,transparent 100%);}
+        .hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(26,110,219,0.03) 0px,rgba(26,110,219,0.03) 1px,transparent 1px,transparent 4px);background-size:4px 100%;}
+        .hero-watermark{position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,25vw,380px);color:transparent;-webkit-text-stroke:1px rgba(26,110,219,0.06);line-height:1;pointer-events:none;user-select:none;white-space:nowrap;}
+        .hero-content{position:relative;z-index:2;max-width:780px;}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:22px;}
+        .hero-eyebrow-bar{width:36px;height:3px;background:linear-gradient(to right,var(--red),var(--blue));}
+        .hero-eyebrow-text{font-size:0.68rem;letter-spacing:5px;text-transform:uppercase;color:var(--blue-light);}
+        .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,12vw,160px);line-height:0.88;letter-spacing:2px;margin-bottom:28px;}
+        .hero-title .line1{display:block;color:#fff;}
+        .hero-title .line2{display:block;color:var(--blue-light);}
+        .hero-title .line3{display:block;color:var(--text-dim);font-size:0.4em;letter-spacing:10px;margin-top:6px;}
+        .hero-stats{display:flex;align-items:center;gap:30px;margin-bottom:46px;}
+        .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--blue-light);line-height:1;}
+        .hero-stat-label{font-size:0.6rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:3px;}
+        .hero-stat-div{width:1px;height:44px;background:var(--text-muted);}
+        .hero-actions{display:flex;gap:16px;align-items:center;}
+        .btn-blue{padding:16px 40px;background:linear-gradient(135deg,var(--blue),#0e50b0);color:#fff;text-decoration:none;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
+        .btn-blue:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,110,219,0.4);}
+        .btn-outline-blue{padding:15px 36px;border:1px solid rgba(26,110,219,0.4);color:var(--blue-light);text-decoration:none;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;transition:all 0.3s;}
+        .btn-outline-blue:hover{background:var(--blue-dim);border-color:var(--blue-light);}
+        .scroll-hint{position:absolute;right:60px;bottom:90px;display:flex;flex-direction:column;align-items:center;gap:10px;writing-mode:vertical-rl;font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-dim);}
+        .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--blue-light),transparent);animation:pulse 2s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+        /* DIVIDER */
+        .divider{height:1px;background:linear-gradient(to right,transparent,rgba(26,110,219,0.3),transparent);margin:0 60px;}
+
+        /* SECTION */
+        section{padding:120px 60px;}
+        .section-header{display:flex;align-items:center;gap:18px;margin-bottom:70px;}
+        .section-num{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;}
+        .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,58px);letter-spacing:4px;color:#fff;}
+        .section-rule{flex:1;height:1px;background:linear-gradient(to right,rgba(26,110,219,0.25),transparent);}
+
+        /* PLANS */
+        .plans{background:var(--dark);}
+        .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,110,219,0.07);}
+        .plan{background:var(--surface);padding:52px 40px;position:relative;overflow:hidden;transition:background 0.3s;}
+        .plan:hover{background:var(--surface2);}
+        .plan.featured{background:var(--surface2);}
+        .plan::after{content:'';position:absolute;inset:0;border:1px solid transparent;transition:border-color 0.4s;pointer-events:none;}
+        .plan:hover::after{border-color:rgba(26,110,219,0.3);}
+        .plan.featured::after{border-color:rgba(26,110,219,0.4);}
+        .plan-badge{display:inline-block;padding:4px 14px;background:linear-gradient(135deg,var(--blue),#0e50b0);color:#fff;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;}
+        .plan-num{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:4px;color:var(--text-muted);margin-bottom:30px;}
+        .plan-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:#fff;margin-bottom:8px;line-height:1;}
+        .plan-price{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--blue-light);line-height:1;margin-bottom:6px;}
+        .plan-period{font-size:0.7rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:28px;}
+        .plan-features{list-style:none;margin-bottom:36px;}
+        .plan-features li{font-size:0.8rem;color:var(--text-dim);padding:8px 0;border-bottom:1px solid rgba(26,110,219,0.07);display:flex;align-items:center;gap:10px;}
+        .plan-features li::before{content:'›';color:var(--blue-light);font-size:1rem;flex-shrink:0;}
+        .plan-cta{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;padding:13px 26px;border:1px solid rgba(26,110,219,0.35);color:var(--blue-light);transition:all 0.3s;}
+        .plan-cta:hover{background:var(--blue-dim);border-color:var(--blue-light);}
+        .plan.featured .plan-cta{background:linear-gradient(135deg,var(--blue),#0e50b0);color:#fff;border:none;}
+        .plan-glow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:80%;height:120px;background:radial-gradient(ellipse,rgba(26,110,219,0.12) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;}
+        .plan:hover .plan-glow,.plan.featured .plan-glow{opacity:1;}
+
+        /* CLASSES */
+        .classes{background:linear-gradient(180deg,var(--dark) 0%,#08090f 100%);}
+        .classes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+        .class-card{position:relative;height:260px;overflow:hidden;background:var(--surface);transition:background 0.3s;}
+        .class-card:hover{background:var(--surface2);}
+        .class-card:first-child{grid-column:1/3;height:320px;}
+        .class-bg{position:absolute;inset:0;transition:transform 0.6s ease;}
+        .class-card:hover .class-bg{transform:scale(1.03);}
+        .c1 .class-bg{background:radial-gradient(ellipse 80% 70% at 60% 40%,rgba(26,110,219,0.3) 0%,rgba(224,48,48,0.1) 60%,transparent 100%),linear-gradient(160deg,#0e1220,#06080f);}
+        .c2 .class-bg{background:radial-gradient(ellipse at 40% 60%,rgba(224,48,48,0.25) 0%,transparent 70%),linear-gradient(180deg,#120a0a,#060810);}
+        .c3 .class-bg{background:radial-gradient(ellipse at 70% 40%,rgba(26,110,219,0.2) 0%,transparent 70%),linear-gradient(180deg,#0a0c18,#060810);}
+        .c4 .class-bg{background:radial-gradient(ellipse at 30% 60%,rgba(26,80,180,0.2) 0%,transparent 70%),linear-gradient(160deg,#090c16,#060810);}
+        .c5 .class-bg{background:radial-gradient(ellipse at 60% 40%,rgba(200,40,40,0.18) 0%,transparent 70%),linear-gradient(180deg,#100a0a,#060810);}
+        .class-card::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(26,110,219,0.02) 0px,rgba(26,110,219,0.02) 1px,transparent 1px,transparent 14px);z-index:1;}
+        .class-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(6,8,16,0.95) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:30px;}
+        .class-tag{font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--blue-light);margin-bottom:8px;}
+        .class-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;color:#fff;margin-bottom:8px;line-height:1;}
+        .c1 .class-name{font-size:3rem;}
+        .class-desc{font-size:0.78rem;color:var(--text-dim);line-height:1.7;max-width:500px;}
+        .class-icon{position:absolute;top:24px;right:28px;font-size:2.5rem;opacity:0.1;z-index:1;}
+        .class-card::after{content:'';position:absolute;inset:0;border:1px solid transparent;z-index:3;transition:border-color 0.4s;pointer-events:none;}
+        .class-card:hover::after{border-color:rgba(26,110,219,0.3);}
+
+        /* TRAINERS */
+        .trainers{background:var(--dark);}
+        .trainers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,110,219,0.06);}
+        .trainer{background:var(--surface);padding:46px 38px;position:relative;overflow:hidden;transition:background 0.3s;}
+        .trainer:hover{background:var(--surface2);}
+        .trainer-icon{font-size:2.5rem;margin-bottom:20px;display:block;}
+        .trainer-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;color:#fff;margin-bottom:6px;}
+        .trainer-role{font-size:0.65rem;letter-spacing:4px;color:var(--blue-light);text-transform:uppercase;margin-bottom:16px;}
+        .trainer-desc{font-size:0.8rem;color:var(--text-dim);line-height:1.8;}
+        .trainer::before{content:'';position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);width:70%;height:100px;background:radial-gradient(ellipse,rgba(26,110,219,0.1) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;}
+        .trainer:hover::before{opacity:1;}
+
+        /* CTA */
+        .cta-section{background:var(--dark);position:relative;overflow:hidden;}
+        .cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 90%,rgba(26,110,219,0.12) 0%,transparent 70%);}
+        .cta-inner{position:relative;max-width:820px;margin:0 auto;text-align:center;}
+        .cta-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;}
+        .cta-eyebrow-bar{width:28px;height:3px;background:linear-gradient(to right,var(--red),var(--blue));}
+        .cta-eyebrow-text{font-size:0.68rem;letter-spacing:5px;color:var(--blue-light);text-transform:uppercase;}
+        .cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,120px);letter-spacing:3px;line-height:0.88;color:#fff;margin-bottom:28px;}
+        .cta-title .accent{color:var(--blue-light);}
+        .cta-sub{font-size:0.9rem;color:var(--text-dim);line-height:1.8;max-width:460px;margin:0 auto 50px;}
+        .cta-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+        .btn-wa{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:#25D366;color:#fff;text-decoration:none;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+        .btn-wa:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,0.3);}
+        .cta-info{display:flex;justify-content:center;gap:50px;margin-top:60px;padding-top:50px;border-top:1px solid rgba(26,110,219,0.1);}
+        .info-item{text-align:center;}
+        .info-icon{font-size:1.3rem;margin-bottom:10px;display:block;}
+        .info-label{font-size:0.62rem;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px;}
+        .info-value{font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:var(--text);letter-spacing:2px;text-transform:uppercase;}
+
+        /* FOOTER */
+        footer{padding:44px 60px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:var(--text-dim);letter-spacing:2px;}
+        .footer-logo-wrap{display:flex;flex-direction:column;gap:3px;}
+        .footer-logo{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:1.2rem;letter-spacing:6px;}
+        .footer-logo span{color:var(--blue-light);}
+        .footer-sub{font-size:0.55rem;letter-spacing:5px;color:var(--text-muted);}
+        .footer-back{display:flex;align-items:center;gap:8px;color:var(--text-dim);text-decoration:none;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;}
+        .footer-back:hover{color:var(--blue-light);}
+        .footer-back::before{content:'←';}
+        .footer-wa{display:flex;align-items:center;gap:8px;color:#25D366;text-decoration:none;font-size:0.7rem;letter-spacing:2px;transition:opacity 0.3s;}
+        .footer-wa:hover{opacity:0.75;}
+
+        /* ANIM */
+        .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+        .fade-up.visible{opacity:1;transform:translateY(0);}
+        .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+
+        @media(max-width:900px){
+            nav{padding:20px 30px;}.nav-links{display:none;}
+            section{padding:80px 30px;}.hero{padding:0 30px 70px;}
+            .plans-grid,.trainers-grid{grid-template-columns:1fr;}
+            .classes-grid{grid-template-columns:1fr;}.class-card:first-child{grid-column:auto;height:260px;}
+            footer{flex-direction:column;gap:14px;text-align:center;}
+            .cta-info{flex-direction:column;gap:30px;}
+            .scroll-hint,.wa-float-label{display:none;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20informaci%C3%B3n%20sobre%20Iron%20Force%20Gym%20%F0%9F%92%AA" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">
+        <span class="wa-float-label">¡Únete al gym!</span>
+        <div class="wa-float-btn">💬</div>
+    </a>
+
+    <!-- Chatbot -->
+    <div class="chat-bubble" id="chatBubble" onclick="toggleChat()" title="Asistente virtual">
+        🤖<span class="chat-badge">1</span>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-avatar">💪</div>
+            <div class="chat-header-info">
+                <div class="chat-header-name">Iron Force Gym</div>
+                <div class="chat-header-status">● Asistente en línea</div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-options" id="chatOptions"></div>
+        <div class="chat-input-row">
+            <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendUserMsg()">
+            <button class="chat-send" onclick="sendUserMsg()">➤</button>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo-wrap">
+            <div class="nav-logo-main">Iron <span class="nav-logo-accent">Force</span></div>
+            <div class="nav-logo-sub">Gym · Quito</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#planes">Planes</a></li>
+            <li><a href="#clases">Clases</a></li>
+            <li><a href="#entrenadores">Entrenadores</a></li>
+        </ul>
+        <a href="#unete" class="nav-cta">Únete Ahora</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-lines"></div>
+        <div class="hero-watermark">IRON FORCE</div>
+        <div class="hero-content">
+            <div class="hero-eyebrow fade-up">
+                <div class="hero-eyebrow-bar"></div>
+                <div class="hero-eyebrow-text">Quito, Ecuador — Abierto Ahora</div>
+            </div>
+            <h1 class="hero-title fade-up d1">
+                <span class="line1">Entrena</span>
+                <span class="line2">Sin Límites</span>
+                <span class="line3">Iron Force Gym · Est. 2020</span>
+            </h1>
+            <div class="hero-stats fade-up d2">
+                <div>
+                    <div class="hero-stat-num">800+</div>
+                    <div class="hero-stat-label">Miembros</div>
+                </div>
+                <div class="hero-stat-div"></div>
+                <div>
+                    <div class="hero-stat-num">15+</div>
+                    <div class="hero-stat-label">Clases/sem</div>
+                </div>
+                <div class="hero-stat-div"></div>
+                <div>
+                    <div class="hero-stat-num">8</div>
+                    <div class="hero-stat-label">Entrenadores</div>
+                </div>
+            </div>
+            <div class="hero-actions fade-up d3">
+                <a href="#unete" class="btn-blue">Empezar Ahora</a>
+                <a href="#planes" class="btn-outline-blue">Ver Planes</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            Scroll
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PLANES -->
+    <section class="plans" id="planes">
+        <div class="section-header fade-up">
+            <span class="section-num">01 /</span>
+            <h2 class="section-title">Planes</h2>
+            <div class="section-rule"></div>
+        </div>
+        <div class="plans-grid">
+            <div class="plan fade-up">
+                <div class="plan-glow"></div>
+                <div class="plan-num">001</div>
+                <div class="plan-name">Básico</div>
+                <div class="plan-price">$25</div>
+                <div class="plan-period">por mes</div>
+                <ul class="plan-features">
+                    <li>Acceso a sala de pesas</li>
+                    <li>Cardio y equipos básicos</li>
+                    <li>Lun–Sáb 6am–10pm</li>
+                    <li>Casillero incluido</li>
+                </ul>
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20el%20Plan%20B%C3%A1sico%20de%20Iron%20Force" target="_blank" class="plan-cta">Inscribirme →</a>
+            </div>
+            <div class="plan featured fade-up d1">
+                <div class="plan-glow"></div>
+                <div class="plan-badge">⚡ Más Popular</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-price">$40</div>
+                <div class="plan-period">por mes</div>
+                <ul class="plan-features">
+                    <li>Todo lo del plan básico</li>
+                    <li>Clases grupales ilimitadas</li>
+                    <li>1 sesión de PT al mes</li>
+                    <li>Acceso 7 días / 24h</li>
+                    <li>App de seguimiento</li>
+                </ul>
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20el%20Plan%20Pro%20de%20Iron%20Force" target="_blank" class="plan-cta">Inscribirme →</a>
+            </div>
+            <div class="plan fade-up d2">
+                <div class="plan-glow"></div>
+                <div class="plan-num">003</div>
+                <div class="plan-name">Elite</div>
+                <div class="plan-price">$70</div>
+                <div class="plan-period">por mes</div>
+                <ul class="plan-features">
+                    <li>Todo lo del plan Pro</li>
+                    <li>4 sesiones de PT/mes</li>
+                    <li>Plan nutricional incluido</li>
+                    <li>Acceso sala VIP</li>
+                    <li>Suplementos básicos</li>
+                </ul>
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20el%20Plan%20Elite%20de%20Iron%20Force" target="_blank" class="plan-cta">Inscribirme →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CLASES -->
+    <section class="classes" id="clases">
+        <div class="section-header fade-up">
+            <span class="section-num">02 /</span>
+            <h2 class="section-title">Clases</h2>
+            <div class="section-rule"></div>
+        </div>
+        <div class="classes-grid">
+            <div class="class-card c1 fade-up">
+                <div class="class-bg"></div>
+                <span class="class-icon">🥊</span>
+                <div class="class-overlay">
+                    <div class="class-tag">Alta Intensidad · Todos los días</div>
+                    <div class="class-name">CrossFit & HIIT</div>
+                    <div class="class-desc">Entrenamiento funcional de alta intensidad que combina fuerza, resistencia y velocidad. Quema hasta 800 calorías por sesión.</div>
+                </div>
+            </div>
+            <div class="class-card c2 fade-up d1">
+                <div class="class-bg"></div>
+                <span class="class-icon">💪</span>
+                <div class="class-overlay">
+                    <div class="class-tag">Fuerza · Lun / Mié / Vie</div>
+                    <div class="class-name">Powerlifting</div>
+                    <div class="class-desc">Técnica y fuerza con los tres grandes movimientos: sentadilla, peso muerto y press de banca.</div>
+                </div>
+            </div>
+            <div class="class-card c3 fade-up d2">
+                <div class="class-bg"></div>
+                <span class="class-icon">🧘</span>
+                <div class="class-overlay">
+                    <div class="class-tag">Movilidad · Mar / Jue / Sáb</div>
+                    <div class="class-name">Yoga & Stretching</div>
+                    <div class="class-desc">Flexibilidad, equilibrio y recuperación activa para complementar tu rutina de fuerza.</div>
+                </div>
+            </div>
+            <div class="class-card c4 fade-up d1">
+                <div class="class-bg"></div>
+                <span class="class-icon">🚴</span>
+                <div class="class-overlay">
+                    <div class="class-tag">Cardio · Diario</div>
+                    <div class="class-name">Spinning</div>
+                    <div class="class-desc">Ciclismo indoor de alto impacto con música en vivo. Ideal para quemar grasa y mejorar resistencia cardiovascular.</div>
+                </div>
+            </div>
+            <div class="class-card c5 fade-up d2">
+                <div class="class-bg"></div>
+                <span class="class-icon">🏋️</span>
+                <div class="class-overlay">
+                    <div class="class-tag">Fuerza · Lun / Jue</div>
+                    <div class="class-name">Olympic Lifting</div>
+                    <div class="class-desc">Levantamiento olímpico con entrenadores certificados. Desarrolla potencia explosiva y coordinación neuromuscular.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ENTRENADORES -->
+    <section class="trainers" id="entrenadores">
+        <div class="section-header fade-up">
+            <span class="section-num">03 /</span>
+            <h2 class="section-title">Entrenadores</h2>
+            <div class="section-rule"></div>
+        </div>
+        <div class="trainers-grid">
+            <div class="trainer fade-up">
+                <span class="trainer-icon">🏆</span>
+                <div class="trainer-name">Carlos V.</div>
+                <div class="trainer-role">Head Coach · Fuerza</div>
+                <p class="trainer-desc">Especialista en powerlifting con 10 años de experiencia. Campeón nacional 2022. Transforma principiantes en atletas.</p>
+            </div>
+            <div class="trainer fade-up d1">
+                <span class="trainer-icon">⚡</span>
+                <div class="trainer-name">Sofía M.</div>
+                <div class="trainer-role">CrossFit · HIIT</div>
+                <p class="trainer-desc">Certified CrossFit L2 trainer. Ex atleta de atletismo. Especialista en programas de pérdida de peso y tonificación.</p>
+            </div>
+            <div class="trainer fade-up d2">
+                <span class="trainer-icon">🧬</span>
+                <div class="trainer-name">Andrés R.</div>
+                <div class="trainer-role">Nutrición · PT Elite</div>
+                <p class="trainer-desc">Licenciado en nutrición deportiva. Diseña planes alimenticios personalizados integrados con tu rutina de entrenamiento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="unete">
+        <div class="cta-glow"></div>
+        <div class="cta-inner">
+            <div class="cta-eyebrow fade-up">
+                <div class="cta-eyebrow-bar"></div>
+                <div class="cta-eyebrow-text">Primera semana gratis</div>
+                <div class="cta-eyebrow-bar"></div>
+            </div>
+            <h2 class="cta-title fade-up d1">
+                Tu Mejor<br><span class="accent">Versión</span><br>Empieza Hoy
+            </h2>
+            <p class="cta-sub fade-up d2">Sin excusas. Sin límites. Únete a Iron Force y transforma tu cuerpo con los mejores entrenadores de Quito.</p>
+            <div class="cta-actions fade-up d3">
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20unirme%20a%20Iron%20Force%20Gym%20%F0%9F%92%AA" target="_blank" class="btn-wa">💬 Unirme por WhatsApp</a>
+                <a href="mailto:studio.art.philip@gmail.com" class="btn-outline-blue">Enviar Correo</a>
+            </div>
+            <div class="cta-info fade-up d4">
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div class="info-label">Ubicación</div>
+                    <div class="info-value">Quito, Ecuador</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🕐</span>
+                    <div class="info-label">Horario</div>
+                    <div class="info-value">Lun–Dom · 6am–10pm</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div class="info-label">WhatsApp</div>
+                    <div class="info-value">+593 968 352 133</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo-wrap">
+            <div class="footer-logo">Iron <span>Force</span></div>
+            <div class="footer-sub">Gym · Quito, Ecuador · 2025</div>
+        </div>
+        <div>© 2025 · Todos los derechos reservados</div>
+        <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
+        <a href="index.html" class="footer-back">Portafolio</a>
+    </footer>
+
+    <script>
+        // Cursor
+        const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+        let mx=0,my=0,rx=0,ry=0;
+        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-5+'px';cursor.style.top=my-5+'px';});
+        function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(animRing);}
+        animRing();
+        document.querySelectorAll('a,button,.plan,.class-card,.trainer').forEach(el=>{
+            el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(26,110,219,0.8)';});
+            el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(26,110,219,0.5)';});
+        });
+        // Scroll reveal
+        const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08});
+        document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+        setTimeout(()=>{document.querySelectorAll('.hero .fade-up').forEach(el=>el.classList.add('visible'));},100);
+
+        // ── Chatbot Iron Force ──────────────────────────────
+        const R={
+            planes:{msg:"💳 Nuestros planes:<br>• <strong>Básico</strong> — $25/mes (sala de pesas + cardio)<br>• <strong>Pro</strong> — $40/mes (clases ilimitadas + 1 PT)<br>• <strong>Elite</strong> — $70/mes (todo incluido + nutrición)<br>¿Cuál te interesa?",opts:["Quiero el Plan Pro","¿Qué incluye el Elite?","Primera semana gratis"]},
+            clases:{msg:"🏋️ Tenemos: CrossFit & HIIT, Powerlifting, Yoga & Stretching, Spinning y Olympic Lifting. Clases todos los días con entrenadores certificados.",opts:["Ver planes","¿Cuánto cuesta?","Unirme ahora"]},
+            horarios:{msg:"🕐 Estamos abiertos <strong>Lun–Dom de 6am a 10pm</strong>. Las clases grupales tienen horarios específicos. ¿Quieres el horario completo por WhatsApp?",opts:["Ver horario completo","Ver planes","Unirme"]},
+            contacto:{msg:"📱 Escríbenos al <strong>+593 968 352 133</strong> por WhatsApp. También puedes visitarnos en Quito. ¡Te respondemos rápido!",opts:["Abrir WhatsApp","Ver planes"]},
+            gratis:{msg:"🎉 ¡Sí! Tu <strong>primera semana es GRATIS</strong>. Solo escríbenos por WhatsApp con tu nombre y te agendamos. Sin tarjeta, sin compromisos.",opts:["Reclamar semana gratis","Ver planes"]},
+            default:{msg:"¡Hola! 💪 Bienvenido a <strong>Iron Force Gym</strong>. ¿En qué puedo ayudarte?",opts:["Ver planes y precios","Horarios de clases","Primera semana gratis","Contacto"]}
+        };
+        const K={plan:["planes"],precio:["planes"],cuanto:["planes"],costo:["planes"],clase:["clases"],actividad:["clases"],horario:["horarios"],hora:["horarios"],tiemp:["horarios"],contact:["contacto"],whatsapp:["contacto"],gratis:["gratis"],free:["gratis"],prueba:["gratis"]};
+        let chatOpen=false,firstOpen=true;
+        function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatWindow').classList.toggle('open',chatOpen);if(chatOpen){document.querySelector('.chat-badge').style.display='none';if(firstOpen){firstOpen=false;addBot(R.default.msg,R.default.opts);}setTimeout(()=>document.getElementById('chatInput').focus(),200);}}
+        function addBot(text,opts=[],delay=0){const box=document.getElementById('chatMessages');if(delay>0){const t=document.createElement('div');t.className='msg typing';t.id='typing';t.textContent='Escribiendo...';box.appendChild(t);box.scrollTop=box.scrollHeight;}setTimeout(()=>{document.getElementById('typing')?.remove();const el=document.createElement('div');el.className='msg bot';el.innerHTML=text;box.appendChild(el);box.scrollTop=box.scrollHeight;renderOpts(opts);},delay||0);}
+        function renderOpts(opts){const c=document.getElementById('chatOptions');c.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOpt(o);c.appendChild(b);});}
+        function handleOpt(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('reclamar')||t.includes('unirme')||t.includes('gratis')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20unirme%20a%20Iron%20Force%20Gym%20%F0%9F%92%AA','_blank');addBot('¡Perfecto! Te abrí WhatsApp. ¡Te esperamos! 💪',[],400);return;}const key=Object.keys(K).find(k=>t.includes(k));const resp=key?R[K[key]]:R.default;addBot(resp.msg,resp.opts,700);}
+        function sendUserMsg(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();const key=Object.keys(K).find(k=>t.includes(k));const resp=key?R[K[key]]:{msg:"Para más info escríbenos por WhatsApp, te respondemos al instante 💪",opts:["Abrir WhatsApp","Ver planes","Clases disponibles"]};addBot(resp.msg,resp.opts,800);}
+        // ── Fin Chatbot ──────────────────────────────────────
+    </script>
+</body>
+</html>
