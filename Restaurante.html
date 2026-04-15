@@ -4,182 +4,400 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Reserva | Restaurante de Autor — Quito</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #e8dfc8;
-            --gold: #b8954a;
-            --gold-light: #d4af6a;
-            --green: #2d4a2a;
-            --green-light: #4a7a44;
-            --dark: #0a0c08;
-            --surface: #0f120c;
-            --surface2: #151a10;
-            --surface3: #1c2416;
-            --text: #c8c0a8;
-            --text-dim: #5a5840;
-            --text-muted: #2a2c1e;
+            --gold: #c9a84c;
+            --gold-light: #e2c070;
+            --gold-dim: rgba(201,168,76,0.35);
+            --dark: #0d0b07;
+            --dark2: #12100a;
+            --dark3: #1a1710;
+            --text: #d4c9a8;
+            --text-dim: #8a7e60;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; }
-        html { scroll-behavior:smooth; }
-        body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; cursor:none; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+        }
 
-        body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.4; }
+        /* ── CURSOR ── */
+        .cursor { width:8px; height:8px; background:var(--gold-light); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+        .cursor-ring { width:36px; height:36px; border:1px solid rgba(201,168,76,0.45); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
 
-        .cursor{width:8px;height:8px;background:var(--gold-light);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;}
-        .cursor-ring{width:34px;height:34px;border:1px solid rgba(184,149,74,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all 0.16s ease;}
+        /* ── WHATSAPP FLOAT ── */
+        .wa-float { position:fixed; bottom:30px; right:30px; z-index:800; display:flex; align-items:center; gap:10px; text-decoration:none; }
+        .wa-float-label { background:rgba(13,11,7,0.95); border:1px solid rgba(37,211,102,0.3); color:#888; font-size:0.65rem; letter-spacing:2px; padding:7px 14px; white-space:nowrap; opacity:0; transform:translateX(10px); transition:all 0.3s; }
+        .wa-float:hover .wa-float-label { opacity:1; transform:translateX(0); }
+        .wa-float-btn { width:54px; height:54px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; animation:waPulse 2.5s ease-in-out infinite; transition:transform 0.3s; }
+        .wa-float:hover .wa-float-btn { transform:scale(1.08); }
+        @keyframes waPulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 0 rgba(37,211,102,0.3);}50%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 10px rgba(37,211,102,0);} }
 
-        /* WhatsApp */
-        .wa-float{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;align-items:center;gap:12px;text-decoration:none;}
-        .wa-float-label{background:#0f120c;border:1px solid rgba(37,211,102,0.3);color:#888;font-size:0.68rem;letter-spacing:2px;padding:8px 16px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all 0.3s;}
-        .wa-float:hover .wa-float-label{opacity:1;transform:translateX(0);}
-        .wa-float-btn{width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;animation:waPulse 2.5s ease-in-out infinite;transition:transform 0.3s;}
-        .wa-float:hover .wa-float-btn{transform:scale(1.1);}
-        @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 0 rgba(37,211,102,0.3);}50%{box-shadow:0 4px 20px rgba(37,211,102,0.35),0 0 0 10px rgba(37,211,102,0);}}
+        /* ── CHATBOT ── */
+        .chat-bubble { position:fixed; bottom:96px; right:30px; z-index:799; width:48px; height:48px; background:linear-gradient(135deg,var(--gold),#7a5e1a); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; cursor:pointer; box-shadow:0 4px 20px rgba(201,168,76,0.4); transition:transform 0.3s; }
+        .chat-bubble:hover { transform:scale(1.1); }
+        .chat-badge { position:absolute; top:-4px; right:-4px; background:#c0392b; color:#fff; font-size:0.55rem; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+        .chat-window { position:fixed; bottom:156px; right:30px; z-index:798; width:340px; background:#100e08; border:1px solid rgba(201,168,76,0.2); border-radius:2px; overflow:hidden; display:none; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.85); max-height:480px; }
+        .chat-window.open { display:flex; }
+        .chat-header { background:#0d0b07; padding:16px 20px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(201,168,76,0.12); }
+        .chat-avatar { width:38px; height:38px; background:linear-gradient(135deg,var(--gold),#7a5e1a); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+        .chat-header-info { flex:1; }
+        .chat-header-name { font-family:'Playfair Display',serif; font-size:1rem; letter-spacing:2px; color:var(--gold-light); font-style:italic; }
+        .chat-header-status { font-size:0.62rem; color:#25D366; letter-spacing:1px; margin-top:2px; }
+        .chat-close { background:none; border:none; color:#5a5030; cursor:pointer; font-size:1.1rem; padding:4px; transition:color 0.2s; }
+        .chat-close:hover { color:var(--gold-light); }
+        .chat-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; min-height:200px; scrollbar-width:thin; scrollbar-color:rgba(201,168,76,0.2) transparent; }
+        .msg { max-width:85%; padding:10px 14px; border-radius:2px; font-size:0.8rem; line-height:1.6; }
+        .msg.bot { background:rgba(255,255,255,0.04); color:var(--text); align-self:flex-start; border-left:2px solid rgba(201,168,76,0.4); }
+        .msg.user { background:rgba(201,168,76,0.1); color:var(--gold-light); align-self:flex-end; border-right:2px solid rgba(201,168,76,0.5); }
+        .msg.typing { background:rgba(255,255,255,0.03); color:#5a5030; align-self:flex-start; font-style:italic; }
+        .chat-options { padding:12px 16px; display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid rgba(201,168,76,0.07); }
+        .chat-opt { background:none; border:1px solid rgba(201,168,76,0.25); color:var(--gold-light); font-size:0.62rem; letter-spacing:2px; padding:7px 12px; cursor:pointer; transition:all 0.2s; text-transform:uppercase; font-family:'Lato',sans-serif; }
+        .chat-opt:hover { background:rgba(201,168,76,0.1); border-color:var(--gold-light); }
+        .chat-input-row { display:flex; border-top:1px solid rgba(201,168,76,0.08); }
+        .chat-input { flex:1; background:#080600; border:none; color:var(--text); padding:12px 16px; font-size:0.8rem; font-family:'Lato',sans-serif; outline:none; }
+        .chat-input::placeholder { color:#3a3420; }
+        .chat-send { background:linear-gradient(135deg,var(--gold),#7a5e1a); border:none; color:#000; padding:0 18px; cursor:pointer; font-size:1rem; transition:opacity 0.2s; }
+        .chat-send:hover { opacity:0.85; }
 
-        /* Chatbot */
-        .chat-bubble{position:fixed;bottom:100px;right:32px;z-index:799;width:48px;height:48px;background:linear-gradient(135deg,var(--gold),#8a6a2a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(184,149,74,0.4);transition:transform 0.3s;}
-        .chat-bubble:hover{transform:scale(1.1);}
-        .chat-badge{position:absolute;top:-4px;right:-4px;background:#c0392b;color:#fff;font-size:0.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
-        .chat-window{position:fixed;bottom:160px;right:32px;z-index:798;width:340px;background:#0f120c;border:1px solid rgba(184,149,74,0.2);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.8);max-height:480px;}
-        .chat-window.open{display:flex;}
-        .chat-header{background:linear-gradient(135deg,#151a0e,#0f120c);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(184,149,74,0.15);}
-        .chat-avatar{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),#8a6a2a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-        .chat-header-info{flex:1;}
-        .chat-header-name{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:3px;color:var(--gold-light);font-style:italic;}
-        .chat-header-status{font-size:0.62rem;color:#25D366;letter-spacing:1px;margin-top:2px;}
-        .chat-close{background:none;border:none;color:#5a5840;cursor:pointer;font-size:1.1rem;padding:4px;transition:color 0.2s;}
-        .chat-close:hover{color:var(--gold-light);}
-        .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;scrollbar-width:thin;scrollbar-color:rgba(184,149,74,0.2) transparent;}
-        .chat-messages::-webkit-scrollbar{width:4px;}
-        .chat-messages::-webkit-scrollbar-thumb{background:rgba(184,149,74,0.2);border-radius:2px;}
-        .msg{max-width:85%;padding:10px 14px;border-radius:2px;font-size:0.8rem;line-height:1.6;}
-        .msg.bot{background:#151a1088;color:var(--text);align-self:flex-start;border-left:2px solid rgba(184,149,74,0.4);}
-        .msg.user{background:rgba(184,149,74,0.12);color:var(--gold-light);align-self:flex-end;border-right:2px solid rgba(184,149,74,0.5);}
-        .msg.typing{background:#151a1088;color:#5a5840;align-self:flex-start;font-style:italic;}
-        .chat-options{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(184,149,74,0.08);}
-        .chat-opt{background:none;border:1px solid rgba(184,149,74,0.25);color:var(--gold-light);font-size:0.65rem;letter-spacing:2px;padding:7px 12px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;font-family:'Inter',sans-serif;}
-        .chat-opt:hover{background:rgba(184,149,74,0.1);border-color:var(--gold-light);}
-        .chat-input-row{display:flex;border-top:1px solid rgba(184,149,74,0.1);}
-        .chat-input{flex:1;background:#080a06;border:none;color:var(--text);padding:12px 16px;font-size:0.8rem;font-family:'Inter',sans-serif;outline:none;}
-        .chat-input::placeholder{color:#2a2c1e;}
-        .chat-send{background:linear-gradient(135deg,var(--gold),#8a6a2a);border:none;color:#000;padding:0 18px;cursor:pointer;font-size:1rem;transition:opacity 0.2s;}
-        .chat-send:hover{opacity:0.85;}
+        /* ── NAV ── */
+        nav {
+            position: fixed; top:0; left:0; right:0; z-index:500;
+            display: flex; justify-content:space-between; align-items:center;
+            padding: 22px 70px;
+            background: linear-gradient(to bottom, rgba(10,8,4,0.95) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(201,168,76,0.08);
+        }
+        .nav-logo {
+            display: flex; align-items:center; gap:14px;
+        }
+        .nav-logo img {
+            height: 44px; width:auto; object-fit:contain;
+        }
+        .nav-logo-text {
+            display: flex; flex-direction:column;
+        }
+        .nav-logo-main { font-family:'Playfair Display',serif; font-size:1.25rem; letter-spacing:4px; color:var(--gold-light); font-style:italic; }
+        .nav-logo-sub { font-size:0.5rem; letter-spacing:6px; color:var(--text-dim); text-transform:uppercase; margin-top:1px; }
+        .nav-links { display:flex; gap:44px; list-style:none; }
+        .nav-links a { color:var(--text-dim); text-decoration:none; font-size:0.68rem; letter-spacing:4px; text-transform:uppercase; transition:color 0.3s; font-weight:400; }
+        .nav-links a:hover { color:var(--gold-light); }
+        .nav-cta { padding:11px 28px; border:1px solid var(--gold-dim); color:var(--gold-light); text-decoration:none; font-size:0.65rem; letter-spacing:4px; text-transform:uppercase; transition:all 0.3s; font-weight:400; }
+        .nav-cta:hover { background:rgba(201,168,76,0.1); border-color:var(--gold-light); }
 
-        /* NAV */
-        nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;background:linear-gradient(to bottom,rgba(10,12,8,0.97) 0%,transparent 100%);}
-        .nav-logo-wrap{display:flex;flex-direction:column;gap:3px;}
-        .nav-logo-main{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:6px;color:var(--gold-light);font-style:italic;}
-        .nav-logo-sub{font-size:0.52rem;letter-spacing:7px;color:var(--text-dim);text-transform:uppercase;}
-        .nav-links{display:flex;gap:44px;list-style:none;}
-        .nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;transition:color 0.3s;}
-        .nav-links a:hover{color:var(--gold-light);}
-        .nav-cta{padding:12px 30px;border:1px solid rgba(184,149,74,0.4);color:var(--gold-light);text-decoration:none;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;transition:all 0.3s;}
-        .nav-cta:hover{background:rgba(184,149,74,0.1);border-color:var(--gold-light);}
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-img {
+            position: absolute; inset:0;
+            background: url('hero-bg.jpg') center center / cover no-repeat;
+        }
+        .hero-overlay {
+            position: absolute; inset:0;
+            background: linear-gradient(
+                105deg,
+                rgba(10,8,4,0.88) 0%,
+                rgba(10,8,4,0.65) 45%,
+                rgba(10,8,4,0.2) 100%
+            );
+        }
+        .hero-overlay2 {
+            position: absolute; inset:0;
+            background: linear-gradient(to top, rgba(10,8,4,1) 0%, transparent 40%);
+        }
+        .hero-content {
+            position: relative; z-index:2;
+            padding: 0 70px;
+            max-width: 720px;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items:center; gap:16px;
+            margin-bottom: 28px;
+        }
+        .hero-eyebrow-line { width:44px; height:1px; background:var(--gold); }
+        .hero-eyebrow-text {
+            font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:6px;
+            color:var(--gold); text-transform:uppercase;
+        }
+        .hero-title {
+            font-family:'Playfair Display',serif;
+            font-size: clamp(52px, 7.5vw, 110px);
+            line-height: 1;
+            margin-bottom: 28px;
+            font-weight: 600;
+        }
+        .hero-title .line1 { display:block; color:#f5ede0; font-style:italic; }
+        .hero-title .line2 { display:block; color:var(--gold-light); }
+        .hero-desc {
+            font-family:'Playfair Display',serif;
+            font-size: 1.08rem; font-style:italic;
+            line-height: 1.9; color:rgba(212,201,168,0.75);
+            max-width: 440px; margin-bottom: 44px;
+        }
+        .hero-actions { display:flex; gap:18px; align-items:center; }
+        .btn-gold {
+            padding: 15px 44px;
+            background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%);
+            color: #1a1200; text-decoration:none;
+            font-family:'Cinzel',serif;
+            font-size: 0.68rem; letter-spacing:4px; text-transform:uppercase; font-weight:600;
+            transition: all 0.3s;
+            border: 1px solid var(--gold);
+        }
+        .btn-gold:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(201,168,76,0.4); }
+        .btn-outline-gold {
+            padding: 14px 36px;
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold-light); text-decoration:none;
+            font-family:'Cinzel',serif;
+            font-size: 0.65rem; letter-spacing:4px; text-transform:uppercase;
+            transition: all 0.3s;
+        }
+        .btn-outline-gold:hover { background:rgba(201,168,76,0.08); border-color:var(--gold-light); }
+        .scroll-hint {
+            position:absolute; right:70px; bottom:50px;
+            display:flex; flex-direction:column; align-items:center; gap:10px;
+            writing-mode:vertical-rl; font-size:0.58rem; letter-spacing:5px;
+            text-transform:uppercase; color:var(--text-dim);
+        }
+        .scroll-line { width:1px; height:50px; background:linear-gradient(to bottom, var(--gold), transparent); animation:scrollPulse 2s ease-in-out infinite; }
+        @keyframes scrollPulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
 
-        /* HERO */
-        .hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 90px;overflow:hidden;}
-        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% 35%,rgba(45,74,42,0.3) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 70%,rgba(184,149,74,0.1) 0%,transparent 60%),linear-gradient(165deg,#0e1208,#0a0c08);}
-        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,149,74,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(184,149,74,0.03) 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse 65% 65% at 50% 50%,black 0%,transparent 100%);}
-        .hero-watermark{position:absolute;right:-20px;bottom:40px;font-family:'Cormorant Garamond',serif;font-size:clamp(80px,13vw,200px);color:transparent;-webkit-text-stroke:1px rgba(184,149,74,0.05);line-height:1;pointer-events:none;user-select:none;font-style:italic;white-space:nowrap;}
-        .hero-content{position:relative;z-index:2;max-width:760px;}
-        .hero-eyebrow{display:inline-flex;align-items:center;gap:14px;margin-bottom:28px;}
-        .hero-eyebrow-line{width:40px;height:1px;background:var(--gold);}
-        .hero-eyebrow-text{font-family:'Cormorant Garamond',serif;font-size:0.9rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold-light);font-style:italic;}
-        .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,9vw,130px);line-height:0.9;letter-spacing:2px;margin-bottom:32px;font-weight:600;}
-        .hero-title .line1{display:block;color:var(--cream);font-style:italic;}
-        .hero-title .line2{display:block;color:var(--gold-light);}
-        .hero-title .line3{display:block;color:var(--text-dim);font-size:0.28em;letter-spacing:10px;font-style:normal;margin-top:12px;font-family:'Inter',sans-serif;font-weight:300;}
-        .hero-desc{font-size:0.92rem;line-height:1.9;color:var(--text-dim);max-width:480px;margin-bottom:50px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;}
-        .hero-actions{display:flex;gap:18px;align-items:center;}
-        .btn-gold{padding:16px 44px;background:linear-gradient(135deg,var(--gold),#8a6a2a);color:#000;text-decoration:none;font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
-        .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,149,74,0.35);}
-        .btn-outline-gold{padding:15px 36px;border:1px solid rgba(184,149,74,0.35);color:var(--gold-light);text-decoration:none;font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;transition:all 0.3s;}
-        .btn-outline-gold:hover{background:rgba(184,149,74,0.08);border-color:var(--gold-light);}
-        .scroll-hint{position:absolute;right:60px;bottom:90px;display:flex;flex-direction:column;align-items:center;gap:10px;writing-mode:vertical-rl;font-size:0.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--text-dim);}
-        .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--gold-light),transparent);animation:pulse 2.2s ease-in-out infinite;}
-        @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+        /* ── GOLD DIVIDER ── */
+        .gold-divider {
+            display: flex; align-items:center; gap:18px;
+            padding: 0 70px;
+        }
+        .gold-divider-line { flex:1; height:1px; background:linear-gradient(to right, transparent, rgba(201,168,76,0.35), transparent); }
+        .gold-divider-icon { color:var(--gold); font-size:0.9rem; }
 
-        /* DIVIDER */
-        .divider{height:1px;background:linear-gradient(to right,transparent,rgba(184,149,74,0.3),transparent);margin:0 60px;}
+        /* ── CUISINE SECTION ── */
+        .cuisine { padding: 110px 70px; background: var(--dark2); }
+        .cuisine-header { text-align:center; margin-bottom:70px; }
+        .section-eyebrow {
+            font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:7px;
+            color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+            display:block;
+        }
+        .section-title {
+            font-family:'Playfair Display',serif; font-size:clamp(36px,4.5vw,58px);
+            color:#f5ede0; font-weight:600; letter-spacing:2px;
+            margin-bottom:12px;
+        }
+        .section-sub {
+            font-family:'Playfair Display',serif; font-style:italic;
+            font-size:1rem; color:var(--text-dim); letter-spacing:1px;
+        }
+        .cuisine-grid {
+            display: grid; grid-template-columns:1fr 1fr; gap:2px;
+        }
+        .cuisine-card {
+            position: relative; overflow:hidden; background:#000;
+            cursor: pointer;
+        }
+        .cuisine-card img {
+            width:100%; height:420px; object-fit:cover;
+            transition: transform 0.6s ease, opacity 0.4s;
+            opacity: 0.85;
+            display:block;
+        }
+        .cuisine-card:hover img { transform:scale(1.06); opacity:0.7; }
+        .cuisine-card-overlay {
+            position:absolute; inset:0;
+            background: linear-gradient(to top, rgba(10,8,4,0.9) 0%, rgba(10,8,4,0.1) 55%);
+            display:flex; flex-direction:column; justify-content:flex-end;
+            padding:36px 40px;
+            transition:all 0.3s;
+        }
+        .cuisine-card-title {
+            font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:600;
+            color:#f5ede0; letter-spacing:2px; margin-bottom:10px;
+        }
+        .cuisine-card-rule {
+            width:40px; height:1px; background:var(--gold); margin-bottom:20px;
+            transition:width 0.4s;
+        }
+        .cuisine-card:hover .cuisine-card-rule { width:70px; }
+        .cuisine-card-btn {
+            display:inline-flex; align-items:center; gap:10px;
+            padding:11px 30px;
+            border:1px solid var(--gold-dim);
+            color:var(--gold-light); text-decoration:none;
+            font-family:'Cinzel',serif;
+            font-size:0.62rem; letter-spacing:4px; text-transform:uppercase;
+            transition:all 0.3s; width:fit-content;
+        }
+        .cuisine-card-btn:hover { background:rgba(201,168,76,0.12); border-color:var(--gold-light); }
 
-        /* SECTION */
-        section{padding:120px 60px;}
-        .section-header{display:flex;align-items:center;gap:20px;margin-bottom:72px;}
-        .section-num{font-family:'Cormorant Garamond',serif;font-size:0.78rem;color:var(--green-light);letter-spacing:4px;font-style:italic;}
-        .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,54px);letter-spacing:4px;color:var(--cream);font-weight:600;}
-        .section-rule{flex:1;height:1px;background:linear-gradient(to right,rgba(184,149,74,0.25),transparent);}
+        /* ── ATMOSPHERE SECTION ── */
+        .atmosphere {
+            position:relative; min-height:520px;
+            display:flex; align-items:center;
+            overflow:hidden;
+        }
+        .atmosphere-img {
+            position:absolute; inset:0;
+            background:url('ambiente.jpg') center center / cover no-repeat;
+        }
+        .atmosphere-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to left, rgba(10,8,4,0.92) 0%, rgba(10,8,4,0.5) 50%, rgba(10,8,4,0.15) 100%);
+        }
+        .atmosphere-content {
+            position:relative; z-index:2;
+            margin-left:auto;
+            padding:80px 70px;
+            max-width:560px;
+            text-align:right;
+        }
+        .atmosphere-content .section-eyebrow { text-align:right; }
+        .atmosphere-content .section-title { text-align:right; }
+        .atmosphere-content .section-sub { text-align:right; margin-bottom:32px; display:block; }
+        .atmosphere-rule { width:60px; height:1px; background:var(--gold); margin:18px 0 18px auto; }
+        .btn-gallery {
+            display:inline-flex; align-items:center; gap:12px;
+            padding:13px 36px;
+            border:1px solid var(--gold-dim);
+            color:var(--gold-light); text-decoration:none;
+            font-family:'Cinzel',serif;
+            font-size:0.65rem; letter-spacing:4px; text-transform:uppercase;
+            transition:all 0.3s;
+        }
+        .btn-gallery:hover { background:rgba(201,168,76,0.1); border-color:var(--gold-light); }
 
-        /* MENU */
-        .menu{background:var(--dark);}
-        .menu-tabs{display:flex;gap:0;margin-bottom:50px;border-bottom:1px solid rgba(184,149,74,0.12);}
-        .tab-btn{background:none;border:none;color:var(--text-dim);font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;padding:14px 28px;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;}
-        .tab-btn.active,.tab-btn:hover{color:var(--gold-light);border-bottom-color:var(--gold-light);}
-        .menu-panel{display:none;}
-        .menu-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,149,74,0.07);}
-        .dish{background:var(--surface);padding:40px 34px;position:relative;overflow:hidden;transition:background 0.3s;}
-        .dish:hover{background:var(--surface2);}
-        .dish::after{content:'';position:absolute;inset:0;border:1px solid transparent;pointer-events:none;transition:border-color 0.4s;}
-        .dish:hover::after{border-color:rgba(184,149,74,0.25);}
-        .dish-icon{font-size:1.8rem;margin-bottom:18px;display:block;}
-        .dish-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:2px;color:var(--cream);margin-bottom:10px;font-weight:600;}
-        .dish-desc{font-size:0.8rem;color:var(--text-dim);line-height:1.8;margin-bottom:24px;}
-        .dish-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold-light);}
-        .dish-glow{position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);width:70%;height:100px;background:radial-gradient(ellipse,rgba(184,149,74,0.1) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;}
-        .dish:hover .dish-glow{opacity:1;}
+        /* ── RESERVATION SECTION ── */
+        .reserva {
+            padding: 110px 70px;
+            background: var(--dark);
+            position:relative; overflow:hidden;
+            text-align:center;
+        }
+        .reserva::before {
+            content:'';
+            position:absolute; inset:0;
+            background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,76,0.07) 0%, transparent 70%);
+        }
+        .reserva-inner { position:relative; z-index:2; max-width:700px; margin:0 auto; }
+        .reserva-eyebrow { display:inline-flex; align-items:center; gap:16px; margin-bottom:24px; }
+        .reserva-eyebrow-line { width:34px; height:1px; background:var(--gold); }
+        .reserva-title {
+            font-family:'Playfair Display',serif; font-size:clamp(44px,7vw,90px);
+            color:#f5ede0; font-weight:600; letter-spacing:2px; line-height:1;
+            margin-bottom:24px;
+        }
+        .reserva-title .accent { color:var(--gold-light); font-style:italic; }
+        .reserva-sub {
+            font-family:'Playfair Display',serif; font-style:italic;
+            font-size:1.05rem; color:var(--text-dim); max-width:420px; margin:0 auto 50px; line-height:1.8;
+        }
 
-        /* EXPERIENCE */
-        .experience{background:linear-gradient(180deg,var(--dark) 0%,#080c06 100%);}
-        .exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,149,74,0.06);}
-        .exp-item{background:var(--surface);padding:44px 32px;transition:background 0.3s;}
-        .exp-item:hover{background:var(--surface2);}
-        .exp-icon{font-size:2rem;margin-bottom:18px;display:block;}
-        .exp-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:2px;color:var(--cream);margin-bottom:12px;font-weight:600;}
-        .exp-desc{font-size:0.78rem;color:var(--text-dim);line-height:1.8;}
+        /* Reservation row (like the image) */
+        .reserva-form-row {
+            display: flex; gap:2px; margin-bottom:44px;
+            justify-content:center; flex-wrap:wrap;
+        }
+        .reserva-select {
+            background:#1a1710; border:1px solid rgba(201,168,76,0.2);
+            color:var(--text-dim); font-family:'Lato',sans-serif;
+            font-size:0.7rem; letter-spacing:3px; text-transform:uppercase;
+            padding:14px 24px; appearance:none; cursor:pointer;
+            outline:none; transition:border-color 0.3s; min-width:160px;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat:no-repeat; background-position:right 16px center;
+            padding-right:40px;
+        }
+        .reserva-select:focus { border-color:var(--gold); }
+        .btn-reserve-now {
+            padding:14px 40px;
+            background:linear-gradient(135deg,var(--gold),#a07830);
+            color:#1a1200; text-decoration:none;
+            font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:4px; text-transform:uppercase; font-weight:700;
+            border:none; cursor:pointer; transition:all 0.3s;
+        }
+        .btn-reserve-now:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(201,168,76,0.4); }
 
-        /* RESERVA */
-        .reserva{background:var(--dark);position:relative;overflow:hidden;}
-        .reserva-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 90%,rgba(45,74,42,0.2) 0%,transparent 70%);}
-        .reserva-inner{position:relative;max-width:820px;margin:0 auto;text-align:center;}
-        .reserva-eyebrow{display:inline-flex;align-items:center;gap:14px;margin-bottom:26px;}
-        .reserva-eyebrow-line{width:30px;height:1px;background:var(--gold);}
-        .reserva-eyebrow-text{font-family:'Cormorant Garamond',serif;font-size:0.9rem;letter-spacing:6px;color:var(--gold-light);font-style:italic;text-transform:uppercase;}
-        .reserva-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,110px);letter-spacing:2px;line-height:0.9;color:var(--cream);margin-bottom:28px;font-weight:600;}
-        .reserva-title .accent{color:var(--gold-light);font-style:italic;}
-        .reserva-sub{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dim);line-height:1.9;max-width:460px;margin:0 auto 52px;font-style:italic;}
-        .reserva-actions{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
-        .btn-wa{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;background:#25D366;color:#fff;text-decoration:none;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
-        .btn-wa:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,0.3);}
-        .reserva-info{display:flex;justify-content:center;gap:50px;margin-top:60px;padding-top:50px;border-top:1px solid rgba(184,149,74,0.1);}
-        .info-item{text-align:center;}
-        .info-icon{font-size:1.3rem;margin-bottom:10px;display:block;}
-        .info-label{font-size:0.6rem;letter-spacing:5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px;}
-        .info-value{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);letter-spacing:2px;}
+        .reserva-info { display:flex; justify-content:center; gap:60px; margin-top:56px; padding-top:44px; border-top:1px solid rgba(201,168,76,0.1); flex-wrap:wrap; }
+        .info-item { text-align:center; }
+        .info-icon-wrap { font-size:1.6rem; margin-bottom:10px; }
+        .info-label { font-size:0.58rem; letter-spacing:5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:7px; }
+        .info-value { font-family:'Playfair Display',serif; font-size:1rem; color:var(--text); letter-spacing:1px; }
 
-        /* FOOTER */
-        footer{padding:44px 60px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:var(--text-dim);letter-spacing:2px;}
-        .footer-logo-wrap{display:flex;flex-direction:column;gap:3px;}
-        .footer-logo{font-family:'Cormorant Garamond',serif;color:var(--gold-light);font-size:1.1rem;letter-spacing:5px;font-style:italic;}
-        .footer-sub{font-size:0.52rem;letter-spacing:5px;color:var(--text-muted);}
-        .footer-back{display:flex;align-items:center;gap:8px;color:var(--text-dim);text-decoration:none;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;}
-        .footer-back:hover{color:var(--gold-light);}
-        .footer-back::before{content:'←';}
-        .footer-wa{display:flex;align-items:center;gap:8px;color:#25D366;text-decoration:none;font-size:0.7rem;letter-spacing:2px;transition:opacity 0.3s;}
-        .footer-wa:hover{opacity:0.75;}
+        /* ── FEATURES BAR ── */
+        .features-bar {
+            border-top:1px solid rgba(201,168,76,0.12);
+            padding:36px 70px;
+            display:flex; justify-content:center; gap:80px;
+            background:var(--dark);
+            flex-wrap:wrap;
+        }
+        .feature-item { display:flex; flex-direction:column; align-items:center; gap:10px; }
+        .feature-icon { font-size:2rem; }
+        .feature-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:4px; color:var(--text-dim); text-transform:uppercase; }
 
-        /* ANIM */
-        .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
-        .fade-up.visible{opacity:1;transform:translateY(0);}
-        .d1{transition-delay:0.12s;}.d2{transition-delay:0.22s;}.d3{transition-delay:0.34s;}.d4{transition-delay:0.46s;}
+        /* ── MENU ── */
+        .menu-section { padding:110px 70px; background:var(--dark); }
+        .menu-tabs { display:flex; gap:0; margin-bottom:50px; border-bottom:1px solid rgba(201,168,76,0.12); justify-content:center; }
+        .tab-btn { background:none; border:none; color:var(--text-dim); font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; text-transform:uppercase; padding:14px 32px; cursor:pointer; transition:all 0.3s; border-bottom:2px solid transparent; margin-bottom:-1px; }
+        .tab-btn.active,.tab-btn:hover { color:var(--gold-light); border-bottom-color:var(--gold-light); }
+        .menu-panel { display:none; }
+        .menu-panel.active { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(201,168,76,0.06); }
+        .dish { background:var(--dark2); padding:40px 36px; position:relative; overflow:hidden; transition:background 0.3s; }
+        .dish:hover { background:var(--dark3); }
+        .dish::after { content:''; position:absolute; inset:0; border:1px solid transparent; pointer-events:none; transition:border-color 0.4s; }
+        .dish:hover::after { border-color:rgba(201,168,76,0.2); }
+        .dish-icon { font-size:1.8rem; margin-bottom:16px; display:block; }
+        .dish-name { font-family:'Playfair Display',serif; font-size:1.35rem; letter-spacing:1px; color:#f0e8d0; margin-bottom:10px; font-weight:600; }
+        .dish-desc { font-size:0.8rem; color:var(--text-dim); line-height:1.8; margin-bottom:22px; }
+        .dish-price { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--gold-light); }
+        .dish-rule { width:28px; height:1px; background:var(--gold); margin-bottom:16px; }
 
-        @media(max-width:900px){
-            nav{padding:20px 30px;}.nav-links{display:none;}
-            section{padding:80px 30px;}.hero{padding:0 30px 70px;}
-            .menu-panel.active,.exp-grid{grid-template-columns:1fr;}
-            footer{flex-direction:column;gap:14px;text-align:center;}
-            .reserva-info{flex-direction:column;gap:30px;}
-            .scroll-hint,.wa-float-label{display:none;}
+        /* ── EXPERIENCE ── */
+        .experience { padding:110px 70px; background:var(--dark2); }
+        .exp-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(201,168,76,0.06); margin-top:60px; }
+        .exp-item { background:var(--dark2); padding:44px 32px; transition:background 0.3s; }
+        .exp-item:hover { background:var(--dark3); }
+        .exp-icon { font-size:2rem; margin-bottom:16px; display:block; }
+        .exp-title { font-family:'Playfair Display',serif; font-size:1.2rem; letter-spacing:1px; color:#f0e8d0; margin-bottom:12px; font-weight:600; }
+        .exp-title-rule { width:26px; height:1px; background:var(--gold); margin-bottom:12px; }
+        .exp-desc { font-size:0.78rem; color:var(--text-dim); line-height:1.85; }
+
+        /* ── FOOTER ── */
+        footer { padding:40px 70px; border-top:1px solid rgba(255,255,255,0.04); display:flex; justify-content:space-between; align-items:center; font-size:0.68rem; color:var(--text-dim); letter-spacing:2px; flex-wrap:wrap; gap:16px; }
+        .footer-logo { font-family:'Playfair Display',serif; color:var(--gold-light); font-size:1.1rem; letter-spacing:4px; font-style:italic; }
+        .footer-sub { font-size:0.5rem; letter-spacing:5px; color:#3a3420; margin-top:3px; }
+        .footer-wa { color:#25D366; text-decoration:none; transition:opacity 0.3s; }
+        .footer-wa:hover { opacity:0.75; }
+        .footer-back { color:var(--text-dim); text-decoration:none; transition:color 0.3s; }
+        .footer-back:hover { color:var(--gold-light); }
+
+        /* ── ANIM ── */
+        .fade-up { opacity:0; transform:translateY(30px); transition:opacity 0.85s ease, transform 0.85s ease; }
+        .fade-up.visible { opacity:1; transform:translateY(0); }
+        .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.32s;}.d4{transition-delay:0.44s;}
+
+        @media(max-width:900px) {
+            nav{padding:18px 24px;}.nav-links{display:none;}
+            .hero-content{padding:0 24px; max-width:100%;}
+            .cuisine-grid,.menu-panel.active,.exp-grid{grid-template-columns:1fr;}
+            .cuisine-card img{height:280px;}
+            .atmosphere-content{padding:60px 24px; margin-left:0; max-width:100%; text-align:left;}
+            .atmosphere-content .section-eyebrow,.atmosphere-content .section-title,.atmosphere-content .section-sub{text-align:left;}
+            .atmosphere-rule{margin:18px 0;}
+            .gold-divider,.cuisine,.menu-section,.experience,.reserva,.features-bar,footer{padding-left:24px;padding-right:24px;}
+            .reserva-info,.features-bar{gap:30px;}
+            .scroll-hint{display:none;}
+            .reserva-form-row{flex-direction:column; align-items:center;}
         }
     </style>
 </head>
@@ -188,7 +406,7 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- WhatsApp Flotante -->
+    <!-- WhatsApp -->
     <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20hacer%20una%20reserva%20en%20La%20Reserva%20%F0%9F%8D%BD" target="_blank" class="wa-float" title="Reservar por WhatsApp">
         <span class="wa-float-label">¡Reservar mesa!</span>
         <div class="wa-float-btn">💬</div>
@@ -217,9 +435,12 @@
 
     <!-- NAV -->
     <nav>
-        <div class="nav-logo-wrap">
-            <div class="nav-logo-main">La Reserva</div>
-            <div class="nav-logo-sub">Restaurante de Autor · Quito</div>
+        <div class="nav-logo">
+            <img src="logo.png" alt="La Reserva Logo">
+            <div class="nav-logo-text">
+                <div class="nav-logo-main">La Reserva</div>
+                <div class="nav-logo-sub">Restaurante de Autor · Quito</div>
+            </div>
         </div>
         <ul class="nav-links">
             <li><a href="#menu">Menú</a></li>
@@ -231,21 +452,20 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-grid"></div>
-        <div class="hero-watermark">La Reserva</div>
+        <div class="hero-img"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-overlay2"></div>
         <div class="hero-content">
             <div class="hero-eyebrow fade-up">
                 <div class="hero-eyebrow-line"></div>
                 <div class="hero-eyebrow-text">Cocina de Autor · Quito, Ecuador</div>
             </div>
             <h1 class="hero-title fade-up d1">
-                <span class="line1">Una Mesa,</span>
-                <span class="line2">Una Historia</span>
-                <span class="line3">Restaurante de Autor · Est. 2018</span>
+                <span class="line1">Bienvenido a</span>
+                <span class="line2">La Reserva</span>
             </h1>
             <p class="hero-desc fade-up d2">
-                Gastronomía que narra el Ecuador a través de ingredientes locales, técnica francesa y alma andina.
+                Saborea los sabores de la gastronomía ecuatoriana en una ambiance elegante e irrepetible.
             </p>
             <div class="hero-actions fade-up d3">
                 <a href="#reservar" class="btn-gold">Reservar Mesa</a>
@@ -258,88 +478,137 @@
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- MENÚ -->
-    <section class="menu" id="menu">
-        <div class="section-header fade-up">
-            <span class="section-num">01 /</span>
-            <h2 class="section-title">Menú</h2>
-            <div class="section-rule"></div>
+    <!-- CUISINE SECTION -->
+    <section class="cuisine" id="cocina">
+        <div class="cuisine-header fade-up">
+            <span class="section-eyebrow">Una Experiencia Gastronómica</span>
+            <h2 class="section-title">Cocina Exquisita</h2>
+            <p class="section-sub">Un Viaje Culinario de Delicias</p>
         </div>
+        <div class="cuisine-grid">
+            <div class="cuisine-card fade-up">
+                <img src="dish1.jpg" alt="Descubre Nuestro Menú">
+                <div class="cuisine-card-overlay">
+                    <div class="cuisine-card-title">Descubre Nuestro Menú</div>
+                    <div class="cuisine-card-rule"></div>
+                    <a href="#menu" class="cuisine-card-btn">Ver Menú →</a>
+                </div>
+            </div>
+            <div class="cuisine-card fade-up d1">
+                <img src="dish2.jpg" alt="Especialidades del Chef">
+                <div class="cuisine-card-overlay">
+                    <div class="cuisine-card-title">Especialidades del Chef</div>
+                    <div class="cuisine-card-rule"></div>
+                    <a href="#menu" class="cuisine-card-btn">Saber Más →</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="menu-tabs fade-up">
+    <!-- GOLD DIVIDER -->
+    <div class="gold-divider">
+        <div class="gold-divider-line"></div>
+        <div class="gold-divider-icon">✦</div>
+        <div class="gold-divider-line"></div>
+    </div>
+
+    <!-- ATMOSPHERE -->
+    <section class="atmosphere">
+        <div class="atmosphere-img"></div>
+        <div class="atmosphere-overlay"></div>
+        <div class="atmosphere-content">
+            <span class="section-eyebrow fade-up">Nuestro Espacio</span>
+            <h2 class="section-title fade-up d1">Atmósfera Sofisticada</h2>
+            <div class="atmosphere-rule fade-up d1"></div>
+            <span class="section-sub fade-up d2">Cena con Estilo y Confort</span>
+            <div class="fade-up d3">
+                <a href="#reservar" class="btn-gallery">Ver Galería →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOLD DIVIDER -->
+    <div class="gold-divider">
+        <div class="gold-divider-line"></div>
+        <div class="gold-divider-icon">✦</div>
+        <div class="gold-divider-line"></div>
+    </div>
+
+    <!-- MENU -->
+    <section class="menu-section" id="menu">
+        <div style="text-align:center;" class="fade-up">
+            <span class="section-eyebrow">Lo Mejor de la Casa</span>
+            <h2 class="section-title">Nuestro Menú</h2>
+        </div>
+        <div class="menu-tabs fade-up d1">
             <button class="tab-btn active" onclick="switchTab('entradas',this)">Entradas</button>
-            <button class="tab-btn" onclick="switchTab('principales',this)">Principales</button>
+            <button class="tab-btn" onclick="switchTab('principales',this)">Platos Principales</button>
             <button class="tab-btn" onclick="switchTab('postres',this)">Postres</button>
         </div>
-
         <div class="menu-panel active" id="tab-entradas">
             <div class="dish fade-up">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🥗</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Ceviche de Mar</div>
                 <p class="dish-desc">Camarones frescos, leche de tigre andina, maíz tostado, aguacate cremoso y cilantro de huerta propia.</p>
                 <div class="dish-price">$14</div>
             </div>
             <div class="dish fade-up d1">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🍄</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Risotto de Hongos</div>
                 <p class="dish-desc">Hongos silvestres de los Andes, arroz arborio, parmesano reggiano añejo y aceite de trufa negra.</p>
                 <div class="dish-price">$16</div>
             </div>
             <div class="dish fade-up d2">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🫙</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Carpaccio Andino</div>
                 <p class="dish-desc">Res wagyu laminada, rúcula silvestre, alcaparras, vinagreta de maracuyá y chips de quinoa.</p>
                 <div class="dish-price">$18</div>
             </div>
         </div>
-
         <div class="menu-panel" id="tab-principales">
             <div class="dish fade-up">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🥩</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Lomo Fino</div>
                 <p class="dish-desc">Lomo de res 300gr, salsa demi-glace de hierba luisa, papas nativas confitadas y verduras de temporada.</p>
                 <div class="dish-price">$34</div>
             </div>
             <div class="dish fade-up d1">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🐟</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Trucha del Páramo</div>
                 <p class="dish-desc">Trucha arcoíris criada en altura, piel crujiente, puré de yuca ahumada y emulsión de ají amarillo.</p>
                 <div class="dish-price">$28</div>
             </div>
             <div class="dish fade-up d2">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🫘</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Ravioli de Choclo</div>
                 <p class="dish-desc">Pasta fresca rellena de choclo tierno y ricotta, salsa de tomate de árbol, nueces tostadas y albahaca.</p>
                 <div class="dish-price">$22</div>
             </div>
         </div>
-
         <div class="menu-panel" id="tab-postres">
             <div class="dish fade-up">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🍫</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Fondant de Cacao</div>
                 <p class="dish-desc">Bizcocho de cacao 72% Arriba Nacional, centro fundente, helado de vainilla de Tahití y caramelo salado.</p>
                 <div class="dish-price">$12</div>
             </div>
             <div class="dish fade-up d1">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🍮</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Flan de Guanábana</div>
                 <p class="dish-desc">Flan artesanal de guanábana ecuatoriana, coulis de maracuyá, crumble de panela y helado de coco.</p>
                 <div class="dish-price">$10</div>
             </div>
             <div class="dish fade-up d2">
-                <div class="dish-glow"></div>
                 <span class="dish-icon">🍓</span>
+                <div class="dish-rule"></div>
                 <div class="dish-name">Pavlova Tropical</div>
                 <p class="dish-desc">Merengue artesanal, crema chantilly de vainilla, frutas tropicales frescas y reducción de tamarindo.</p>
                 <div class="dish-price">$11</div>
@@ -347,71 +616,92 @@
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- EXPERIENCIA -->
+    <!-- EXPERIENCE -->
     <section class="experience" id="experiencia">
-        <div class="section-header fade-up">
-            <span class="section-num">02 /</span>
+        <div style="text-align:center;" class="fade-up">
+            <span class="section-eyebrow">Más que una Cena</span>
             <h2 class="section-title">La Experiencia</h2>
-            <div class="section-rule"></div>
         </div>
         <div class="exp-grid">
             <div class="exp-item fade-up">
                 <span class="exp-icon">🌿</span>
+                <div class="exp-title-rule"></div>
                 <div class="exp-title">Ingredientes Locales</div>
                 <p class="exp-desc">Trabajamos con agricultores ecuatorianos de temporada. Cada plato celebra la biodiversidad de nuestro país.</p>
             </div>
             <div class="exp-item fade-up d1">
                 <span class="exp-icon">👨‍🍳</span>
+                <div class="exp-title-rule"></div>
                 <div class="exp-title">Cocina de Autor</div>
                 <p class="exp-desc">Chef ejecutivo con formación en Francia y 15 años de experiencia. Cada plato es una obra única e irrepetible.</p>
             </div>
             <div class="exp-item fade-up d2">
                 <span class="exp-icon">🍷</span>
+                <div class="exp-title-rule"></div>
                 <div class="exp-title">Maridaje Exclusivo</div>
                 <p class="exp-desc">Carta de vinos sudamericanos y cocteles artesanales con destilados ecuatorianos. Sommelier en sala.</p>
             </div>
             <div class="exp-item fade-up d3">
                 <span class="exp-icon">🕯</span>
+                <div class="exp-title-rule"></div>
                 <div class="exp-title">Ambiente Íntimo</div>
                 <p class="exp-desc">Salón privado para eventos, iluminación cálida y música en vivo los fines de semana. Solo 12 mesas.</p>
             </div>
         </div>
     </section>
 
-    <!-- RESERVAR -->
+    <!-- RESERVATION -->
     <section class="reserva" id="reservar">
-        <div class="reserva-glow"></div>
         <div class="reserva-inner">
             <div class="reserva-eyebrow fade-up">
                 <div class="reserva-eyebrow-line"></div>
-                <div class="reserva-eyebrow-text">Disponibilidad limitada</div>
+                <span class="section-eyebrow" style="margin:0;">Disponibilidad Limitada</span>
                 <div class="reserva-eyebrow-line"></div>
             </div>
             <h2 class="reserva-title fade-up d1">
-                Reserva Tu<br><span class="accent">Mesa</span> Ahora
+                Reserve<br>Su <span class="accent">Mesa</span>
             </h2>
             <p class="reserva-sub fade-up d2">
-                Solo 12 mesas disponibles por noche. Asegura tu experiencia antes de que se agoten.
+                Experimente una velada inolvidable con nosotros. Solo 12 mesas por noche.
             </p>
-            <div class="reserva-actions fade-up d3">
-                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20mesa%20en%20La%20Reserva%20%F0%9F%8D%BD" target="_blank" class="btn-wa">💬 Reservar por WhatsApp</a>
-                <a href="mailto:studio.art.philip@gmail.com" class="btn-outline-gold">Enviar Correo</a>
+            <div class="reserva-form-row fade-up d3">
+                <select class="reserva-select">
+                    <option>Seleccionar Fecha</option>
+                    <option>Hoy</option>
+                    <option>Mañana</option>
+                    <option>Esta semana</option>
+                </select>
+                <select class="reserva-select">
+                    <option>Seleccionar Hora</option>
+                    <option>12:00 pm</option>
+                    <option>1:00 pm</option>
+                    <option>7:00 pm</option>
+                    <option>8:00 pm</option>
+                    <option>9:00 pm</option>
+                </select>
+                <select class="reserva-select">
+                    <option>Número de Personas</option>
+                    <option>1 persona</option>
+                    <option>2 personas</option>
+                    <option>3 personas</option>
+                    <option>4 personas</option>
+                    <option>+4 personas</option>
+                </select>
+                <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20mesa%20en%20La%20Reserva%20%F0%9F%8D%BD" target="_blank" class="btn-reserve-now">Reservar Ahora</a>
             </div>
             <div class="reserva-info fade-up d4">
                 <div class="info-item">
-                    <span class="info-icon">📍</span>
+                    <div class="info-icon-wrap">📍</div>
                     <div class="info-label">Ubicación</div>
                     <div class="info-value">Quito, Ecuador</div>
                 </div>
                 <div class="info-item">
-                    <span class="info-icon">🕐</span>
+                    <div class="info-icon-wrap">🕐</div>
                     <div class="info-label">Horario</div>
                     <div class="info-value">Mar–Dom · 12pm–10pm</div>
                 </div>
                 <div class="info-item">
-                    <span class="info-icon">📞</span>
+                    <div class="info-icon-wrap">📞</div>
                     <div class="info-label">Reservas</div>
                     <div class="info-value">+593 968 352 133</div>
                 </div>
@@ -419,44 +709,60 @@
         </div>
     </section>
 
+    <!-- FEATURES BAR -->
+    <div class="features-bar">
+        <div class="feature-item fade-up">
+            <div class="feature-icon">🍽</div>
+            <div class="feature-label">Cocina Gourmet</div>
+        </div>
+        <div class="feature-item fade-up d1">
+            <div class="feature-icon">🍷</div>
+            <div class="feature-label">Vinos & Cocteles</div>
+        </div>
+        <div class="feature-item fade-up d2">
+            <div class="feature-icon">✨</div>
+            <div class="feature-label">Ambiente de Lujo</div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo-wrap">
+        <div>
             <div class="footer-logo">La Reserva</div>
             <div class="footer-sub">Restaurante de Autor · Quito · 2025</div>
         </div>
-        <div>© 2025 · Todos los derechos reservados</div>
+        <div style="font-size:0.65rem; letter-spacing:2px;">© 2025 · Todos los derechos reservados</div>
         <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
-        <a href="index.html" class="footer-back">Portafolio</a>
+        <a href="index.html" class="footer-back" style="font-size:0.65rem; letter-spacing:2px;">← Portafolio</a>
     </footer>
 
     <script>
-        // Cursor
+        // ── Cursor ──
         const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-        let mx=0,my=0,rx=0,ry=0;
-        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-4+'px';cursor.style.top=my-4+'px';});
-        function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx-17+'px';ring.style.top=ry-17+'px';requestAnimationFrame(animRing);}
+        let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+        function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
         animRing();
-        document.querySelectorAll('a,button,.dish,.exp-item').forEach(el=>{
-            el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(184,149,74,0.8)';});
-            el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(184,149,74,0.4)';});
+        document.querySelectorAll('a,button,.dish,.exp-item,.cuisine-card').forEach(el=>{
+            el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8) translate(-50%,-50%)';ring.style.borderColor='rgba(201,168,76,0.8)';});
+            el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1) translate(-50%,-50%)';ring.style.borderColor='rgba(201,168,76,0.45)';});
         });
 
-        // Menu tabs
+        // ── Menu tabs ──
         function switchTab(id,btn){
             document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
             document.getElementById('tab-'+id).classList.add('active');
             btn.classList.add('active');
-            document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el=>{el.classList.remove('visible');setTimeout(()=>el.classList.add('visible'),50);});
+            setTimeout(()=>document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el=>{el.classList.remove('visible');setTimeout(()=>el.classList.add('visible'),50);}),10);
         }
 
-        // Scroll reveal
-        const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08});
+        // ── Scroll reveal ──
+        const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.07});
         document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-        setTimeout(()=>{document.querySelectorAll('.hero .fade-up').forEach(el=>el.classList.add('visible'));},100);
+        setTimeout(()=>document.querySelectorAll('.hero .fade-up').forEach(el=>el.classList.add('visible')),100);
 
-        // ── Chatbot La Reserva ────────────────────────────────
+        // ── Chatbot ──
         const R={
             menu:{msg:"🍽 Ofrecemos cocina de autor ecuatoriana con:<br>• <strong>Entradas</strong> desde $14 (ceviche, carpaccio, risotto)<br>• <strong>Platos principales</strong> desde $22 (lomo, trucha, pasta)<br>• <strong>Postres</strong> desde $10<br>¿Quieres ver el menú completo?",opts:["Ver platos principales","Reservar mesa","¿Tienen opciones veganas?"]},
             reserva:{msg:"📅 Para reservar tu mesa escríbenos por WhatsApp al <strong>+593 968 352 133</strong>. Solo tenemos <strong>12 mesas disponibles</strong> por noche, ¡reserva con anticipación!",opts:["Reservar ahora","¿Cuál es el horario?","¿Tienen eventos privados?"]},
@@ -472,7 +778,6 @@
         function renderOpts(opts){const c=document.getElementById('chatOptions');c.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOpt(o);c.appendChild(b);});}
         function handleOpt(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('reservar')||t.includes('solicitar')||t.includes('abrir')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20mesa%20en%20La%20Reserva%20%F0%9F%8D%BD','_blank');addBot('¡Perfecto! Te abrí WhatsApp para tu reserva. ¡Le esperamos! 🍽',[],400);return;}const key=Object.keys(K).find(k=>t.includes(k));const resp=key?R[K[key]]:R.default;addBot(resp.msg,resp.opts,700);}
         function sendUserMsg(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();const key=Object.keys(K).find(k=>t.includes(k));const resp=key?R[K[key]]:{msg:"Para atenderle mejor, escríbanos por WhatsApp. ¡Respondemos al instante! 🌿",opts:["Abrir WhatsApp","Ver menú","Reservar mesa"]};addBot(resp.msg,resp.opts,800);}
-        // ── Fin Chatbot ──────────────────────────────────────
     </script>
 </body>
 </html>
