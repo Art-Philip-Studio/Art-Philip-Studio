@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Cut | Barbería de Élite — Quito</title>
+<meta name="description" content="Barbería premium en Quito. Cortes, barba, tratamientos. Reserva online en 72h. Golden Cut.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a84c; --gold-light:#e8c96a; --gold-dim:rgba(201,168,76,0.15);
+  --dark:#080808; --surface:#0f0f0f; --surface2:#161616; --surface3:#1c1c1c;
+  --text:#d4d0c8; --text-dim:#6b6660; --text-muted:#3a3632;
+  --orange:#c4622d; --orange-light:#e07040; --green:#25D366;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.35;}
+
+/* CURSOR */
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(201,168,76,0.45);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all .14s ease;}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;align-items:center;gap:12px;text-decoration:none;}
+.wa-float-label{background:#111;border:1px solid rgba(37,211,102,.3);color:#aaa;font-size:.68rem;letter-spacing:2px;padding:8px 16px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all .3s;}
+.wa-float:hover .wa-float-label{opacity:1;transform:translateX(0);}
+.wa-float-btn{width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;animation:waPulse 2.5s ease-in-out infinite;}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.3);}50%{box-shadow:0 4px 20px rgba(37,211,102,.35),0 0 0 10px rgba(37,211,102,0);}}
+
+/* CHATBOT */
+.chat-bubble{position:fixed;bottom:100px;right:32px;z-index:799;width:48px;height:48px;background:linear-gradient(135deg,#c9a84c,#a07828);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,.4);transition:transform .3s;}
+.chat-bubble:hover{transform:scale(1.1);}
+.chat-badge{position:absolute;top:-4px;right:-4px;background:#e74c3c;color:#fff;font-size:.55rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.chat-window{position:fixed;bottom:160px;right:32px;z-index:798;width:340px;background:#0f0f0f;border:1px solid rgba(201,168,76,.2);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.7);max-height:480px;}
+.chat-window.open{display:flex;}
+.chat-header{background:linear-gradient(135deg,#1a1500,#0f0f0f);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(201,168,76,.15);}
+.chat-avatar{width:38px;height:38px;background:linear-gradient(135deg,#c9a84c,#a07828);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.chat-header-info{flex:1;}
+.chat-header-name{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:2px;color:#c9a84c;}
+.chat-header-status{font-size:.62rem;color:#25D366;letter-spacing:1px;margin-top:2px;}
+.chat-close{background:none;border:none;color:#6b6660;cursor:pointer;font-size:1.1rem;padding:4px;transition:color .2s;}
+.chat-close:hover{color:#c9a84c;}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.2) transparent;}
+.msg{max-width:85%;padding:10px 14px;border-radius:2px;font-size:.8rem;line-height:1.6;}
+.msg.bot{background:#1a1a1a;color:#d4d0c8;align-self:flex-start;border-left:2px solid rgba(201,168,76,.4);}
+.msg.user{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.1));color:#e8c96a;align-self:flex-end;border-right:2px solid rgba(201,168,76,.6);}
+.msg.typing{background:#1a1a1a;color:#6b6660;align-self:flex-start;font-style:italic;}
+.chat-options{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(201,168,76,.08);}
+.chat-opt{background:none;border:1px solid rgba(201,168,76,.25);color:#c9a84c;font-size:.68rem;letter-spacing:2px;padding:7px 14px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-family:'Inter',sans-serif;}
+.chat-opt:hover{background:rgba(201,168,76,.1);border-color:#c9a84c;}
+.chat-input-row{display:flex;border-top:1px solid rgba(201,168,76,.1);}
+.chat-input{flex:1;background:#0a0a0a;border:none;color:#d4d0c8;padding:12px 16px;font-size:.8rem;font-family:'Inter',sans-serif;outline:none;}
+.chat-input::placeholder{color:#3a3632;}
+.chat-send{background:linear-gradient(135deg,#c9a84c,#a07828);border:none;color:#000;padding:0 18px;cursor:pointer;font-size:1rem;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:24px 60px;background:linear-gradient(to bottom,rgba(8,8,8,.97) 0%,transparent 100%);transition:padding .3s;}
+nav.scrolled{padding:16px 60px;background:rgba(8,8,8,.97);border-bottom:1px solid rgba(201,168,76,.08);}
+.nav-logo{display:flex;flex-direction:column;gap:2px;}
+.nav-logo-main{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:6px;color:var(--gold);text-transform:uppercase;}
+.nav-logo-sub{font-size:.56rem;letter-spacing:5px;color:var(--text-dim);text-transform:uppercase;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{padding:11px 28px;background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;transition:all .3s;cursor:pointer;font-family:'Inter',sans-serif;}
+.nav-cta:hover{background:var(--gold-dim);border-color:var(--gold);}
+
+/* ══════════════
+   HERO
+══════════════ */
+.hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 90px;overflow:hidden;}
+
+/* Imagen de fondo real */
+.hero-img{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=80');
+  background-size:cover;background-position:center 30%;
+}
+/* Overlay oscuro */
+.hero-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(8,8,8,.92) 0%,rgba(8,8,8,.75) 50%,rgba(8,8,8,.4) 100%),
+             linear-gradient(to top,rgba(8,8,8,.95) 0%,transparent 50%);
+}
+
+.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse 65% 65% at 30% 50%,black 0%,transparent 100%);}
+.hero-watermark{position:absolute;right:4%;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,18vw,260px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.06);line-height:1;pointer-events:none;z-index:1;}
+.hero-content{position:relative;z-index:2;max-width:720px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:22px;}
+.hero-eyebrow-line{width:36px;height:1px;background:var(--gold);}
+.hero-eyebrow-text{font-size:.68rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);}
+
+/* Badge de estado abierto */
+.open-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);padding:6px 14px;border-radius:20px;margin-bottom:22px;}
+.open-dot{width:7px;height:7px;border-radius:50%;background:#25D366;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+.open-text{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:#25D366;}
+
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:2px;margin-bottom:28px;}
+.hero-title .t1{display:block;color:var(--text-dim);font-size:.42em;letter-spacing:8px;margin-bottom:6px;}
+.hero-title .t2{display:block;color:#fff;}
+.hero-title .t3{display:block;color:var(--gold);}
+
+.hero-meta{display:flex;align-items:center;gap:28px;margin-bottom:44px;flex-wrap:wrap;}
+.hero-meta-div{width:1px;height:36px;background:var(--text-muted);}
+.hero-meta-item{text-align:center;}
+.hero-meta-num{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold);line-height:1;}
+.hero-meta-lbl{font-size:.58rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:4px;}
+
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-gold{padding:16px 36px;background:linear-gradient(135deg,var(--gold) 0%,#a07828 100%);color:#000;text-decoration:none;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .3s;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.3);}
+.btn-outline{padding:15px 32px;border:1px solid rgba(201,168,76,.35);color:var(--gold);text-decoration:none;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;transition:all .3s;}
+.btn-outline:hover{background:var(--gold-dim);border-color:var(--gold);}
+.btn-wa{padding:15px 32px;background:#25D366;color:#fff;text-decoration:none;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .3s;display:inline-flex;align-items:center;gap:10px;}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3);}
+
+.scroll-hint{position:absolute;right:60px;bottom:90px;display:flex;flex-direction:column;align-items:center;gap:10px;writing-mode:vertical-rl;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-dim);z-index:2;}
+.scroll-hint-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollA 2s ease-in-out infinite;}
+@keyframes scrollA{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+/* ══════════════
+   ABOUT / STUDIO
+══════════════ */
+.about{padding:120px 60px;background:var(--dark);position:relative;overflow:hidden;}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-img-wrap{position:relative;}
+.about-img{
+  width:100%;height:520px;object-fit:cover;
+  background-image:url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=800&q=80');
+  background-size:cover;background-position:center;
+  border:1px solid rgba(201,168,76,.12);
+}
+.about-img-badge{
+  position:absolute;bottom:-24px;right:-24px;
+  background:var(--gold);color:#000;
+  padding:28px 32px;text-align:center;
+}
+.about-badge-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;}
+.about-badge-txt{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;}
+.about-label{font-size:.65rem;letter-spacing:5px;text-transform:uppercase;color:var(--orange-light);display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.about-label::before{content:'';width:24px;height:1px;background:var(--orange-light);}
+.about-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4vw,58px);letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:24px;}
+.about-heading span{color:var(--gold);}
+.about-text{font-size:.88rem;color:var(--text-dim);line-height:1.9;margin-bottom:16px;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.08);margin-top:40px;}
+.about-stat{background:var(--surface);padding:24px;text-align:center;}
+.about-stat-num{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);}
+.about-stat-lbl{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-top:4px;}
+
+/* ══════════════
+   SERVICIOS
+══════════════ */
+.services{padding:120px 60px;background:linear-gradient(180deg,var(--dark) 0%,#0a0806 100%);}
+.section-header{display:flex;align-items:center;gap:18px;margin-bottom:70px;}
+.section-num{font-family:'Cinzel',serif;font-size:.68rem;color:var(--orange);letter-spacing:3px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,4.5vw,56px);letter-spacing:4px;color:#fff;}
+.section-rule{flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.25),transparent);}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.07);}
+.svc{background:var(--surface);padding:50px 42px;position:relative;overflow:hidden;transition:background .35s;}
+.svc:hover{background:var(--surface2);}
+.svc::before{content:'';position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);width:70%;height:100px;background:radial-gradient(ellipse,rgba(201,168,76,.12) 0%,transparent 70%);opacity:0;transition:opacity .4s;}
+.svc:hover::before{opacity:1;}
+.svc::after{content:'';position:absolute;inset:0;border:1px solid transparent;pointer-events:none;transition:border-color .4s;}
+.svc:hover::after{border-color:rgba(201,168,76,.25);}
+.svc-num{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:4px;color:var(--text-muted);margin-bottom:30px;}
+.svc-icon{font-size:2rem;margin-bottom:18px;display:block;}
+.svc-name{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:2px;color:#fff;margin-bottom:14px;line-height:1;}
+.svc-desc{font-size:.82rem;color:var(--text-dim);line-height:1.85;}
+.svc-price{margin-top:30px;font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold);}
+.svc-price span{font-size:.68rem;color:var(--text-dim);font-family:'Inter',sans-serif;}
+.svc-cta{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .3s;}
+.svc-cta:hover{gap:14px;}
+.svc-cta::after{content:'→';}
+
+/* ══════════════
+   GALERÍA — BEFORE/AFTER
+══════════════ */
+.gallery{padding:120px 60px;background:#0a0806;}
+.gallery-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:280px 280px;gap:4px;}
+.gitem{position:relative;overflow:hidden;background:var(--surface);}
+.gitem:first-child{grid-row:1/3;}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:grayscale(20%);}
+.gitem:hover img{transform:scale(1.05);filter:grayscale(0%);}
+.gitem-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;opacity:0;transition:opacity .4s;}
+.gitem:hover .gitem-overlay{opacity:1;}
+.gitem-lbl{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);}
+.gitem-cap{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#fff;margin-top:5px;}
+/* Fallback gradients si no cargan imágenes */
+.gitem.g1{background:linear-gradient(145deg,#1a0f00,#0d0800);}
+.gitem.g2{background:linear-gradient(145deg,#120e06,#080808);}
+.gitem.g3{background:linear-gradient(145deg,#100c06,#0a0808);}
+.gitem.g4{background:linear-gradient(145deg,#0e0a06,#090808);}
+.gitem.g5{background:linear-gradient(145deg,#110c08,#080808);}
+
+/* ══════════════
+   EQUIPO
+══════════════ */
+.team{padding:120px 60px;background:var(--dark);}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.team-card{position:relative;overflow:hidden;background:var(--surface);border:1px solid rgba(201,168,76,.08);transition:border-color .3s;}
+.team-card:hover{border-color:rgba(201,168,76,.3);}
+.team-img{width:100%;height:360px;object-fit:cover;object-position:top;display:block;filter:grayscale(30%);transition:filter .4s,transform .4s;}
+.team-card:hover .team-img{filter:grayscale(0%);transform:scale(1.03);}
+.team-info{padding:28px 30px;}
+.team-name{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#fff;margin-bottom:4px;}
+.team-role{font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.team-spec{font-size:.8rem;color:var(--text-dim);line-height:1.7;margin-bottom:18px;}
+.team-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid rgba(201,168,76,.3);color:var(--gold);text-decoration:none;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;transition:all .3s;}
+.team-btn:hover{background:var(--gold-dim);border-color:var(--gold);}
+/* Fallback si no cargan imágenes */
+.team-img-placeholder{width:100%;height:360px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(145deg,#1a1500,#0f0d08);}
+
+/* ══════════════
+   PROCESO / PASOS
+══════════════ */
+.process{padding:120px 60px;background:linear-gradient(180deg,#0a0806 0%,var(--dark) 100%);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative;}
+.process-steps::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.3),rgba(201,168,76,.3),transparent);}
+.step{padding:0 28px 0 0;position:relative;}
+.step-num{width:72px;height:72px;border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);margin-bottom:28px;background:var(--dark);position:relative;z-index:2;transition:all .3s;}
+.step:hover .step-num{background:var(--gold-dim);border-color:var(--gold);}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#fff;margin-bottom:12px;}
+.step-desc{font-size:.8rem;color:var(--text-dim);line-height:1.8;}
+
+/* ══════════════
+   RESERVA ONLINE
+══════════════ */
+.booking{padding:120px 60px;background:var(--dark);position:relative;overflow:hidden;}
+.booking-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80');
+  background-size:cover;background-position:center;
+  opacity:.08;
+}
+.booking-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 90%,rgba(196,98,45,.12) 0%,transparent 70%);}
+.booking-inner{position:relative;max-width:820px;margin:0 auto;text-align:center;}
+.booking-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:22px;}
+.booking-label-line{width:28px;height:1px;background:var(--orange-light);}
+.booking-label-text{font-size:.68rem;letter-spacing:5px;color:var(--orange-light);text-transform:uppercase;}
+.booking-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,110px);letter-spacing:3px;line-height:.9;color:#fff;margin-bottom:26px;}
+.booking-title .gold{color:var(--gold);}
+.booking-sub{font-size:.9rem;color:var(--text-dim);line-height:1.8;max-width:460px;margin:0 auto 48px;}
+.booking-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+.booking-info{display:flex;justify-content:center;gap:50px;margin-top:60px;padding-top:50px;border-top:1px solid rgba(201,168,76,.1);flex-wrap:wrap;}
+.info-item{text-align:center;}
+.info-icon{font-size:1.4rem;margin-bottom:10px;display:block;}
+.info-label{font-size:.62rem;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px;}
+.info-value{font-family:'Cinzel',serif;font-size:.88rem;color:var(--text);letter-spacing:2px;}
+
+/* ══════════════
+   TESTIMONIOS
+══════════════ */
+.testimonials{padding:120px 60px;background:linear-gradient(180deg,#0a0806 0%,var(--dark) 100%);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.06);}
+.testi{background:var(--surface);padding:44px 38px;position:relative;transition:background .3s;}
+.testi:hover{background:var(--surface2);}
+.testi-stars{display:flex;gap:4px;margin-bottom:22px;}
+.star{color:var(--gold);font-size:.85rem;}
+.testi-quote{font-size:.86rem;color:var(--text);line-height:1.85;margin-bottom:28px;font-style:italic;}
+.testi-quote::before{content:'"';color:var(--gold);font-size:1.4rem;line-height:0;vertical-align:-6px;margin-right:4px;}
+.testi-author{display:flex;align-items:center;gap:14px;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);}
+.testi-name{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:2px;color:#fff;}
+.testi-role{font-size:.66rem;letter-spacing:2px;color:var(--text-dim);margin-top:3px;}
+
+/* ══════════════
+   HORARIOS Y UBICACIÓN
+══════════════ */
+.location{padding:120px 60px;background:var(--dark);}
+.location-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start;}
+.schedule-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;color:#fff;margin-bottom:32px;}
+.schedule-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(201,168,76,.07);}
+.schedule-day{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--text);}
+.schedule-time{font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold);}
+.schedule-closed{color:var(--text-dim);}
+.map-wrap{width:100%;height:380px;background:var(--surface);border:1px solid rgba(201,168,76,.1);position:relative;overflow:hidden;}
+.map-wrap iframe{width:100%;height:100%;border:none;filter:grayscale(80%) invert(90%) contrast(90%);}
+.map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(145deg,#0f0d08,#1a1500);}
+.map-placeholder-icon{font-size:3rem;opacity:.5;}
+.map-placeholder-text{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:3px;color:var(--gold);}
+.map-placeholder-sub{font-size:.7rem;color:var(--text-dim);letter-spacing:2px;}
+.contact-list{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+.contact-item{display:flex;align-items:center;gap:16px;font-size:.82rem;color:var(--text-dim);}
+.contact-item-icon{width:36px;height:36px;background:var(--gold-dim);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+
+/* ══════════════
+   GOLD DIVIDER
+══════════════ */
+.gold-divider{height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.4),transparent);margin:0 60px;}
+
+/* ══════════════
+   FOOTER
+══════════════ */
+footer{padding:44px 60px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;font-size:.7rem;color:var(--text-dim);letter-spacing:2px;}
+.footer-logo-wrap{display:flex;flex-direction:column;gap:3px;}
+.footer-logo{font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;letter-spacing:5px;}
+.footer-sub-logo{font-size:.56rem;letter-spacing:5px;color:var(--text-muted);text-transform:uppercase;}
+.footer-links{display:flex;gap:28px;}
+.footer-links a{color:var(--text-dim);text-decoration:none;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-back{display:flex;align-items:center;gap:10px;color:var(--text-dim);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s;}
+.footer-back:hover{color:var(--gold);}
+.footer-back::before{content:'←';}
+
+/* ANIMACIONES */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:.12s;}.delay-2{transition-delay:.22s;}.delay-3{transition-delay:.34s;}.delay-4{transition-delay:.46s;}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  nav{padding:18px 28px;}.nav-links{display:none;}
+  .hero,.about,.services,.gallery,.team,.process,.booking,.testimonials,.location{padding:80px 28px;}
+  .about-inner{grid-template-columns:1fr;gap:50px;}
+  .about-img-badge{bottom:-16px;right:-16px;}
+  .services-grid,.testi-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gitem:first-child{grid-row:auto;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
+  .process-steps::before{display:none;}
+  .location-inner{grid-template-columns:1fr;}
+  .booking-info{gap:28px;}
+  footer{flex-direction:column;text-align:center;}
+  .scroll-hint{display:none;}
+  .gold-divider{margin:0 28px;}
+}
+@media(max-width:600px){
+  .gallery-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .hero-meta{flex-wrap:wrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut%20%F0%9F%92%88" target="_blank" class="wa-float">
+  <span class="wa-float-label">¡Reservar por WhatsApp!</span>
+  <div class="wa-float-btn">💬</div>
+</a>
+
+<!-- CHATBOT -->
+<div class="chat-bubble" id="chatBubble" onclick="toggleChat()">✂<span class="chat-badge">1</span></div>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">✂</div>
+    <div class="chat-header-info"><div class="chat-header-name">Golden Cut</div><div class="chat-header-status">● Asistente en línea</div></div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-options" id="chatOptions"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendUserMsg()">
+    <button class="chat-send" onclick="sendUserMsg()">➤</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <div class="nav-logo-main">Golden Cut</div>
+    <div class="nav-logo-sub">Barbería · Quito</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#reservar">Reservar</a></li>
+  </ul>
+  <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita" target="_blank" class="nav-cta">Reservar Cita</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-img"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-watermark">✂</div>
+
+  <div class="hero-content">
+    <div class="open-badge">
+      <div class="open-dot"></div>
+      <span class="open-text">Abierto ahora · Hasta las 8:00 PM</span>
+    </div>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Desde 2018 · Quito, Ecuador</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="t1">Barbería de élite</span>
+      <span class="t2">Golden</span>
+      <span class="t3">Cut</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">1,200+</div>
+        <div class="hero-meta-lbl">Clientes</div>
+      </div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">6</div>
+        <div class="hero-meta-lbl">Años</div>
+      </div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">4.9★</div>
+        <div class="hero-meta-lbl">Google</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita" target="_blank" class="btn-gold">Reservar Ahora</a>
+      <a href="#galeria" class="btn-outline">Ver Trabajos</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-hint-line"></div>Scroll</div>
+</section>
+
+<!-- ═══════════ NOSOTROS ═══════════ -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div class="about-img-wrap fade-up">
+      <div class="about-img"></div>
+      <div class="about-img-badge">
+        <div class="about-badge-num">6+</div>
+        <div class="about-badge-txt">Años de experiencia</div>
+      </div>
+    </div>
+    <div class="fade-up delay-1">
+      <div class="about-label">Quiénes somos</div>
+      <h2 class="about-heading">Arte en cada<br><span>corte</span></h2>
+      <p class="about-text">En Golden Cut no solo cortamos cabello — creamos experiencias. Cada cliente merece atención personalizada, técnica impecable y un resultado que lo haga sentir seguro y elegante.</p>
+      <p class="about-text">Nuestro equipo de barberos profesionales combina técnicas clásicas con tendencias modernas para ofrecerte el mejor estilo en Quito.</p>
+      <div class="about-stats">
+        <div class="about-stat"><div class="about-stat-num">1,200+</div><div class="about-stat-lbl">Clientes felices</div></div>
+        <div class="about-stat"><div class="about-stat-num">15+</div><div class="about-stat-lbl">Servicios</div></div>
+        <div class="about-stat"><div class="about-stat-num">4.9★</div><div class="about-stat-lbl">Google Reviews</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ═══════════ SERVICIOS ═══════════ -->
+<section class="services" id="servicios">
+  <div class="section-header fade-up">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Servicios</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="services-grid">
+    <div class="svc fade-up">
+      <div class="svc-num">001</div>
+      <span class="svc-icon">✂</span>
+      <h3 class="svc-name">Corte Clásico</h3>
+      <p class="svc-desc">Corte tradicional con tijera o máquina. Incluye lavado, secado y peinado final. Perfecto para el hombre clásico y elegante.</p>
+      <div class="svc-price">$12 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Corte%20Cl%C3%A1sico" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+    <div class="svc fade-up delay-1">
+      <div class="svc-num">002</div>
+      <span class="svc-icon">💈</span>
+      <h3 class="svc-name">Fade Premium</h3>
+      <p class="svc-desc">Degradado profesional con acabado perfecto. Desde skin fade hasta mid fade. La técnica más popular de nuestros barberos.</p>
+      <div class="svc-price">$15 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Fade%20Premium" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+    <div class="svc fade-up delay-2">
+      <div class="svc-num">003</div>
+      <span class="svc-icon">🪒</span>
+      <h3 class="svc-name">Barba Completa</h3>
+      <p class="svc-desc">Perfilado, arreglo y afeitado con navaja. Incluye hot towel y aceite hidratante para una experiencia premium.</p>
+      <div class="svc-price">$10 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Barba%20Completa" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-num">004</div>
+      <span class="svc-icon">🎨</span>
+      <h3 class="svc-name">Diseño & Líneas</h3>
+      <p class="svc-desc">Diseños personalizados y líneas de precisión. Desde simples hasta elaborados. Arte en tu cabello.</p>
+      <div class="svc-price">$18 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Dise%C3%B1o%20y%20L%C3%ADneas" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+    <div class="svc fade-up delay-1">
+      <div class="svc-num">005</div>
+      <span class="svc-icon">🧴</span>
+      <h3 class="svc-name">Tratamiento Capilar</h3>
+      <p class="svc-desc">Hidratación profunda, keratina y tratamientos anticaída. Cuida tu cabello con los mejores productos del mercado.</p>
+      <div class="svc-price">$25 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Tratamiento%20Capilar" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+    <div class="svc fade-up delay-2">
+      <div class="svc-num">006</div>
+      <span class="svc-icon">👑</span>
+      <h3 class="svc-name">Combo VIP</h3>
+      <p class="svc-desc">Corte + barba + tratamiento + lavado. La experiencia completa Golden Cut. Incluye bebida de cortesía.</p>
+      <div class="svc-price">$35 <span>USD / sesión</span></div>
+      <a href="https://wa.me/593968352133?text=Quiero%20reservar%20Combo%20VIP" target="_blank" class="svc-cta">Reservar</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALERÍA ═══════════ -->
+<section class="gallery" id="galeria">
+  <div class="section-header fade-up">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Nuestros Trabajos</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="gallery-grid fade-up">
+    <div class="gitem g1">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&q=80" alt="Fade premium Golden Cut" loading="lazy">
+      <div class="gitem-overlay"><div class="gitem-lbl">Especialidad</div><div class="gitem-cap">Skin Fade Premium</div></div>
+    </div>
+    <div class="gitem g2">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="Corte clásico" loading="lazy">
+      <div class="gitem-overlay"><div class="gitem-lbl">Clásico</div><div class="gitem-cap">Corte Formal</div></div>
+    </div>
+    <div class="gitem g3">
+      <img src="https://images.unsplash.com/photo-1622296089863-eb7fc530daa8?w=600&q=80" alt="Barba perfilada" loading="lazy">
+      <div class="gitem-overlay"><div class="gitem-lbl">Barba</div><div class="gitem-cap">Perfilado Premium</div></div>
+    </div>
+    <div class="gitem g4">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80" alt="Interior barbería" loading="lazy">
+      <div class="gitem-overlay"><div class="gitem-lbl">Nuestro local</div><div class="gitem-cap">Ambiente Único</div></div>
+    </div>
+    <div class="gitem g5">
+      <img src="https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?w=600&q=80" alt="Diseño artístico" loading="lazy">
+      <div class="gitem-overlay"><div class="gitem-lbl">Arte</div><div class="gitem-cap">Diseño Personalizado</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ═══════════ EQUIPO ═══════════ -->
+<section class="team" id="equipo">
+  <div class="section-header fade-up">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">Nuestro Equipo</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="team-grid">
+    <div class="team-card fade-up">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&q=80" alt="Carlos Mendoza - Top Barber" class="team-img" loading="lazy">
+      <div class="team-info">
+        <div class="team-name">Carlos Mendoza</div>
+        <div class="team-role">Top Barber · 8 años exp.</div>
+        <p class="team-spec">Especialista en fade y diseños artísticos. Ha trabajado en Miami y Bogotá antes de unirse a Golden Cut.</p>
+        <a href="https://wa.me/593968352133?text=Quiero%20reservar%20con%20Carlos" target="_blank" class="team-btn">Reservar con él</a>
+      </div>
+    </div>
+    <div class="team-card fade-up delay-1">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&q=80" alt="Andrés Vega - Barber" class="team-img" loading="lazy">
+      <div class="team-info">
+        <div class="team-name">Andrés Vega</div>
+        <div class="team-role">Barber · 5 años exp.</div>
+        <p class="team-spec">Experto en cortes clásicos y barba con navaja. Su técnica de hot towel es la más solicitada del local.</p>
+        <a href="https://wa.me/593968352133?text=Quiero%20reservar%20con%20Andr%C3%A9s" target="_blank" class="team-btn">Reservar con él</a>
+      </div>
+    </div>
+    <div class="team-card fade-up delay-2">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&q=80" alt="Diego Torres - Hair Stylist" class="team-img" loading="lazy">
+      <div class="team-info">
+        <div class="team-name">Diego Torres</div>
+        <div class="team-role">Hair Stylist · 4 años exp.</div>
+        <p class="team-spec">Especialista en tratamientos capilares y coloración. Combina técnicas modernas con cuidado profesional.</p>
+        <a href="https://wa.me/593968352133?text=Quiero%20reservar%20con%20Diego" target="_blank" class="team-btn">Reservar con él</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESO ═══════════ -->
+<section class="process">
+  <div class="section-header fade-up">
+    <span class="section-num">04 /</span>
+    <h2 class="section-title">¿Cómo Funciona?</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="process-steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-title">Elige tu servicio</div>
+      <p class="step-desc">Revisa nuestros servicios y precios. Desde cortes clásicos hasta combos VIP completos.</p>
+    </div>
+    <div class="step fade-up delay-1">
+      <div class="step-num">02</div>
+      <div class="step-title">Reserva por WhatsApp</div>
+      <p class="step-desc">Escríbenos en WhatsApp con tu nombre, servicio y horario preferido. Te confirmamos en minutos.</p>
+    </div>
+    <div class="step fade-up delay-2">
+      <div class="step-num">03</div>
+      <div class="step-title">Llega al local</div>
+      <p class="step-desc">Preséntate a tu hora en Golden Cut. Disfruta de una bebida mientras esperas en nuestro lounge.</p>
+    </div>
+    <div class="step fade-up delay-3">
+      <div class="step-num">04</div>
+      <div class="step-title">Luce impecable</div>
+      <p class="step-desc">Sal del local con el mejor estilo de Quito. Garantizamos tu satisfacción o repetimos el servicio.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ═══════════ TESTIMONIOS ═══════════ -->
+<section class="testimonials" id="testimonios">
+  <div class="section-header fade-up">
+    <span class="section-num">05 /</span>
+    <h2 class="section-title">Lo que dicen</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi fade-up">
+      <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="testi-quote">El mejor fade que me han hecho en Quito. Carlos es un artista. Vine por recomendación y ya no voy a ningún otro lado. El ambiente es increíble.</p>
+      <div class="testi-author"><div class="testi-avatar">JM</div><div><div class="testi-name">Juan Morales</div><div class="testi-role">Cliente · 2 años</div></div></div>
+    </div>
+    <div class="testi fade-up delay-1">
+      <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="testi-quote">Reservar por WhatsApp es súper fácil. En 5 minutos tenía mi cita confirmada. El Combo VIP vale cada centavo, salí completamente transformado.</p>
+      <div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sebastián Ramos</div><div class="testi-role">Cliente · 1 año</div></div></div>
+    </div>
+    <div class="testi fade-up delay-2">
+      <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="testi-quote">Llevé a mi hijo de 8 años y quedó feliz. Saben trabajar con niños también. El local es limpio, la música es buena y el trato es excelente.</p>
+      <div class="testi-author"><div class="testi-avatar">AP</div><div><div class="testi-name">Andrés Paredes</div><div class="testi-role">Cliente · 6 meses</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESERVAR ═══════════ -->
+<section class="booking" id="reservar">
+  <div class="booking-bg"></div>
+  <div class="booking-glow"></div>
+  <div class="booking-inner">
+    <div class="booking-label fade-up">
+      <div class="booking-label-line"></div>
+      <span class="booking-label-text">Agenda tu cita</span>
+      <div class="booking-label-line"></div>
+    </div>
+    <h2 class="booking-title fade-up">¿Listo para<br>lucir <span class="gold">diferente?</span></h2>
+    <p class="booking-sub fade-up delay-1">Reserva en 2 minutos por WhatsApp. Sin formularios complicados. Te respondemos al instante en horario de atención.</p>
+    <div class="booking-actions fade-up delay-2">
+      <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut%20%F0%9F%92%88" target="_blank" class="btn-wa">💬 Reservar por WhatsApp</a>
+      <a href="tel:+593968352133" class="btn-outline">📞 Llamar ahora</a>
+    </div>
+    <div class="booking-info fade-up delay-3">
+      <div class="info-item"><span class="info-icon">🕐</span><div class="info-label">Lunes a Viernes</div><div class="info-value">9:00 AM – 8:00 PM</div></div>
+      <div class="info-item"><span class="info-icon">🕐</span><div class="info-label">Sábados</div><div class="info-value">8:00 AM – 7:00 PM</div></div>
+      <div class="info-item"><span class="info-icon">🕐</span><div class="info-label">Domingos</div><div class="info-value">10:00 AM – 4:00 PM</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ UBICACIÓN ═══════════ -->
+<section class="location" id="ubicacion">
+  <div class="section-header fade-up">
+    <span class="section-num">06 /</span>
+    <h2 class="section-title">Encuéntranos</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="location-inner">
+    <div class="fade-up">
+      <div class="schedule-title">Horarios</div>
+      <div class="schedule-row"><span class="schedule-day">Lunes – Viernes</span><span class="schedule-time">9:00 – 20:00</span></div>
+      <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">8:00 – 19:00</span></div>
+      <div class="schedule-row"><span class="schedule-day">Domingo</span><span class="schedule-time">10:00 – 16:00</span></div>
+      <div class="contact-list">
+        <div class="contact-item"><div class="contact-item-icon">📍</div>Quito, Ecuador · Norte de la ciudad</div>
+        <div class="contact-item"><div class="contact-item-icon">📱</div>+593 968 352 133</div>
+        <div class="contact-item"><div class="contact-item-icon">✉</div>studio.art.philip@gmail.com</div>
+        <div class="contact-item"><div class="contact-item-icon">📸</div>@goldencutquito</div>
+      </div>
+    </div>
+    <div class="fade-up delay-1">
+      <div class="map-wrap">
+        <!-- Reemplaza con tu iframe de Google Maps real -->
+        <div class="map-placeholder">
+          <div class="map-placeholder-icon">📍</div>
+          <div class="map-placeholder-text">Golden Cut · Quito</div>
+          <div class="map-placeholder-sub">Agrega tu iframe de Google Maps aquí</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <div class="footer-logo">Golden Cut</div>
+    <div class="footer-sub-logo">Barbería · Quito, Ecuador</div>
+  </div>
+  <div class="footer-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#galeria">Galería</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#reservar">Reservar</a>
+  </div>
+  <a href="index.html" class="footer-back">Volver al portafolio</a>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx-5+'px';cur.style.top=my-5+'px';});
+(function ar(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(ar);})();
+document.querySelectorAll('a,button,.svc,.testi,.team-card,.gitem').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.borderColor='rgba(201,168,76,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.borderColor='rgba(201,168,76,0.45)';});
+});
+
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* FADE UP */
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* BADGE ABIERTO/CERRADO en tiempo real */
+function checkOpen(){
+  const now=new Date();
+  const h=now.getHours(),d=now.getDay();
+  let open=false;
+  if(d>=1&&d<=5&&h>=9&&h<20)open=true;
+  if(d===6&&h>=8&&h<19)open=true;
+  if(d===0&&h>=10&&h<16)open=true;
+  const badge=document.querySelector('.open-badge');
+  const dot=document.querySelector('.open-dot');
+  const txt=document.querySelector('.open-text');
+  if(badge&&dot&&txt){
+    if(open){
+      dot.style.background='#25D366';
+      txt.style.color='#25D366';
+      badge.style.borderColor='rgba(37,211,102,.3)';
+      badge.style.background='rgba(37,211,102,.1)';
+      const cierre=d===6?19:d===0?16:20;
+      txt.textContent='Abierto ahora · Hasta las '+cierre+':00';
+    } else {
+      dot.style.background='#e74c3c';
+      txt.style.color='#e74c3c';
+      badge.style.borderColor='rgba(231,76,60,.3)';
+      badge.style.background='rgba(231,76,60,.1)';
+      txt.textContent='Cerrado ahora · Abrimos mañana';
+    }
+  }
+}
+checkOpen();
+
+/* CHATBOT */
+const RC={
+  precios:{msg:"💰 Nuestros precios:<br>• Corte Clásico — $12<br>• Fade Premium — $15<br>• Barba Completa — $10<br>• Diseño & Líneas — $18<br>• Tratamiento — $25<br>• Combo VIP — $35",opts:["Reservar cita","¿Cómo reservar?","Horarios"]},
+  reservar:{msg:"📱 Reservar es muy fácil: escríbenos por WhatsApp con tu nombre, servicio y horario preferido. Te confirmamos en minutos.",opts:["Abrir WhatsApp","Ver precios","Horarios"]},
+  horarios:{msg:"🕐 Lunes–Viernes: 9:00–20:00<br>Sábado: 8:00–19:00<br>Domingo: 10:00–16:00",opts:["Reservar cita","Ver precios"]},
+  default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Golden Cut</strong>. ¿Qué necesitas?",opts:["Ver precios","Reservar cita","Horarios","Ubicación"]}
+};
+const KC={precio:["precios"],costo:["precios"],cuanto:["precios"],reserv:["reservar"],cita:["reservar"],hora:["horarios"],abierto:["horarios"],ubicaci:["horarios"]};
+let co=false,fo=true;
+function toggleChat(){co=!co;document.getElementById('chatWindow').classList.toggle('open',co);if(co){document.querySelector('.chat-badge').style.display='none';if(fo){fo=false;addBotC(RC.default.msg,RC.default.opts);}setTimeout(()=>document.getElementById('chatInput').focus(),200);}}
+function addBotC(txt,opts=[],delay=0){const box=document.getElementById('chatMessages');if(delay>0){const t=document.createElement('div');t.className='msg typing';t.id='typing';t.textContent='Escribiendo...';box.appendChild(t);box.scrollTop=box.scrollHeight;}setTimeout(()=>{document.getElementById('typing')?.remove();const el=document.createElement('div');el.className='msg bot';el.innerHTML=txt;box.appendChild(el);box.scrollTop=box.scrollHeight;renderOptsC(opts);},delay||0);}
+function renderOptsC(opts){const c=document.getElementById('chatOptions');c.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOptC(o);c.appendChild(b);});}
+function handleOptC(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('reservar')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20reservar%20una%20cita%20en%20Golden%20Cut','_blank');addBotC('¡Te abrí WhatsApp! 🚀',[],300);return;}const k=Object.keys(KC).find(k=>t.includes(k));addBotC((k?RC[KC[k]]:RC.default).msg,(k?RC[KC[k]]:RC.default).opts,600);}
+function sendUserMsg(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();const k=Object.keys(KC).find(k=>t.includes(k));addBotC((k?RC[KC[k]]:{msg:"Para más info escríbenos por WhatsApp 😊",opts:["Abrir WhatsApp"]}).msg,(k?RC[KC[k]]:{opts:["Abrir WhatsApp"]}).opts,700);}
+</script>
+</body>
+</html>
