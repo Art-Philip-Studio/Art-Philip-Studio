@@ -426,6 +426,8 @@ section.sec{padding:120px 60px;position:relative;}
 .sobre-mi{background:var(--surface);position:relative;overflow:hidden;}
 .sobre-mi-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
 .sobre-mi-inner{position:relative;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center;}
+.sobre-mi-avatar-wrap{width:180px;height:180px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,76,.4);box-shadow:0 0 0 6px rgba(8,8,8,.9),0 0 0 8px rgba(201,168,76,.15),0 0 30px rgba(201,168,76,.3);flex-shrink:0;}
+.sobre-mi-avatar-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;}
 .sobre-mi-avatar{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#1a1500,#0f0f0f);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:3.5rem;flex-shrink:0;}
 .sobre-mi-left{display:flex;flex-direction:column;align-items:flex-start;gap:20px;}
 .sobre-mi-tag{font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--orange-light);display:flex;align-items:center;gap:8px;}
@@ -684,7 +686,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- NAV FIJA -->
 <nav class="main-nav">
   <a href="#" class="nav-logo-wrap">
-    <img src="logo.jpg" alt="Art Philip Studio" class="nav-logo-img">
+    <img src="assets/logos/logo.jpg" alt="Art Philip Studio" class="nav-logo-img">
     <div class="nav-logo-text"><div class="nav-logo-main">Art Philip Studio</div><div class="nav-logo-sub">Dev &amp; Soluciones Digitales</div></div>
   </a>
   <ul class="nav-links">
@@ -705,7 +707,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
         <div class="c-logo">
           <!-- ✅ Tu logo.jpg reemplaza el ícono AP -->
           <div class="c-logo-icon">
-            <img src="logo.jpg" alt="Art Philip Studio">
+            <img src="assets/logos/logo.jpg" alt="Art Philip Studio">
           </div>
           <div class="c-logo-text">
             <div class="c-logo-name">Art <span>Philip</span> Studio</div>
@@ -731,8 +733,8 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
             <div class="logo-circle" id="logoCoin">
               <!-- CARA FRONTAL: Logo -->
               <div class="logo-face logo-face-front">
-                <img src="logo.jpg" alt="Art Philip Studio"
-                  onerror="this.style.display='none'">
+                <img src="assets/logos/logo.png" alt="Art Philip Studio"
+                   onerror="this.style.display='none'">
               </div>
               <!-- CARA TRASERA: Hora en tiempo real -->
               <div class="logo-face logo-face-back">
@@ -800,7 +802,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- DEMOS SLIDER -->
 <div class="demo-hero-img" id="demoHeroWrap" data-url="Barberia.html">
   <div class="demo-hero-bg" id="demoHeroBg"
-    style="background-image:url('Barberia-demo.jpg');background-size:cover;background-position:center;">
+    style="background-image:url('assets/img/demos/Barberia-demo.jpg');background-size:cover;background-position:center;">
   </div>
   <div class="demo-hero-overlay">
     <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
@@ -809,7 +811,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   </div>
   <div class="demo-thumbs">
     <div class="demo-thumb active" onclick="selectDemo(0,this)">
-      <div class="demo-thumb-bg" style="background-image:url('Barberia-demo.jpg');">
+      <div class="demo-thumb-bg" style="background-image:url('assets/img/demos/Barberia-demo.jpg');">
         <div class="demo-thumb-label">GOLDEN CUT</div>
       </div>
     </div>
@@ -819,7 +821,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
       </div>
     </div>
     <div class="demo-thumb" onclick="selectDemo(2,this)">
-      <div class="demo-thumb-bg" style="background-image:url('Gym-demo.jpg');">
+      <div class="demo-thumb-bg" style="background-image:url('assets/img/demos/Gym-demo.jpg');">
         <div class="demo-thumb-label">IRON FORCE</div>
       </div>
     </div>
@@ -851,7 +853,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div class="sobre-mi-inner">
    <div class="sobre-mi-left fade-up">
       <div class="sobre-mi-avatar-wrap">
-        <img src="philip-avatar.png" alt="Philip">
+        <img src="assets/logos/philip-avatar.png" alt="Philip">
       </div>
       <div class="sobre-mi-tag">Desarrollador Freelance</div>
       <div class="sobre-mi-name">Philip</div>
@@ -910,7 +912,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo-wrap"><img src="logo.jpg" alt="Art Philip Studio" class="footer-logo-img"><div class="footer-logo-text"><div class="footer-logo">Art Philip Studio</div><div class="footer-sub">Quito, Ecuador — 2025</div></div></div>
+  <div class="footer-logo-wrap"><img src="assets/logos/logo.jpg" alt="Art Philip Studio" class="footer-logo-img"><div class="footer-logo-text"><div class="footer-logo">Art Philip Studio</div><div class="footer-sub">Quito, Ecuador — 2025</div></div></div>
   <div>Soluciones Digitales</div>
   <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
 </footer>
@@ -1012,20 +1014,20 @@ document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 // ── NUEVO SLIDER DEMOS ──
 var demosData = [
   {
-    url: 'Barberia.html',
-    img: 'Barberia-demo.jpg',
+    url: 'servicios/Barberia.html',
+    img: 'assets/img/demos/Barberia-demo.jpg',
     title: 'Barbería Golden Cut',
     sub: 'Landing Page · Dark Theme · Reservas · Animado'
   },
   {
-    url: 'Restaurante.html',
-    img: 'Restaurante-demo.jpg',
+    url: 'servicios/Restaurante.html',
+    img: 'assets/img/demos/Restaurante-demo.jpg',
     title: 'Restaurante La Reserva',
     sub: 'Landing Page · Elegante · Menú · Reservas'
   },
   {
-    url: 'Gym.html',
-    img: 'Gym-demo.jpg',
+    url: 'servicios/Gym.html',
+    img: 'assets/img/demos/Gym-demo.jpg',
     title: 'Gym Iron Force',
     sub: 'Landing Page · Energía · Planes · Bold'
   }
