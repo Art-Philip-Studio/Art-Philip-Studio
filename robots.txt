@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://art-philip-studio.github.io/Art-Philip-Studio/sitemap.xml
