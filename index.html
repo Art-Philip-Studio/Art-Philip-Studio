@@ -11,7 +11,9 @@
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root{
@@ -594,6 +596,8 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 @keyframes robotBounce{0%,100%{transform:translateY(0) scale(1);}30%{transform:translateY(-12px) scale(1.05);}60%{transform:translateY(-4px) scale(1.02);}}
 @keyframes robotShake{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-8deg);}75%{transform:rotate(8deg);}}
 @keyframes robotNod{0%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}70%{transform:translateY(-2px);}}
+.nav-logo-img, .footer-logo-img { aspect-ratio: 1/1; }
+.sobre-mi-avatar-wrap img { aspect-ratio: 1/1; }
 </style>
 </head>
 <body>
