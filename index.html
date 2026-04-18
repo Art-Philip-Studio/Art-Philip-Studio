@@ -11,10 +11,10 @@
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <style>
 :root{
   --gold:#c9a84c; --gold-light:#e8c96a; --dark:#080808;
@@ -718,8 +718,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- NAV FIJA -->
 <nav class="main-nav">
   <a href="#" class="nav-logo-wrap">
-    <img src="logo.jpg" alt="Art Philip Studio"
-  fetchpriority="high" onerror="this.style.display='none'">
+    <img src="assets/logos/logo.png" alt="Art Philip Studio" class="nav-logo-img" width="42" height="42" fetchpriority="high">
     <div class="nav-logo-text"><div class="nav-logo-main">Art Philip Studio</div><div class="nav-logo-sub">Dev &amp; Soluciones Digitales</div></div>
   </a>
   <ul class="nav-links">
@@ -884,7 +883,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div class="sobre-mi-inner">
    <div class="sobre-mi-left fade-up">
       <div class="sobre-mi-avatar-wrap">
-        <img src="assets/logos/philip-avatar.png" alt="Philip">
+        <img src="assets/logos/philip-avatar.png" alt="Philip" width="180" height="180">
       </div>
       <div class="sobre-mi-tag">Desarrollador Freelance</div>
       <div class="sobre-mi-name">Philip</div>
@@ -943,7 +942,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo-wrap"><img src="assets/logos/logo.png" alt="Art Philip Studio" class="footer-logo-img"><div class="footer-logo-text"><div class="footer-logo">Art Philip Studio</div><div class="footer-sub">Quito, Ecuador — 2025</div></div></div>
+  <div class="footer-logo-wrap"><img src="assets/logos/logo.png" alt="Art Philip Studio" class="footer-logo-img" width="32" height="32"><div class="footer-logo-text"><div class="footer-logo">Art Philip Studio</div><div class="footer-sub">Quito, Ecuador — 2025</div></div></div>
   <div>Soluciones Digitales</div>
   <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
 </footer>
