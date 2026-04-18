@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Art Philip Studio | Páginas web que consiguen clientes</title>
+<title>Diseño Web Internacional $199 USD - México, Colombia, Europa | Art Philip Studio</title>
+<meta name="description" content="Diseño web para negocios en México, Colombia y Europa. Landing pages con WhatsApp, tiendas online. Entrega en 72h desde $199 USD. Trabajo 100% remoto para clientes en todo el mundo.">
+<meta name="keywords" content="diseño web mexico, diseño web colombia, diseño web españa, web designer latam, landing page internacional, tienda online europa">
 <link rel="icon" type="image/jpeg" href="logo-simbolo.png">
 <link rel="shortcut icon" href="logo-simbolo.png">
 <link rel="apple-touch-icon" href="logo-simbolo.png">
@@ -139,11 +141,36 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-face-front{background:linear-gradient(145deg,#1a1500,#0f0d08);}
 .logo-face-front img{width:100%;height:100%;object-fit:contain;padding:8;}
 .logo-face-back{background:linear-gradient(145deg,#0a0a00,#1a1200);transform:rotateY(180deg);flex-direction:column;gap:4px;}
-.clock-display{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;}
-.clock-time{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:var(--gold);line-height:1;text-shadow:0 0 20px rgba(201,168,76,.6);}
-.clock-ampm{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-light);text-transform:uppercase;opacity:.8;}
-.clock-label{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:2px;}
-.clock-greeting{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:var(--orange);text-transform:uppercase;text-align:center;padding:0 10px;}
+.btn-demos-back{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  height:100%;
+  text-decoration:none;
+  color:var(--gold);
+  transition:transform .3s;
+}
+.btn-demos-back:hover{transform:scale(1.1);}
+.btn-demos-back .demo-icon{
+  font-size:38px;
+  line-height:1;
+  text-shadow:0 0 20px rgba(201,168,76,.6);
+  animation:playPulse 2s ease-in-out infinite;
+}
+.btn-demos-back .demo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  letter-spacing:4px;
+  line-height:1.1;
+  text-align:center;
+}
+@keyframes playPulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.15);opacity:.8;}
+}
 .logo-circle-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:100%;}
 .logo-initials{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;color:var(--gold);line-height:1;}
 .logo-brand{font-family:'Cinzel',serif;font-size:7px;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;}
@@ -738,12 +765,10 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
               </div>
               <!-- CARA TRASERA: Hora en tiempo real -->
               <div class="logo-face logo-face-back">
-                <div class="clock-display">
-                  <div class="clock-time" id="clockTime">00:00</div>
-                  <div class="clock-ampm" id="clockAmPm">AM</div>
-                  <div class="clock-label">Quito · Ecuador</div>
-                  <div class="clock-greeting" id="clockGreeting">Buenas</div>
-                </div>
+               <a href="#demos" class="btn-demos-back">
+               <span class="demo-icon">▶</span>
+                <span class="demo-text">VER<br>DEMOS</span>
+                </a>
               </div>
             </div>
           </div>
@@ -767,10 +792,10 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
         </div>
 
         <div class="hero-text">
-          <div class="hero-greeting">Quito, Ecuador — Disponible Ahora</div>
+          <div class="hero-greeting">Quito, Ecuador — Disponible Ahora</div>  
           <h1 class="hero-name">Philip</h1>
-          <p class="hero-role">Web Designer &amp; Developer<span class="cursor-blink"></span></p>
-          <p class="hero-bio">Soy Philip, desarrollador web en Quito. Diseño y desarrollo tu página desde cero — lista en 72 horas, con diseño profesional y enfocada en que tus clientes te contacten.</p>
+          <p class="hero-role">Philip - Web Designer Internacional<span class="cursor-blink"></span></p>
+          <p class="hero-bio">Soy Philip, diseñador web en Quito, Ecuador. Desarrollo páginas web para negocios en México, Colombia, España y todo el mundo. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.</p>
           <div class="hero-cta-row">
             <a href="#demos" class="btn-ver">Ver Demos</a>
             <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios" target="_blank" class="btn-wa-hero">Contratar</a>
@@ -929,19 +954,6 @@ function enviarFormulario(){
   .catch(()=>{st.className='error';st.textContent='Error al enviar. Intenta por WhatsApp.';st.style.display='block';btn.textContent='Enviar mensaje';btn.disabled=false;});
 }
 
-// ── RELOJ EN TIEMPO REAL + COIN FLIP ──
-function updateClock(){
-  const now=new Date();
-  let h=now.getHours(),m=now.getMinutes();
-  const ampm=h>=12?'PM':'AM';
-  const h12=h%12||12;
-  document.getElementById('clockTime').textContent=(h12<10?'0':'')+h12+':'+(m<10?'0':'')+m;
-  document.getElementById('clockAmPm').textContent=ampm;
-  const g=h<6?'Buenas noches':h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches';
-  document.getElementById('clockGreeting').textContent=g;
-}
-updateClock();
-setInterval(updateClock,30000);
 // Flip en mobile con click
 document.getElementById('logoWrap').addEventListener('click',function(){
   this.classList.toggle('flipped');
