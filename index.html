@@ -11,6 +11,7 @@
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" href="https://fonts.gstatic.com/s/bebasneu/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2" type="font/woff2" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
@@ -102,7 +103,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px 40px;position:relative;overflow:hidden;}
 .hero-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(196,98,45,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 70%,rgba(201,168,76,.08) 0%,transparent 60%),linear-gradient(180deg,#0d0b09 0%,#080808 100%);}
 .hero-section::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 0%,transparent 100%);}
-.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;}
+.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;will-change:transform;}
 
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
 @keyframes rotateBorder{to{--angle:360deg;}}
@@ -315,7 +316,6 @@ section.sec{padding:120px 60px;position:relative;}
 .demo-thumb-bg {
   width: 100%;
   height: 100%;
-  aspect-ratio: 16/9;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -948,7 +948,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
 emailjs.init("Hjb8zflqeJag36Cg-");
 function enviarFormulario(){
   var n=document.getElementById('f-name').value.trim(),e=document.getElementById('f-email').value.trim(),m=document.getElementById('f-message').value.trim(),btn=document.getElementById('submitBtn'),st=document.getElementById('formStatus');
