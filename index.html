@@ -7,6 +7,7 @@
 <meta name="description" content="Diseño web para negocios en México, Colombia y Europa. Landing pages con WhatsApp, tiendas online. Entrega en 72h desde $199 USD. Trabajo 100% remoto para clientes en todo el mundo.">
 <meta name="keywords" content="diseño web mexico, diseño web colombia, diseño web españa, web designer latam, landing page internacional, tienda online europa">
 <link rel="icon" type="image/jpeg" href="logo-simbolo.png">
+<link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg" fetchpriority="low">
 <link rel="shortcut icon" href="logo-simbolo.png">
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,7 +93,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:linear-gradient(to bottom,rgba(8,8,8,.97) 0%,transparent 100%);border-bottom:1px solid rgba(201,168,76,.06);}
 .nav-logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none;}
-.nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:4px;flex-shrink:0;}
+.nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:4px;flex-shrink:0;content-visibility:auto;}
 .nav-logo-text{display:flex;flex-direction:column;gap:2px;}
 .nav-logo-main{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 .nav-logo-sub{font-size:.52rem;letter-spacing:5px;color:var(--text-dim);text-transform:uppercase;}
@@ -103,7 +104,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px 40px;position:relative;overflow:hidden;}
 .hero-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(196,98,45,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 70%,rgba(201,168,76,.08) 0%,transparent 60%),linear-gradient(180deg,#0d0b09 0%,#080808 100%);}
 .hero-section::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 0%,transparent 100%);}
-.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;will-change:transform;}
+.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);contain:layout style;font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;contain:layout style;}
 
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
 @keyframes rotateBorder{to{--angle:360deg;}}
