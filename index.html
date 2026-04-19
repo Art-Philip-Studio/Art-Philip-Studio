@@ -180,7 +180,8 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-initials{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;color:var(--gold);line-height:1;}
 .logo-brand{font-family:'Cinzel',serif;font-size:7px;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;}
 
-.social-orbit{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.social-orbit{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform 0.8s ease;}
+.logo-area:hover .social-orbit{transform:rotate(360deg);}
 .soc-icon{position:absolute;width:30px;height:30px;border-radius:7px;border:1px solid rgba(201,168,76,.28);background:rgba(8,8,8,.85);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);text-decoration:none;cursor:pointer;transition:background .25s,border-color .25s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;}
 .soc-icon:hover{background:rgba(201,168,76,.15);border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.35),0 4px 14px rgba(0,0,0,.5);}
 .soc-icon svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
@@ -558,7 +559,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   .logo-ring-spin{width:186px;height:186px;}
   .logo-circle{width:144px;height:144px;}
   .logo-circle-wrap{width:144px;height:144px;}
-  .social-orbit{position:static;width:auto;height:auto;display:flex;flex-direction:row;gap:8px;margin-top:10px;}
+  .social-orbit{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform 0.8s ease;}
   .soc-icon{position:static !important;transform:none !important;}
   .soc-icon:hover{transform:translateY(-2px) !important;}
   .card-stats{grid-template-columns:repeat(2,1fr);}
@@ -997,10 +998,13 @@ function startLongPress(){
     if(orbit){
       orbit.style.transition = 'transform 0.8s ease';
       orbit.style.transform = 'rotate(360deg)';
-      setTimeout(function(){ orbit.style.transform = 'rotate(0deg)'; orbit.style.transition = 'none'; }, 850);
+      setTimeout(function(){ 
+        orbit.style.transform = 'rotate(0deg)'; 
+        orbit.style.transition = 'none'; 
+      }, 850);
     }
-  }, 500); // 500ms = medio segundo presionado
-}
+  }, 500); // ← cierra el setTimeout de startLongPress
+} // ← cierra la función startLongPress
 
 function endLongPress(){
   clearTimeout(pressTimer);
@@ -1023,6 +1027,15 @@ logoWrap.addEventListener('mouseleave', endLongPress);
 logoWrap.addEventListener('touchstart', startLongPress, {passive:true});
 logoWrap.addEventListener('touchend', endLongPress);
 logoWrap.addEventListener('touchcancel', endLongPress);
+// Giro al hacer click/tap en móvil
+logoWrap.addEventListener('click', function(){
+  const orbit = this.closest('.logo-area').querySelector('.social-orbit');
+  if(orbit){
+    orbit.style.transition = 'transform 0.8s ease';
+    orbit.style.transform = 'rotate(360deg)';
+    setTimeout(function(){ orbit.style.transform = 'rotate(0deg)'; orbit.style.transition = 'none'; }, 850);
+  }
+});
 
 // cursor desactivado - se usa cursor del sistema
 
