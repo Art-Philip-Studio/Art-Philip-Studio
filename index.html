@@ -137,7 +137,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-ring-spin::before,.logo-ring-spin::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);top:50%;left:-3px;transform:translateY(-50%);box-shadow:0 0 8px var(--gold);}
 .logo-ring-spin::after{left:auto;right:-3px;background:var(--orange);box-shadow:0 0 8px var(--orange);}
 @keyframes spinRing{to{transform:rotate(360deg);}}
-.logo-circle-wrap{position:absolute;width:188px;height:188px;perspective:600px;cursor:pointer;overflow:visible;contain:layout;}
+.logo-circle-wrap{position:absolute;width:188px;height:188px;perspective:600px;cursor:pointer;overflow:visible;}
 .logo-circle{width:188px;height:188px;border-radius:50%;border:2px solid rgba(201,168,76,.25);background:linear-gradient(145deg,#1a1500,#0f0d08);display:flex;align-items:center;justify-content:center;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.45,.05,.55,.95);}
 .logo-circle-wrap.flipped .logo-circle{transform:rotateY(180deg);}
 .logo-face{position:absolute;width:100%;height:100%;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -315,6 +315,7 @@ section.sec{padding:120px 60px;position:relative;}
 .demo-thumb-bg {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16/9;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -766,7 +767,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
               <!-- CARA FRONTAL: Logo -->
               <div class="logo-face logo-face-front">
                 <img src="assets/logos/logo-simbolo.png" alt="Art Philip Studio"
-                   onerror="this.style.display='none'">
+   fetchpriority="high" width="188" height="188" onerror="this.style.display='none'">
               </div>
               <!-- CARA TRASERA: Hora en tiempo real -->
               <div class="logo-face logo-face-back">
