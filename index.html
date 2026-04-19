@@ -11,11 +11,19 @@
 <link rel="shortcut icon" href="logo-simbolo.png">
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<<<<<<< HEAD
 <link rel="preload" as="font" href="https://fonts.gstatic.com/s/bebasneu/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2" type="font/woff2" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
+=======
+<link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
+<link rel="preload" as="image" href="assets/logos/logo-simbolo.png" fetchpriority="high">
+>>>>>>> seo-europa
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <style>
 :root{
@@ -139,7 +147,11 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-ring-spin::before,.logo-ring-spin::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);top:50%;left:-3px;transform:translateY(-50%);box-shadow:0 0 8px var(--gold);}
 .logo-ring-spin::after{left:auto;right:-3px;background:var(--orange);box-shadow:0 0 8px var(--orange);}
 @keyframes spinRing{to{transform:rotate(360deg);}}
+<<<<<<< HEAD
 .logo-circle-wrap{position:absolute;width:188px;height:188px;perspective:600px;cursor:pointer;overflow:visible;}
+=======
+.logo-circle-wrap{position:absolute;width:188px;height:188px;perspective:600px;cursor:pointer;overflow:visible;contain:layout style;}
+>>>>>>> seo-europa
 .logo-circle{width:188px;height:188px;border-radius:50%;border:2px solid rgba(201,168,76,.25);background:linear-gradient(145deg,#1a1500,#0f0d08);display:flex;align-items:center;justify-content:center;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.45,.05,.55,.95);}
 .logo-circle-wrap.flipped .logo-circle{transform:rotateY(180deg);}
 .logo-face{position:absolute;width:100%;height:100%;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -317,6 +329,7 @@ section.sec{padding:120px 60px;position:relative;}
 .demo-thumb-bg {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16/9;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -885,7 +898,11 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div class="sobre-mi-inner">
    <div class="sobre-mi-left fade-up">
       <div class="sobre-mi-avatar-wrap">
+<<<<<<< HEAD
         <img src="assets/logos/philip-avatar.png" alt="Philip" width="180" height="180">
+=======
+        <img src="assets/logos/philip-avatar.png" alt="Philip" width="180" height="180" loading="lazy" decoding="async">
+>>>>>>> seo-europa
       </div>
       <div class="sobre-mi-tag">Desarrollador Freelance</div>
       <div class="sobre-mi-name">Philip</div>
