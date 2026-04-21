@@ -7,16 +7,11 @@
 <meta name="description" content="Diseño web para negocios en México, Colombia y Europa. Landing pages con WhatsApp, tiendas online. Entrega en 72h desde $199 USD. Trabajo 100% remoto para clientes en todo el mundo.">
 <meta name="keywords" content="diseño web mexico, diseño web colombia, diseño web españa, web designer latam, landing page internacional, tienda online europa">
 <link rel="icon" type="image/jpeg" href="logo-simbolo.png">
-<link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg" fetchpriority="low">
 <link rel="shortcut icon" href="logo-simbolo.png">
 <link rel="apple-touch-icon" href="logo-simbolo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="font" href="https://fonts.gstatic.com/s/bebasneu/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2" type="font/woff2" crossorigin>
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
 <link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
@@ -98,7 +93,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:linear-gradient(to bottom,rgba(8,8,8,.97) 0%,transparent 100%);border-bottom:1px solid rgba(201,168,76,.06);}
 .nav-logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none;}
-.nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:4px;flex-shrink:0;content-visibility:auto;}
+.nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:4px;flex-shrink:0;}
 .nav-logo-text{display:flex;flex-direction:column;gap:2px;}
 .nav-logo-main{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 .nav-logo-sub{font-size:.52rem;letter-spacing:5px;color:var(--text-dim);text-transform:uppercase;}
@@ -109,7 +104,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px 40px;position:relative;overflow:hidden;}
 .hero-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(196,98,45,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 70%,rgba(201,168,76,.08) 0%,transparent 60%),linear-gradient(180deg,#0d0b09 0%,#080808 100%);}
 .hero-section::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 0%,transparent 100%);}
-.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);contain:layout style;font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;contain:layout style;}
+.hero-aps{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,30vw,420px);color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.07);line-height:1;pointer-events:none;user-select:none;z-index:1;}
 
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
 @keyframes rotateBorder{to{--angle:360deg;}}
@@ -137,20 +132,21 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 
 .card-body{display:flex;align-items:center;padding:34px 40px 28px 30px;gap:40px;position:relative;z-index:2;overflow:visible;}
 
-.logo-area{position:relative;width:220px;height:250px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:visible;}
+.logo-area{position:relative;width:200px;height:200px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:visible;}
 .logo-ring-outer{position:absolute;width:218px;height:218px;border-radius:50%;border:2px solid rgba(201,168,76,.55);box-shadow:0 0 0 5px rgba(8,8,8,.9),0 0 0 7px rgba(201,168,76,.10),0 0 28px rgba(201,168,76,.38),0 0 60px rgba(201,168,76,.16),0 0 100px rgba(196,98,45,.10);animation:goldPulse 3.5s ease-in-out infinite;}
 @keyframes goldPulse{0%,100%{box-shadow:0 0 0 5px rgba(8,8,8,.9),0 0 0 7px rgba(201,168,76,.10),0 0 28px rgba(201,168,76,.38),0 0 60px rgba(201,168,76,.16),0 0 100px rgba(196,98,45,.10);}50%{box-shadow:0 0 0 5px rgba(8,8,8,.9),0 0 0 7px rgba(201,168,76,.20),0 0 44px rgba(201,168,76,.56),0 0 85px rgba(201,168,76,.26),0 0 130px rgba(196,98,45,.18);}}
 .logo-ring-spin{position:absolute;width:240px;height:240px;border-radius:50%;border:1px dashed rgba(201,168,76,.18);animation:spinRing 28s linear infinite;}
 .logo-ring-spin::before,.logo-ring-spin::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);top:50%;left:-3px;transform:translateY(-50%);box-shadow:0 0 8px var(--gold);}
 .logo-ring-spin::after{left:auto;right:-3px;background:var(--orange);box-shadow:0 0 8px var(--orange);}
 @keyframes spinRing{to{transform:rotate(360deg);}}
-.logo-circle-wrap{position:absolute;width:188px;height:188px;perspective:600px;cursor:pointer;overflow:visible;contain:layout style;}
+.logo-circle-wrap{position:absolute;width:188px;height:188px;transform-style:preserve-3d;perspective:1000px;cursor:pointer;overflow:visible;}
 .logo-circle{width:188px;height:188px;border-radius:50%;border:2px solid rgba(201,168,76,.25);background:linear-gradient(145deg,#1a1500,#0f0d08);display:flex;align-items:center;justify-content:center;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.45,.05,.55,.95);}
 .logo-circle-wrap.flipped .logo-circle{transform:rotateY(180deg);}
 .logo-face{position:absolute;width:100%;height:100%;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .logo-face-front{background:linear-gradient(145deg,#1a1500,#0f0d08);}
 .logo-face-front img{width:100%;height:100%;object-fit:contain;padding:8;}
-.logo-face-back{background:linear-gradient(145deg,#0a0a00,#1a1200);transform:rotateY(180deg);flex-direction:column;gap:4px;}
+.logo-face-back{background:linear-gradient(145deg,#0a0a00,#1a1200);transform:rotateY(180deg);flex-direction:column;gap:4px;overflow:visible !important;pointer-events:auto;}
+.logo-area:hover .logo-circle-wrap:not(.flipped) .logo-circle{transform:rotateY(180deg);}
 .btn-demos-back{
   display:flex;
   flex-direction:column;
@@ -184,21 +180,22 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justif
 .logo-circle-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:100%;}
 .logo-initials{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;color:var(--gold);line-height:1;}
 .logo-brand{font-family:'Cinzel',serif;font-size:7px;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;}
-
-.social-orbit{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
-.soc-icon{position:absolute;width:30px;height:30px;border-radius:7px;border:1px solid rgba(201,168,76,.28);background:rgba(8,8,8,.85);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);text-decoration:none;cursor:pointer;transition:background .25s,border-color .25s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;}
+.logo-face-back a{pointer-events:all !important;}
+.soc-icon{position:absolute;width:30px;height:30px;border-radius:7px;border:1px solid rgba(201,168,76,.28);background:rgba(8,8,8,.85);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);text-decoration:none;cursor:pointer;  pointer-events:all;transition: background .25s, border-color .25s,
+              color .25s, transform .25s cubic-bezier(.34,1.56,.64,1),
+              box-shadow .25s;z-index:20;}
 .soc-icon:hover{background:rgba(201,168,76,.15);border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.35),0 4px 14px rgba(0,0,0,.5);}
 .soc-icon svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
 .soc-icon:hover svg{transform:scale(1.35);}
-.soc-icon.wa{top:4px;left:50%;transform:translateX(-50%);}
+.soc-icon.wa{top:2px;left:50%;transform:translateX(-50%);}
 .soc-icon.wa:hover{transform:translateX(-50%) scale(1.18);}
-.soc-icon.x{top:28%;right:-8px;}
+.soc-icon.x{top:50%;right:2px;transform:none;}
 .soc-icon.x:hover{transform:scale(1.18);}
-.soc-icon.li{bottom:28%;right:-8px;}
+.soc-icon.li{bottom:50px;right:2px; transform: none;}
 .soc-icon.li:hover{transform:scale(1.18);}
-.soc-icon.gh{bottom:4px;left:50%;transform:translateX(-50%);}
+.soc-icon.gh{bottom:2px;left:50%;transform:translateX(-50%);}
 .soc-icon.gh:hover{transform:translateX(-50%) scale(1.18);color:#ff4500;border-color:#ff4500;box-shadow:0 0 10px rgba(255,69,0,.35),0 4px 14px rgba(0,0,0,.5);}
-.soc-icon.ip{top:28%;left:-8px;}
+.soc-icon.ip{top:50%;left:2px;transform:none}
 .soc-icon.ip:hover{transform:scale(1.18);color:#ff0000;border-color:#ff0000;box-shadow:0 0 10px rgba(255,0,0,.35),0 4px 14px rgba(0,0,0,.5);}
 
 .hero-text{flex:1;}
@@ -543,6 +540,49 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .delay-1{transition-delay:.1s;}.delay-2{transition-delay:.2s;}.delay-3{transition-delay:.3s;}
 
+/* PEGA ESTO ARRIBA DE TODOS LOS @media */
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logo-area:hover .social-orbit {
+  animation: orbitSpin 1.2s cubic-bezier(.25,.46,.45,.94) forwards;
+}
+.logo-area:hover .logo-circle {
+  transform: rotateY(180deg);
+}
+.logo-circle-wrap {
+  position: relative;
+  width: 188px;
+  height: 188px;
+  perspective: 1000px;
+}
+/* ── SOCIAL ORBIT base ── */
+.social-orbit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.8s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Posiciones de los iconos ── */
+.soc-icon.wa  { top:-8px;    left:50%; transform:translateX(-50%); }
+.soc-icon.wa:hover { transform:translateX(-50%) scale(1.18); }
+.soc-icon.x   { top:22%;    right:-14px; }
+.soc-icon.x:hover  { transform:scale(1.18); }
+.soc-icon.li  { bottom:22%; right:-14px; }
+.soc-icon.li:hover { transform:scale(1.18); }
+.soc-icon.gh  { bottom:-8px; left:50%; transform:translateX(-50%); }
+.soc-icon.gh:hover { transform:translateX(-50%) scale(1.18); color:#ff4500; border-color:#ff4500; }
+.soc-icon.ip  { top:22%;    left:-14px; }
+.soc-icon.ip:hover { transform:scale(1.18); color:#ff0000; border-color:#ff0000; }
+
 @media(max-width:1024px){
   .hero-section{padding:80px 16px 32px;}
   .card-body{gap:28px;}
@@ -552,30 +592,24 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   .logo-circle{width:154px;height:154px;}
   .logo-circle-wrap{width:154px;height:154px;}
 }
+
 @media(max-width:860px){
-  nav.main-nav{padding:14px 20px;}.nav-links{display:none;}
+  nav.main-nav{padding:14px 20px;}
+  .nav-links{display:none;}
   section.sec{padding:70px 22px;}
   .card-body{flex-direction:column;align-items:center;text-align:center;padding:26px 20px 20px;gap:22px;}
   .hero-bio{max-width:100%;}
   .hero-cta-row{justify-content:center;}
-  .logo-area{width:170px;height:190px;}
+  .logo-area{position:relative;width:200px;height:200px;}
   .logo-ring-outer{width:168px;height:168px;}
   .logo-ring-spin{width:186px;height:186px;}
   .logo-circle{width:144px;height:144px;}
   .logo-circle-wrap{width:144px;height:144px;}
-  .social-orbit{position:static;width:auto;height:auto;display:flex;flex-direction:row;gap:8px;margin-top:10px;}
-  .soc-icon{position:static !important;transform:none !important;}
-  .soc-icon:hover{transform:translateY(-2px) !important;}
+  .social-orbit{position:absolute;inset:0;width:200px;height:200px;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transform-origin:center center;z-index:10;pointer-events:none;}
   .card-stats{grid-template-columns:repeat(2,1fr);}
   .card-stats .stat:nth-child(2){border-right:none;}
   .card-stats .stat:nth-child(3){border-top:1px solid rgba(201,168,76,.07);}
   .c-nav-links{display:none;}
-  .carousel-scene{height:360px;}
-  .demo-card{width:200px;height:290px;}
-  .demo-card[data-pos="1"]{transform:translateX(218px) scale(0.84) translateZ(0) rotateY(-12deg);}
-  .demo-card[data-pos="-1"]{transform:translateX(-218px) scale(0.84) translateZ(0) rotateY(12deg);}
-  .demo-card[data-pos="2"]{transform:translateX(370px) scale(0.68) translateZ(-50px) rotateY(-18deg);}
-  .demo-card[data-pos="-2"]{transform:translateX(-370px) scale(0.68) translateZ(-50px) rotateY(18deg);}
   .services-list{grid-template-columns:1fr;}
   .testimonios-grid{grid-template-columns:1fr;}
   .sobre-mi-inner{grid-template-columns:1fr;gap:40px;}
@@ -583,6 +617,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   footer{flex-direction:column;gap:10px;text-align:center;}
   .wa-float-label{display:none;}
 }
+
 @media(max-width:500px){
   .hero-name{font-size:28px;}
   .hero-role{font-size:14px;justify-content:center;}
@@ -731,6 +766,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   </a>
   <ul class="nav-links">
     <li><a href="#demos">Demos</a></li>
+    <li><a href="efectos.html">Efectos</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#sobre-mi">Sobre mí</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -757,6 +793,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
         <ul class="c-nav-links">
           <li><a href="#inicio" class="active">Home</a></li>
           <li><a href="#demos">Demos</a></li>
+          <li><a href="efectos.html">Efectos</a></li>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -774,14 +811,14 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
               <!-- CARA FRONTAL: Logo -->
               <div class="logo-face logo-face-front">
                 <img src="assets/logos/logo-simbolo.png" alt="Art Philip Studio"
-   fetchpriority="high" width="188" height="188" onerror="this.style.display='none'">
+                fetchpriority="high" width="188" height="188" onerror="this.style.display='none'">
               </div>
               <!-- CARA TRASERA: Hora en tiempo real -->
               <div class="logo-face logo-face-back">
-               <a href="#demos" class="btn-demos-back">
-               <span class="demo-icon">▶</span>
-                <span class="demo-text">VER<br>DEMOS</span>
-                </a>
+              <a href="efectos.html" class="btn-demos-back">
+             <span class="demo-icon">✦</span>
+             <span class="demo-text">EFECTOS<br>GRATIS</span>
+              </a>
               </div>
             </div>
           </div>
@@ -891,7 +928,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div class="sobre-mi-inner">
    <div class="sobre-mi-left fade-up">
       <div class="sobre-mi-avatar-wrap">
-      <img src="assets/logos/philip-avatar.png" alt="Philip" width="180" height="180" loading="lazy" decoding="async">
+        <img src="assets/logos/philip-avatar.png" alt="Philip" width="180" height="180" loading="lazy" decoding="async">
       </div>
       <div class="sobre-mi-tag">Desarrollador Freelance</div>
       <div class="sobre-mi-name">Philip</div>
@@ -955,7 +992,7 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <a href="https://wa.me/593968352133" target="_blank" class="footer-wa">💬 +593 968 352 133</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 emailjs.init("Hjb8zflqeJag36Cg-");
 function enviarFormulario(){
   var n=document.getElementById('f-name').value.trim(),e=document.getElementById('f-email').value.trim(),m=document.getElementById('f-message').value.trim(),btn=document.getElementById('submitBtn'),st=document.getElementById('formStatus');
@@ -967,67 +1004,7 @@ function enviarFormulario(){
   .catch(()=>{st.className='error';st.textContent='Error al enviar. Intenta por WhatsApp.';st.style.display='block';btn.textContent='Enviar mensaje';btn.disabled=false;});
 }
 
-// Flip en mobile con click
-document.getElementById('logoWrap').addEventListener('click',function(){
-  this.classList.toggle('flipped');
-});
 
-document.getElementById('logoWrap').addEventListener('mouseenter',function(){
-  this.classList.add('flipped');
-});
-
-document.getElementById('logoWrap').addEventListener('mouseleave',function(){
-  this.classList.remove('flipped');
-});
-// ── LONG PRESS en el círculo ──
-let pressTimer = null;
-const logoWrap = document.getElementById('logoWrap');
-const socIcons = document.querySelectorAll('.soc-icon');
-
-function startLongPress(){
-  pressTimer = setTimeout(function(){
-    // Encoger círculo
-    logoWrap.style.transform = 'scale(0.75)';
-    logoWrap.style.transition = 'transform 0.4s cubic-bezier(.34,1.56,.64,1)';
-
-    // Agrandar y girar iconos
-    socIcons.forEach(function(icon, i){
-      icon.style.transition = 'transform 0.5s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s';
-      icon.style.transform = icon.style.transform.replace(/scale\([^)]*\)/,'') + ' scale(1.6)';
-      icon.style.boxShadow = '0 0 16px rgba(201,168,76,.7)';
-    });
-
-    // Animación de giro en el orbit
-    const orbit = logoWrap.closest('.logo-area').querySelector('.social-orbit');
-    if(orbit){
-      orbit.style.transition = 'transform 0.8s ease';
-      orbit.style.transform = 'rotate(360deg)';
-      setTimeout(function(){ orbit.style.transform = 'rotate(0deg)'; orbit.style.transition = 'none'; }, 850);
-    }
-  }, 500); // 500ms = medio segundo presionado
-}
-
-function endLongPress(){
-  clearTimeout(pressTimer);
-  // Volver círculo a normal
-  logoWrap.style.transform = '';
-
-  // Volver iconos a normal
-  socIcons.forEach(function(icon){
-    icon.style.transform = '';
-    icon.style.boxShadow = '';
-  });
-}
-
-// Eventos para PC (mouse)
-logoWrap.addEventListener('mousedown', startLongPress);
-logoWrap.addEventListener('mouseup', endLongPress);
-logoWrap.addEventListener('mouseleave', endLongPress);
-
-// Eventos para móvil (touch)
-logoWrap.addEventListener('touchstart', startLongPress, {passive:true});
-logoWrap.addEventListener('touchend', endLongPress);
-logoWrap.addEventListener('touchcancel', endLongPress);
 
 // cursor desactivado - se usa cursor del sistema
 
@@ -1106,14 +1083,84 @@ window.addEventListener('load', function(){
   selectDemo(0, demoThumbs[0]);
 });
 
-const R={precios:{msg:"💰 Mis servicios:<br>• <strong>Landing Page Premium</strong> — $150<br>• <strong>Sitio Web Corporativo</strong> — $350<br>• <strong>Tienda Online</strong> — $650",opts:["Quiero cotizar","¿Cuánto tiempo?","Ver demos"]},tiempo:{msg:"⏱ Landing Page en <strong>48–72h</strong>. Sitio corporativo en <strong>5–7 días</strong>.",opts:["¿Cuánto cuesta?","Contratar ahora"]},servicios:{msg:"🎯 Landing Page $150 · Corporativo $350 · Tienda Online $650",opts:["Cotizar","¿Tiempo de entrega?"]},contacto:{msg:"📱 WhatsApp: <strong>+593 968 352 133</strong><br>✉ studio.art.philip@gmail.com",opts:["Abrir WhatsApp"]},demos:{msg:"🖥 Barbería Golden Cut · Restaurante La Reserva · Gym Iron Force — y más en camino.",opts:["¿Cuánto cuesta?","Contacto"]},default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Art Philip Studio</strong>. ¿En qué puedo ayudarte?",opts:["Ver servicios","¿Cuánto tiempo?","Ver demos","Contacto"]}};
-const K={precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],tiemp:["tiempo"],dias:["tiempo"],horas:["tiempo"],entrega:["tiempo"],servici:["servicios"],haces:["servicios"],contact:["contacto"],whatsapp:["contacto"],correo:["contacto"],demo:["demos"],proyect:["demos"],portafolio:["demos"]};
+const R={
+efectos:{msg:"✦ <strong>Efectos CSS/JS Gratis</strong><br>Rosa Animada · Botón Neón · Loader Dorado · Login Glass · Tarjeta Flip<br><br>👉 <a href='efectos.html' style='color:#c9a84c'>Ver todos los efectos →</a>",opts:["Ver efectos","¿Cuánto cuesta adaptarlo?","Contratar"]},
+precios:{msg:"💰 Mis servicios:<br>• <strong>Landing Page Premium</strong> — $150<br>• <strong>Sitio Web Corporativo</strong> — $350<br>• <strong>Tienda Online</strong> — $650",opts:["Quiero cotizar","¿Cuánto tiempo?","Ver demos"]},tiempo:{msg:"⏱ Landing Page en <strong>48–72h</strong>. Sitio corporativo en <strong>5–7 días</strong>.",opts:["¿Cuánto cuesta?","Contratar ahora"]},servicios:{msg:"🎯 Landing Page $150 · Corporativo $350 · Tienda Online $650",opts:["Cotizar","¿Tiempo de entrega?"]},contacto:{msg:"📱 WhatsApp: <strong>+593 968 352 133</strong><br>✉ studio.art.philip@gmail.com",opts:["Abrir WhatsApp"]},demos:{msg:"🖥 Barbería Golden Cut · Restaurante La Reserva · Gym Iron Force — y más en camino.",opts:["¿Cuánto cuesta?","Contacto"]},default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Art Philip Studio</strong>. ¿En qué puedo ayudarte?",opts:["Ver servicios","¿Cuánto tiempo?","Ver demos","Contacto"]}};
+const K={efecto:["efectos"],css:["efectos"],rosa:["efectos"],boton:["efectos"],neon:["efectos"],loader:["efectos"],
+precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],tiemp:["tiempo"],dias:["tiempo"],horas:["tiempo"],entrega:["tiempo"],servici:["servicios"],haces:["servicios"],contact:["contacto"],whatsapp:["contacto"],correo:["contacto"],demo:["demos"],proyect:["demos"],portafolio:["demos"]};
 let chatOpen=false,firstOpen=true;
 function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatWindow').classList.toggle('open',chatOpen);if(chatOpen){document.querySelector('.chat-badge').style.display='none';if(firstOpen){firstOpen=false;addBot(R.default.msg,R.default.opts);}setTimeout(()=>document.getElementById('chatInput').focus(),200);}}
 function addBot(txt,opts=[],delay=0){const box=document.getElementById('chatMessages');if(delay>0){const t=document.createElement('div');t.className='msg typing';t.id='typing';t.textContent='Escribiendo...';box.appendChild(t);box.scrollTop=box.scrollHeight;}setTimeout(()=>{document.getElementById('typing')?.remove();const el=document.createElement('div');el.className='msg bot';el.innerHTML=txt;box.appendChild(el);box.scrollTop=box.scrollHeight;renderOpts(opts);},delay||0);}
 function renderOpts(opts){const c=document.getElementById('chatOptions');c.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOpt(o);c.appendChild(b);});}
-function handleOpt(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('contratar')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios','_blank');addBot('¡Te abrí WhatsApp! 🚀',[],300);return;}const k=Object.keys(K).find(k=>t.includes(k));addBot((k?R[K[k]]:R.default).msg,(k?R[K[k]]:R.default).opts,600);}
+function handleOpt(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('contratar')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios','_blank');addBot('¡Te abrí WhatsApp! 🚀',[],300);return;}if(t.includes('ver efectos')||t.includes('efectos gratis')){window.location.href='efectos.html';return;}const k=Object.keys(K).find(k=>t.includes(k));addBot((k?R[K[k]]:R.default).msg,(k?R[K[k]]:R.default).opts,600);}
 function sendUserMsg(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();const k=Object.keys(K).find(k=>t.includes(k));addBot((k?R[K[k]]:{msg:"Para ayudarte mejor, escríbeme por WhatsApp 😊",opts:["Abrir WhatsApp"]}).msg,(k?R[K[k]]:{msg:"",opts:["Abrir WhatsApp"]}).opts,700);}
+ </script>
+
+    <script>
+// ── LOGO FLIP FIX - VERSIÓN LIMPIA ──
+document.addEventListener('DOMContentLoaded', function() {
+  const logoWrap = document.getElementById('logoWrap');
+  if (!logoWrap) return;
+
+  const orbit = logoWrap.closest('.logo-area').querySelector('.social-orbit');
+
+  function girarOrbita() {
+    if(!orbit) return;
+    orbit.style.transition = 'transform 0.8s ease';
+    orbit.style.transform = 'rotate(360deg)';
+    setTimeout(function(){
+      orbit.style.transition = 'none';
+      orbit.style.transform = 'rotate(0deg)';
+    }, 850);
+  }
+
+  // Clic — flip logo + giro órbita
+  logoWrap.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link) {
+      e.stopPropagation();
+      window.location.href = link.getAttribute('href');
+      return;
+    }
+    e.preventDefault();
+    logoWrap.classList.toggle('flipped');
+    girarOrbita();
+  });
+
+  // Long press
+  let pressTimer = null;
+  const socIcons = document.querySelectorAll('.soc-icon');
+
+  function startLongPress(e) {
+    if (e.target.closest('a')) return;
+    pressTimer = setTimeout(function() {
+      logoWrap.style.transform = 'scale(0.75)';
+      logoWrap.style.transition = 'transform 0.4s cubic-bezier(.34,1.56,.64,1)';
+      socIcons.forEach(function(icon) {
+        icon.style.transition = 'transform 0.5s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s';
+        icon.style.transform += ' scale(1.6)';
+        icon.style.boxShadow = '0 0 16px rgba(201,168,76,.7)';
+      });
+      girarOrbita();
+    }, 500);
+  }
+
+  function endLongPress() {
+    clearTimeout(pressTimer);
+    logoWrap.style.transform = '';
+    socIcons.forEach(function(icon) {
+      icon.style.transform = '';
+      icon.style.boxShadow = '';
+    });
+  }
+
+  logoWrap.addEventListener('mousedown', startLongPress);
+  logoWrap.addEventListener('mouseup', endLongPress);
+  logoWrap.addEventListener('mouseleave', endLongPress);
+  logoWrap.addEventListener('touchstart', startLongPress, {passive: true});
+  logoWrap.addEventListener('touchend', endLongPress);
+  logoWrap.addEventListener('touchcancel', endLongPress);
+});
 </script>
 <script>
 (function(){
