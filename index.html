@@ -13,102 +13,185 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Great+Vibes&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
 <link rel="preload" as="image" href="assets/logos/logo-simbolo.png" fetchpriority="high">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <style>
-  /* --- VENTANA PRINCIPAL --- */
+  body {
+  padding-top: 100px; /* Empuja TODO el contenido hacia abajo */
+  background: var(--dark);
+  color: var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+/* ── CONTENEDOR CON SCROLL SNAP ── */
 .food-demo-window {
   width: 100%;
-  height: 500px;
-  background: #fdfdfd;
+  max-width: 1060px; /* <- Ancho máximo como tu hero-card */
+  height: 600px; /* <- Alto fijo pequeño, no 100vh */
+  background: #ffffff;
   position: relative;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+   margin: 140px auto 80px;
+   z-index: 10; /* <- Centrado y separado */
 }
 
-/* --- ANIMACIÓN ZIGZAG PARA INGREDIENTES --- */
+.food-slider-wrap {
+  width: 100%;
+  height: 100%; /* <- Ocupa el 100% de la tarjeta de 600px */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.food-slider-wrap::-webkit-scrollbar { display: none; }
+
+/* --- INGREDIENTES ZIGZAG --- */
 .ing {
-  position: absolute;
-  width: 80px;
+  position: fixed;
+  width: 60px;
   z-index: 10;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+  opacity: 0;
+  pointer-events: none;
 }
-
 .ing-left {
   top: 10%; left: -10%;
   animation: zigzagLeft 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
-
 .ing-right {
   top: 20%; right: -10%;
   animation: zigzagRight 4.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   animation-delay: 1s;
 }
-
 @keyframes zigzagLeft {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(150px, 100px) rotate(45deg); } /* Entra al centro */
-  66% { transform: translate(50px, 200px) rotate(-20deg); } /* Baja zigzag */
+  0% { transform: translate(0, 0) rotate(0deg); opacity:0; }
+  10%{opacity:1;}
+  33% { transform: translate(150px, 100px) rotate(45deg); opacity:1;}
+  66% { transform: translate(50px, 200px) rotate(-20deg); opacity:1;}
   100% { transform: translate(-100px, 400px) rotate(10deg); opacity: 0; }
 }
-
 @keyframes zigzagRight {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(-150px, 120px) rotate(-45deg); }
+  0% { transform: translate(0, 0) rotate(0deg); opacity:0;}
+  10%{opacity:1;}
+  33% { transform: translate(-150px, 120px) rotate(-45deg); opacity:1;}
   100% { transform: translate(100px, 450px) rotate(-10deg); opacity: 0; }
 }
 
-/* --- ANIMACIÓN DE PLATOS (Rebote Elegante) --- */
-.plate-left, .plate-right {
-  opacity: 0;
-  animation: plateEntry 1.8s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+/* --- CADA SLIDE OCUPA 100VH Y SE "PEGA" AL SCROLL --- */
+.plate-slide {
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 60px 40px;
+  background: #ffffff;
+  position: relative;
 }
 
+/* --- ANIMACIÓN PLATO AL ENTRAR --- */
+.plate-left {
+  opacity: 1; /* <- Visible por defecto */
+  transform: scale(1) translateY(0) rotate(0deg);
+}
+.plate-slide.active .plate-left {
+  animation: plateEntry 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+}
 @keyframes plateEntry {
   0% { transform: scale(0.5) translateY(100px) rotate(-10deg); opacity: 0; }
   100% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
 }
 
-/* --- DISEÑO DE TEXTOS --- */
-.main-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2.8rem;
-  letter-spacing: 2px;
-  color: #1a1a1a;
-  margin: 10px 0;
-}
-
-.pi-label {
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 0.7rem;
-  color: #c9a84c;
-  font-weight: bold;
-}
-
-.pi-price {
-  font-family: 'Cinzel', serif;
-  font-size: 1.8rem;
-  color: #c9a84c;
-  margin-top: 15px;
-}
-
-.plate-scene {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-}
-
 .plate-img-file {
-  width: 300px;
-  filter: drop-shadow(0 25px 40px rgba(0,0,0,0.2));
+  width: 100%;
+  max-width: 480px;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
+  animation: floatPlate 6s ease-in-out infinite;
+}
+@keyframes floatPlate {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.plate-info-center{
+  flex: 0 0 45%;
+  text-align: center;
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.plate-slide.active .plate-info-center {
+  animation: textFadeIn 1s ease 0.3s forwards;
+}
+@keyframes textFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TIPOGRAFÍA MINGLE --- */
+.pi-label-elegant {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 32px;
+}
+.pi-title-group {
+  position: relative;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.pi-main-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: #1a1a1a;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin: 0;
+}
+.pi-sub-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: #c9a84c;
+  font-weight: 400;
+  line-height: 1;
+  margin: -20px 0 0;
+  transform: rotate(-3deg);
+  text-shadow: 0 2px 20px rgba(201,168,76,.3);
+}
+.pi-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  line-height: 1.9;
+  font-weight: 300;
+  color: #6b6660;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.pi-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c9a84c;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+@media(max-width:968px){
+  .plate-slide{flex-direction:column;gap:40px;}
+  .pi-main-title{font-size:3.5rem;}
+  .pi-sub-title{font-size:2.5rem;margin-top:-15px;}
 }
 
 :root{
@@ -869,34 +952,36 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
 
 <!-- DEMOS SLIDER -->
 <div class="demo-stage">
-<div class="food-demo-window">
-  <div class="flying-elements">
+  <div style="width:100%;max-width:1060px;margin:0 auto;border-radius:20px;overflow:hidden;position:relative;height:500px;background:#fff;">
+  
+  <!-- SLIDE 1 -->
+  <div class="food-slide active" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;padding:40px;opacity:1;transition:opacity 0.8s ease;">
+    <img src="assets/img/demos/hamburguesa.png" style="width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));animation:floatPlate 6s ease-in-out infinite;" alt="Burger">
+    <div style="text-align:center;">
+      <span style="font-family:Montserrat,sans-serif;font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:#c9a84c;">Favorito de la Casa</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:#1a1a1a;line-height:1;margin:16px 0 0;">BURGER</h1>
+      <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;color:#c9a84c;margin:-10px 0 16px;transform:rotate(-3deg);display:block;">Smash</h2>
+      <p style="font-family:Montserrat,sans-serif;font-size:.85rem;color:#6b6660;line-height:1.9;max-width:320px;">Carne 100% Angus sellada al momento, queso cheddar fundido y cebolla caramelizada en pan brioche tostado.</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#c9a84c;margin-top:16px;">$22.00</div>
+    </div>
   </div>
 
-  <div class="food-content-scroll">
-    <section class="plate-scene">
-      <div class="plate-left">
-        <img src="assets/img/demos/plato-estrella.png" class="plate-img-file">
-      </div>
-      <div class="plate-info-center">
-        <span class="pi-label">Plato Estrella</span>
-        <h1 class="main-title">TAKE A TASTE</h1>
-        <p class="pi-desc">Especias secretas de la casa con texturas crujientes y frescura de Miami.</p>
-        <div class="pi-price">$24.50</div>
-      </div>
-    </section>
+  <!-- SLIDE 2 -->
+  <div class="food-slide" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;padding:40px;opacity:0;transition:opacity 0.8s ease;">
+    <img src="assets/img/demos/pasta.png" style="width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));animation:floatPlate 6s ease-in-out infinite;" alt="Pasta">
+    <div style="text-align:center;">
+      <span style="font-family:Montserrat,sans-serif;font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:#c9a84c;">Recomendación</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:#1a1a1a;line-height:1;margin:16px 0 0;">PASTA</h1>
+      <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;color:#c9a84c;margin:-10px 0 16px;transform:rotate(-3deg);display:block;">Mediterránea</h2>
+      <p style="font-family:Montserrat,sans-serif;font-size:.85rem;color:#6b6660;line-height:1.9;max-width:320px;">Tomates cherry madurados al sol y albahaca fresca recogida cada mañana.</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#c9a84c;margin-top:16px;">$18.00</div>
+    </div>
+  </div>
 
-    <section class="plate-scene">
-      <div class="plate-right">
-        <img src="assets/img/demos/pasta.png" class="plate-img-file">
-      </div>
-      <div class="plate-info-center">
-        <span class="pi-label">Recomendación</span>
-        <h2 class="pi-name">PASTA MEDITERRÁNEA</h2>
-        <p class="pi-desc">Tomates cherry madurados al sol y albahaca fresca recogida cada mañana.</p>
-        <div class="pi-price">$18.00</div>
-      </div>
-    </section>
+  <!-- DOTS -->
+  <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;">
+    <div class="food-dot active" onclick="goFoodSlide(0)" style="width:8px;height:8px;border-radius:50%;background:#c9a84c;cursor:pointer;transition:opacity .3s;"></div>
+    <div class="food-dot" onclick="goFoodSlide(1)" style="width:8px;height:8px;border-radius:50%;background:#c9a84c;cursor:pointer;opacity:.3;transition:opacity .3s;"></div>
   </div>
 </div>
 
@@ -1386,6 +1471,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setState('idle', 0);
 })();
+</script>
+<script>
+let foodIdx = 0;
+const foodSlides = document.querySelectorAll('.food-slide');
+const foodDots = document.querySelectorAll('.food-dot');
+
+function goFoodSlide(n) {
+  foodSlides[foodIdx].style.opacity = '0';
+  foodDots[foodIdx].style.opacity = '.3';
+  foodIdx = n;
+  foodSlides[foodIdx].style.opacity = '1';
+  foodDots[foodIdx].style.opacity = '1';
+}
+
+setInterval(function(){
+  goFoodSlide((foodIdx + 1) % foodSlides.length);
+}, 5000);
 </script>
 </body>
 </html>
