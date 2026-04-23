@@ -13,11 +13,187 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/demos/Barberia-demo.jpg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Great+Vibes&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap"></noscript>
 <link rel="preload" as="image" href="assets/logos/logo-simbolo.png" fetchpriority="high">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <style>
+  body {
+  padding-top: 100px; /* Empuja TODO el contenido hacia abajo */
+  background: var(--dark);
+  color: var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+/* ── CONTENEDOR CON SCROLL SNAP ── */
+.food-demo-window {
+  width: 100%;
+  max-width: 1060px; /* <- Ancho máximo como tu hero-card */
+  height: 600px; /* <- Alto fijo pequeño, no 100vh */
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+   margin: 140px auto 80px;
+   z-index: 10; /* <- Centrado y separado */
+}
+
+.food-slider-wrap {
+  width: 100%;
+  height: 100%; /* <- Ocupa el 100% de la tarjeta de 600px */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.food-slider-wrap::-webkit-scrollbar { display: none; }
+
+/* --- INGREDIENTES ZIGZAG --- */
+.ing {
+  position: fixed;
+  width: 60px;
+  z-index: 10;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+  opacity: 0;
+  pointer-events: none;
+}
+.ing-left {
+  top: 10%; left: -10%;
+  animation: zigzagLeft 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+.ing-right {
+  top: 20%; right: -10%;
+  animation: zigzagRight 4.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation-delay: 1s;
+}
+@keyframes zigzagLeft {
+  0% { transform: translate(0, 0) rotate(0deg); opacity:0; }
+  10%{opacity:1;}
+  33% { transform: translate(150px, 100px) rotate(45deg); opacity:1;}
+  66% { transform: translate(50px, 200px) rotate(-20deg); opacity:1;}
+  100% { transform: translate(-100px, 400px) rotate(10deg); opacity: 0; }
+}
+@keyframes zigzagRight {
+  0% { transform: translate(0, 0) rotate(0deg); opacity:0;}
+  10%{opacity:1;}
+  33% { transform: translate(-150px, 120px) rotate(-45deg); opacity:1;}
+  100% { transform: translate(100px, 450px) rotate(-10deg); opacity: 0; }
+}
+
+/* --- CADA SLIDE OCUPA 100VH Y SE "PEGA" AL SCROLL --- */
+.plate-slide {
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 60px 40px;
+  background: #ffffff;
+  position: relative;
+}
+
+/* --- ANIMACIÓN PLATO AL ENTRAR --- */
+.plate-left {
+  opacity: 1; /* <- Visible por defecto */
+  transform: scale(1) translateY(0) rotate(0deg);
+}
+.plate-slide.active .plate-left {
+  animation: plateEntry 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+}
+@keyframes plateEntry {
+  0% { transform: scale(0.5) translateY(100px) rotate(-10deg); opacity: 0; }
+  100% { transform: scale(1) translateY(0) rotate(0deg); opacity: 1; }
+}
+
+.plate-img-file {
+  width: 100%;
+  max-width: 480px;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
+  animation: floatPlate 6s ease-in-out infinite;
+}
+@keyframes floatPlate {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.plate-info-center{
+  flex: 0 0 45%;
+  text-align: center;
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.plate-slide.active .plate-info-center {
+  animation: textFadeIn 1s ease 0.3s forwards;
+}
+@keyframes textFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TIPOGRAFÍA MINGLE --- */
+.pi-label-elegant {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 32px;
+}
+.pi-title-group {
+  position: relative;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.pi-main-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: #1a1a1a;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin: 0;
+}
+.pi-sub-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: #c9a84c;
+  font-weight: 400;
+  line-height: 1;
+  margin: -20px 0 0;
+  transform: rotate(-3deg);
+  text-shadow: 0 2px 20px rgba(201,168,76,.3);
+}
+.pi-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  line-height: 1.9;
+  font-weight: 300;
+  color: #6b6660;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.pi-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c9a84c;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+@media(max-width:968px){
+  .plate-slide{flex-direction:column;gap:40px;}
+  .pi-main-title{font-size:3.5rem;}
+  .pi-sub-title{font-size:2.5rem;margin-top:-15px;}
+}
+
 :root{
   --gold:#c9a84c; --gold-light:#e8c96a; --dark:#080808;
   --surface:#111111; --text:#d4d0c8; --text-dim:#6b6660;
@@ -238,112 +414,6 @@ section.sec{padding:120px 60px;position:relative;}
 .demos-title .or{color:var(--orange);}
 .demos-sub{font-size:13px;color:var(--text-dim);font-weight:300;max-width:380px;margin:0 auto;}
 .demos-section { padding-bottom: 60px; }
-
-.demo-hero-img {
-  width: 100%;
-  height: 80vh;
-  min-height: 500px;
-  border-radius: 18px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 32px;
-  cursor: pointer;
-}
-.demo-hero-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 32px 36px;
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
-  z-index: 5;
-}
-.demo-hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(28px,5vw,52px);
-  letter-spacing: 3px;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.demo-hero-sub {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 2px;
-  margin-bottom: 14px;
-}
-.demo-hero-btn {
-  display: inline-block;
-  padding: 11px 28px;
-  background: var(--gold);
-  color: #000;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.2s, transform 0.15s;
-}
-.demo-hero-btn:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-}
-.demo-thumbs {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  gap: 12px;
-  z-index: 10;
-}
-.demo-thumb {
-  width: 120px;
-  height: 75px;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid rgba(255,255,255,0.2);
-  transition: all 0.3s cubic-bezier(.25,.46,.45,.94);
-  position: relative;
-  flex-shrink: 0;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-.demo-thumb:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255,255,255,0.6);
-}
-.demo-thumb.active {
-  border-color: var(--gold);
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(201,168,76,.3);
-}
-.demo-thumb-bg {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16/9;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-}
-.demo-thumb-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-}
-.demo-thumb-label {
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  color: #fff;
-  z-index: 2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-}
-.demo-thumb-icon { 
-  display: none;
-}
 
 @media(max-width: 768px){
   .demo-thumbs {
@@ -881,34 +951,39 @@ footer{padding:40px 60px;border-top:1px solid rgba(255,255,255,.05);display:flex
   </div>
 
 <!-- DEMOS SLIDER -->
-<div class="demo-hero-img" id="demoHeroWrap" data-url="Barberia.html">
-  <div class="demo-hero-bg" id="demoHeroBg"
-    style="background-image:url('assets/img/demos/Barberia-demo.jpg');background-size:cover;background-position:center;">
+<div class="demo-stage">
+  <div style="width:100%;max-width:1060px;margin:0 auto;border-radius:20px;overflow:hidden;position:relative;height:500px;background:#fff;">
+  
+  <!-- SLIDE 1 -->
+  <div class="food-slide active" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;padding:40px;opacity:1;transition:opacity 0.8s ease;">
+    <img src="assets/img/demos/hamburguesa.png" style="width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));animation:floatPlate 6s ease-in-out infinite;" alt="Burger">
+    <div style="text-align:center;">
+      <span style="font-family:Montserrat,sans-serif;font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:#c9a84c;">Favorito de la Casa</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:#1a1a1a;line-height:1;margin:16px 0 0;">BURGER</h1>
+      <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;color:#c9a84c;margin:-10px 0 16px;transform:rotate(-3deg);display:block;">Smash</h2>
+      <p style="font-family:Montserrat,sans-serif;font-size:.85rem;color:#6b6660;line-height:1.9;max-width:320px;">Carne 100% Angus sellada al momento, queso cheddar fundido y cebolla caramelizada en pan brioche tostado.</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#c9a84c;margin-top:16px;">$22.00</div>
+    </div>
   </div>
-  <div class="demo-hero-overlay">
-    <div class="demo-hero-title" id="demoHeroTitle">Barbería Golden Cut</div>
-    <div class="demo-hero-sub" id="demoHeroSub">Landing Page · Dark Theme · Reservas</div>
-    <a href="Barberia.html" target="_blank" class="demo-hero-btn" id="demoHeroBtn">Ver Demo ▶</a>
+
+  <!-- SLIDE 2 -->
+  <div class="food-slide" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;padding:40px;opacity:0;transition:opacity 0.8s ease;">
+    <img src="assets/img/demos/pasta.png" style="width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));animation:floatPlate 6s ease-in-out infinite;" alt="Pasta">
+    <div style="text-align:center;">
+      <span style="font-family:Montserrat,sans-serif;font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:#c9a84c;">Recomendación</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:#1a1a1a;line-height:1;margin:16px 0 0;">PASTA</h1>
+      <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;color:#c9a84c;margin:-10px 0 16px;transform:rotate(-3deg);display:block;">Mediterránea</h2>
+      <p style="font-family:Montserrat,sans-serif;font-size:.85rem;color:#6b6660;line-height:1.9;max-width:320px;">Tomates cherry madurados al sol y albahaca fresca recogida cada mañana.</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#c9a84c;margin-top:16px;">$18.00</div>
+    </div>
   </div>
-  <div class="demo-thumbs">
-    <div class="demo-thumb active" onclick="selectDemo(0,this)">
-      <div class="demo-thumb-bg" style="background-image:url('assets/img/demos/Barberia-demo.jpg');">
-        <div class="demo-thumb-label">GOLDEN CUT</div>
-      </div>
-    </div>
-    <div class="demo-thumb" onclick="selectDemo(1,this)">
-      <div class="demo-thumb-bg" style="background-image:url('assets/img/demos/Restaurante-demo.jpg');">
-        <div class="demo-thumb-label">LA RESERVA</div>
-      </div>
-    </div>
-    <div class="demo-thumb" onclick="selectDemo(2,this)">
-      <div class="demo-thumb-bg" style="background-image:url('assets/img/demos/Gym-demo.jpg');">
-        <div class="demo-thumb-label">IRON FORCE</div>
-      </div>
-    </div>
+
+  <!-- DOTS -->
+  <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;">
+    <div class="food-dot active" onclick="goFoodSlide(0)" style="width:8px;height:8px;border-radius:50%;background:#c9a84c;cursor:pointer;transition:opacity .3s;"></div>
+    <div class="food-dot" onclick="goFoodSlide(1)" style="width:8px;height:8px;border-radius:50%;background:#c9a84c;cursor:pointer;opacity:.3;transition:opacity .3s;"></div>
   </div>
 </div>
-</section>
 
 <!-- ✅ SECCIÓN PROYECTOS ELIMINADA COMPLETAMENTE -->
 
@@ -1090,16 +1165,95 @@ window.addEventListener('load', function(){
 });
 
 const R={
-efectos:{msg:"✦ <strong>Efectos CSS/JS Gratis</strong><br>Rosa Animada · Botón Neón · Loader Dorado · Login Glass · Tarjeta Flip<br><br>👉 <a href='efectos.html' style='color:#c9a84c'>Ver todos los efectos →</a>",opts:["Ver efectos","¿Cuánto cuesta adaptarlo?","Contratar"]},
-precios:{msg:"💰 Mis servicios:<br>• <strong>Landing Page Premium</strong> — $150<br>• <strong>Sitio Web Corporativo</strong> — $350<br>• <strong>Tienda Online</strong> — $650",opts:["Quiero cotizar","¿Cuánto tiempo?","Ver demos"]},tiempo:{msg:"⏱ Landing Page en <strong>48–72h</strong>. Sitio corporativo en <strong>5–7 días</strong>.",opts:["¿Cuánto cuesta?","Contratar ahora"]},servicios:{msg:"🎯 Landing Page $150 · Corporativo $350 · Tienda Online $650",opts:["Cotizar","¿Tiempo de entrega?"]},contacto:{msg:"📱 WhatsApp: <strong>+593 968 352 133</strong><br>✉ studio.art.philip@gmail.com",opts:["Abrir WhatsApp"]},demos:{msg:"🖥 Barbería Golden Cut · Restaurante La Reserva · Gym Iron Force — y más en camino.",opts:["¿Cuánto cuesta?","Contacto"]},default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Art Philip Studio</strong>. ¿En qué puedo ayudarte?",opts:["Ver servicios","¿Cuánto tiempo?","Ver demos","Contacto"]}};
-const K={efecto:["efectos"],css:["efectos"],rosa:["efectos"],boton:["efectos"],neon:["efectos"],loader:["efectos"],
-precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],tiemp:["tiempo"],dias:["tiempo"],horas:["tiempo"],entrega:["tiempo"],servici:["servicios"],haces:["servicios"],contact:["contacto"],whatsapp:["contacto"],correo:["contacto"],demo:["demos"],proyect:["demos"],portafolio:["demos"]};
+  precios:{msg:"💰 Mis servicios:<br>• <strong>Landing Page Premium</strong> — $150<br>• <strong>Sitio Web Corporativo</strong> — $350<br>• <strong>Tienda Online</strong> — $650",opts:["Quiero cotizar","¿Cuánto tiempo?","Ver demos"]},
+  tiempo:{msg:"⏱ Landing Page en <strong>48–72h</strong>. Sitio corporativo en <strong>5–7 días</strong>.",opts:["¿Cuánto cuesta?","Contratar ahora"]},
+  servicios:{msg:"🎯 Landing Page $150 · Corporativo $350 · Tienda Online $650",opts:["Cotizar","¿Tiempo de entrega?"]},
+  contacto:{msg:"📱 WhatsApp: <strong>+593 968 352 133</strong><br>✉ studio.art.philip@gmail.com",opts:["Abrir WhatsApp"]},
+  demos:{msg:"🖥 Barbería Golden Cut · Restaurante La Reserva · Gym Iron Force",opts:["¿Cuánto cuesta?","Contacto"]},
+  default:{msg:"¡Hola! 👋 Soy el asistente de <strong>Art Philip Studio</strong>. ¿En qué puedo ayudarte?",opts:["Ver servicios","¿Cuánto tiempo?","Ver demos","Contacto"]}
+};
+const K={precio:["precios"],costo:["precios"],cuanto:["precios"],valor:["precios"],tiemp:["tiempo"],dias:["tiempo"],horas:["tiempo"],entrega:["tiempo"],servici:["servicios"],haces:["servicios"],contact:["contacto"],whatsapp:["contacto"],correo:["contacto"],demo:["demos"],proyect:["demos"],portafolio:["demos"]};
 let chatOpen=false,firstOpen=true;
-function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatWindow').classList.toggle('open',chatOpen);if(chatOpen){document.querySelector('.chat-badge').style.display='none';if(firstOpen){firstOpen=false;addBot(R.default.msg,R.default.opts);}setTimeout(()=>document.getElementById('chatInput').focus(),200);}}
-function addBot(txt,opts=[],delay=0){const box=document.getElementById('chatMessages');if(delay>0){const t=document.createElement('div');t.className='msg typing';t.id='typing';t.textContent='Escribiendo...';box.appendChild(t);box.scrollTop=box.scrollHeight;}setTimeout(()=>{document.getElementById('typing')?.remove();const el=document.createElement('div');el.className='msg bot';el.innerHTML=txt;box.appendChild(el);box.scrollTop=box.scrollHeight;renderOpts(opts);},delay||0);}
-function renderOpts(opts){const c=document.getElementById('chatOptions');c.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-opt';b.textContent=o;b.onclick=()=>handleOpt(o);c.appendChild(b);});}
-function handleOpt(txt){const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();if(t.includes('whatsapp')||t.includes('contratar')){window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios','_blank');addBot('¡Te abrí WhatsApp! 🚀',[],300);return;}if(t.includes('ver efectos')||t.includes('efectos gratis')){window.location.href='efectos.html';return;}const k=Object.keys(K).find(k=>t.includes(k));addBot((k?R[K[k]]:R.default).msg,(k?R[K[k]]:R.default).opts,600);}
-function sendUserMsg(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;inp.value='';const box=document.getElementById('chatMessages');const u=document.createElement('div');u.className='msg user';u.textContent=txt;box.appendChild(u);box.scrollTop=box.scrollHeight;document.getElementById('chatOptions').innerHTML='';const t=txt.toLowerCase();const k=Object.keys(K).find(k=>t.includes(k));addBot((k?R[K[k]]:{msg:"Para ayudarte mejor, escríbeme por WhatsApp 😊",opts:["Abrir WhatsApp"]}).msg,(k?R[K[k]]:{msg:"",opts:["Abrir WhatsApp"]}).opts,700);}
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chatWindow').classList.toggle('open',chatOpen);
+  if(chatOpen){
+    document.querySelector('.chat-badge').style.display='none';
+    if(firstOpen){
+      firstOpen=false;
+      addBot(R.default.msg,R.default.opts);
+    }
+    setTimeout(()=>document.getElementById('chatInput').focus(),200);
+  }
+}
+
+function addBot(txt,opts=[],delay=0){
+  const box=document.getElementById('chatMessages');
+  if(delay>0){
+    const t=document.createElement('div');
+    t.className='msg typing';t.id='typing';
+    t.textContent='Escribiendo...';
+    box.appendChild(t);
+    box.scrollTop=box.scrollHeight;
+  }
+  setTimeout(()=>{
+    document.getElementById('typing')?.remove();
+    const el=document.createElement('div');
+    el.className='msg bot';
+    el.innerHTML=txt;
+    box.appendChild(el);
+    box.scrollTop=box.scrollHeight;
+    renderOpts(opts);
+  },delay||0);
+}
+
+function renderOpts(opts){
+  const c=document.getElementById('chatOptions');
+  c.innerHTML='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='chat-opt';
+    b.textContent=o;
+    b.onclick=()=>handleOpt(o);
+    c.appendChild(b);
+  });
+}
+
+function handleOpt(txt){
+  const box=document.getElementById('chatMessages');
+  const u=document.createElement('div');
+  u.className='msg user';
+  u.textContent=txt;
+  box.appendChild(u);
+  box.scrollTop=box.scrollHeight;
+  document.getElementById('chatOptions').innerHTML='';
+  const t=txt.toLowerCase();
+  if(t.includes('whatsapp')||t.includes('contratar')){
+    window.open('https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios','_blank');
+    addBot('¡Te abrí WhatsApp! 🚀',[],300);
+    return;
+  }
+  const k=Object.keys(K).find(k=>t.includes(k));
+  addBot((k?R[K[k]]:R.default).msg,(k?R[K[k]]:R.default).opts,600);
+}
+
+function sendUserMsg(){
+  const inp=document.getElementById('chatInput');
+  const txt=inp.value.trim();
+  if(!txt)return;
+  inp.value='';
+  const box=document.getElementById('chatMessages');
+  const u=document.createElement('div');
+  u.className='msg user';
+  u.textContent=txt;
+  box.appendChild(u);
+  box.scrollTop=box.scrollHeight;
+  document.getElementById('chatOptions').innerHTML='';
+  const t=txt.toLowerCase();
+  const k=Object.keys(K).find(k=>t.includes(k));
+  addBot((k?R[K[k]]:{msg:"Para ayudarte mejor, escríbeme por WhatsApp 😊",opts:["Abrir WhatsApp"]}).msg,(k?R[K[k]]:{msg:"",opts:["Abrir WhatsApp"]}).opts,700);
+}
  </script>
 
     <script>
@@ -1173,141 +1327,167 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script>
 (function(){
-  const wrap      = document.getElementById('aiRobotWrap');
-  if(!wrap) return;
-  const badge     = document.getElementById('aiBadge');
-  const tooltip   = document.getElementById('aiTooltip');
-  const eyesNormal= document.getElementById('eyesNormal');
+  const wrap = document.getElementById('aiRobotWrap');
+  const badge = document.getElementById('aiBadge');
+  const tooltip = document.getElementById('aiTooltip');
+  const eyesNormal = document.getElementById('eyesNormal');
   const eyesHappy = document.getElementById('eyesHappy');
-  const eyesSearch= document.getElementById('eyesSearch');
-  const eyesSurp  = document.getElementById('eyesSurprise');
+  const eyesSearch = document.getElementById('eyesSearch');
+  const eyesSurp = document.getElementById('eyesSurprise');
   const mouthNorm = document.getElementById('mouthNormal');
-  const mouthHap  = document.getElementById('mouthHappy');
-  const blushL    = document.getElementById('blushLeft');
-  const blushR    = document.getElementById('blushRight');
-  const armsNorm  = document.getElementById('armsNormal');
-  const armsUp    = document.getElementById('armsUp');
-  const antennas  = document.getElementById('antennas');
+  const mouthHap = document.getElementById('mouthHappy');
+  const blushL = document.getElementById('blushLeft');
+  const blushR = document.getElementById('blushRight');
+  const armsNorm = document.getElementById('armsNormal');
+  const armsUp = document.getElementById('armsUp');
+  const antennas = document.getElementById('antennas');
 
-  let currentState='idle', stateTimer=null, isScrolling=false, scrollTimer=null;
+  if(!wrap) return;
 
-  const messages={idle:'¡Hola! ¿En qué te ayudo? 👋',scroll:'Explorando la página... 🔍',click:'¡Hiciste click! Puedo ayudarte 😊',happy:'¡Excelentes demos! ¿Te interesa uno? ✨',chat:'¡Escríbeme! Estoy aquí 💬',demos:'¡Estos diseños consiguen clientes! 🚀',services:'¿Cotizamos tu proyecto? 💰',contact:'¿Listo para empezar? ¡Escríbeme! 📩'};
+  let currentState = 'idle';
+  let stateTimer = null;
+  let isScrolling = false;
+  let scrollTimer = null;
 
-  function setState(state,duration){
-    if(currentState===state) return;
-    currentState=state;
+  const messages = {
+    idle:'¡Hola! ¿En qué te ayudo? 👋',
+    scroll:'Explorando la página... 🔍',
+    click:'¡Hiciste click! Puedo ayudarte 😊',
+    happy:'¡Excelentes demos! ¿Te interesa uno? ✨',
+    chat:'¡Escríbeme! Estoy aquí 💬',
+    demos:'¡Estos diseños consiguen clientes! 🚀',
+    services:'¿Cotizamos tu proyecto? 💰',
+    contact:'¿Listo para empezar? ¡Escríbeme! 📩'
+  };
+
+  function setState(state, duration){
+    if(currentState === state) return;
+    currentState = state;
     clearTimeout(stateTimer);
-    wrap.className='ai-robot-wrap state-'+state;
+    wrap.className = 'ai-robot-wrap state-' + state;
     setFaceState(state);
-    tooltip.textContent=messages[state]||messages.idle;
-    if(duration) stateTimer=setTimeout(()=>setState('idle'),duration);
+    if(tooltip) tooltip.textContent = messages[state] || messages.idle;
+    if(duration) stateTimer = setTimeout(()=> setState('idle'), duration);
   }
 
   function setFaceState(state){
-    const opN=(state==='idle'||state==='chat')?'1':'0';
-    const opH=(state==='happy'||state==='demos'||state==='services')?'1':'0';
-    const opS=(state==='scroll')?'1':'0';
-    const opX=(state==='click'||state==='contact')?'1':'0';
-    animateOpacity(eyesNormal,opN);
-    animateOpacity(eyesHappy,opH);
-    animateOpacity(eyesSearch,opS);
-    animateOpacity(eyesSurp,opX);
-    animateOpacity(mouthNorm,opH==='1'?'0':'1');
-    animateOpacity(mouthHap,opH);
-    animateOpacity(blushL,opH);
-    animateOpacity(blushR,opH);
-    animateOpacity(armsNorm,opH==='1'?'0':'1');
-    animateOpacity(armsUp,opH);
-    if(antennas) antennas.style.opacity=opH==='1'?'1':'0.7';
+    const opN = (state==='idle'||state==='chat')?'1':'0';
+    const opH = (state==='happy'||state==='demos'||state==='services')?'1':'0';
+    const opS = (state==='scroll')?'1':'0';
+    const opX = (state==='click'||state==='contact')?'1':'0';
+
+    if(eyesNormal) eyesNormal.style.opacity = opN;
+    if(eyesHappy) eyesHappy.style.opacity = opH;
+    if(eyesSearch) eyesSearch.style.opacity = opS;
+    if(eyesSurp) eyesSurp.style.opacity = opX;
+    if(mouthNorm) mouthNorm.style.opacity = opH==='1'?'0':'1';
+    if(mouthHap) mouthHap.style.opacity = opH;
+    if(blushL) blushL.style.opacity = opH;
+    if(blushR) blushR.style.opacity = opH;
+    if(armsNorm) armsNorm.style.opacity = opH==='1'?'0':'1';
+    if(armsUp) armsUp.style.opacity = opH;
+    if(antennas) antennas.style.opacity = opH==='1'?'1':'0.7';
   }
 
-  function animateOpacity(el,val){
-    if(!el) return;
-    el.style.transition='opacity .4s ease';
-    el.style.opacity=val;
+  /* ── CLICK ÚNICO - Funciona PC y móvil ── */
+  let clickHandled = false;
+  function handleRobotClick(e){
+    if(clickHandled) return;
+    clickHandled = true;
+    e.stopPropagation();
+    e.preventDefault();
+    if(typeof window.toggleChat === 'function') {
+      window.toggleChat();
+    }
+    setTimeout(()=>{ clickHandled = false; }, 300);
   }
 
-  window.addEventListener('scroll',function(){
-    if(!isScrolling){isScrolling=true;setState('scroll');}
+  wrap.addEventListener('click', handleRobotClick);
+  wrap.addEventListener('touchend', handleRobotClick, {passive: false});
+
+  /* ── Scroll ── */
+  window.addEventListener('scroll', function(){
+    if(!isScrolling){
+      isScrolling = true;
+      setState('scroll');
+    }
     clearTimeout(scrollTimer);
-    scrollTimer=setTimeout(function(){isScrolling=false;setState('idle',0);},800);
-  },{passive:true});
+    scrollTimer = setTimeout(function(){
+      isScrolling = false;
+      setState('idle', 0);
+    }, 800);
+  }, {passive: true});
 
-  document.addEventListener('click',function(e){
+  /* ── Click en página (no en robot) ── */
+  document.addEventListener('click', function(e){
     if(wrap.contains(e.target)) return;
-    setState('click',1500);
+    setState('click', 1500);
   });
 
-  setTimeout(function(){
-    function watchSection(selector,state){
-      const el=document.querySelector(selector);
-      if(!el) return;
-      el.addEventListener('mouseenter',()=>setState(state));
-      el.addEventListener('mouseleave',()=>{if(currentState===state) setState('idle',0);});
-    }
+  /* ── Hover secciones (solo PC) ── */
+  function watchSection(sel, state){
+    const el = document.querySelector(sel);
+    if(!el) return;
+    el.addEventListener('mouseenter', ()=> setState(state));
+    el.addEventListener('mouseleave', ()=> { if(currentState===state) setState('idle',0); });
+  }
+
+  setTimeout(()=>{
     watchSection('#demos','demos');
     watchSection('#servicios','services');
     watchSection('#contacto','contact');
     watchSection('#sobre-mi','happy');
-  },500);
+  }, 500);
 
-  wrap.addEventListener('mouseenter',function(){
-    if(currentState!=='chat'){
-      tooltip.style.opacity='1';
-      tooltip.style.transform='translateY(50%) translateX(0)';
-    }
-  });
-
-  const observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
+  /* ── IntersectionObserver (móvil y PC) ── */
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
       if(!entry.isIntersecting) return;
-      const id=entry.target.id;
+      const id = entry.target.id;
       if(id==='demos') setState('demos',3000);
       if(id==='servicios') setState('services',3000);
       if(id==='contacto') setState('contact',4000);
       if(id==='sobre-mi') setState('happy',2500);
     });
-  },{threshold:0.4});
+  }, {threshold: 0.4});
 
-  setTimeout(function(){
-    ['demos','servicios','contacto','sobre-mi'].forEach(function(id){
-      const el=document.getElementById(id);
+  setTimeout(()=>{
+    ['demos','servicios','contacto','sobre-mi'].forEach(id=>{
+      const el = document.getElementById(id);
       if(el) observer.observe(el);
     });
-  },300);
+  }, 300);
 
-  const origToggle=window.toggleChat;
-  if(origToggle){
-    window.toggleChat=function(){
-      origToggle();
-      const chatOpen=document.getElementById('chatWindow')&&document.getElementById('chatWindow').classList.contains('open');
-      setState(chatOpen?'chat':'idle',chatOpen?0:2000);
-      tooltip.textContent=chatOpen?messages.chat:messages.idle;
-    };
-  }
-
-  function blink(){
-    if(currentState!=='idle'&&currentState!=='chat') return;
-    if(!eyesNormal) return;
-    eyesNormal.style.transform='scaleY(0.1)';
-    eyesNormal.style.transition='transform .08s';
-    setTimeout(function(){eyesNormal.style.transform='scaleY(1)';},100);
-  }
-  setInterval(blink,3500);
-
-  let antennaPhase=0;
-  setInterval(function(){
+  /* ── Antenas parpadeantes ── */
+  let ap = 0;
+  setInterval(()=>{
     if(!antennas) return;
-    antennaPhase=antennaPhase===0?1:0;
-    antennas.querySelectorAll('circle').forEach(function(c){
-      c.style.transition='opacity .5s';
-      c.style.opacity=antennaPhase===0?'1':'0.4';
+    ap = ap === 0? 1 : 0;
+    antennas.querySelectorAll('circle').forEach(c=>{
+      c.style.transition = 'opacity.5s';
+      c.style.opacity = ap === 0? '1' : '0.4';
     });
-  },1200);
+  }, 1200);
 
-  setState('idle',0);
-  currentState='idle';
+  setState('idle', 0);
 })();
+</script>
+<script>
+let foodIdx = 0;
+const foodSlides = document.querySelectorAll('.food-slide');
+const foodDots = document.querySelectorAll('.food-dot');
+
+function goFoodSlide(n) {
+  foodSlides[foodIdx].style.opacity = '0';
+  foodDots[foodIdx].style.opacity = '.3';
+  foodIdx = n;
+  foodSlides[foodIdx].style.opacity = '1';
+  foodDots[foodIdx].style.opacity = '1';
+}
+
+setInterval(function(){
+  goFoodSlide((foodIdx + 1) % foodSlides.length);
+}, 5000);
 </script>
 </body>
 </html>
