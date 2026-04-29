@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondos Animados CSS | Art Philip Studio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap">
+    <style>
+        :root {
+            --teal:#00d4d4; --teal-dark:#00a3a3; --teal-glow:#00ffff;
+            --bg:#0a1014; --bg-card:#101820; --bg-card-hover:#14202a;
+            --text:#e8f4f4; --text-dim:#7a9ca0; --white:#ffffff;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            background:var(--bg); color:var(--text);
+            font-family:'Poppins',sans-serif; overflow-x:hidden;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,212,.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,163,163,.06) 0%, transparent 50%);
+        }
+        body::before{
+            content:'';position:fixed;inset:0;z-index:-1;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* ── NAV ── */
+        nav{
+            position:fixed;top:0;left:0;right:0;z-index:500;
+            display:flex;justify-content:space-between;align-items:center;
+            padding:20px 60px;
+            background:linear-gradient(to bottom,rgba(10,16,20,.9) 0%,transparent 100%);
+            backdrop-filter:blur(10px);
+        }
+        .nav-logo{
+            font-family:'Bebas Neue',sans-serif;
+            font-size:1rem;
+            letter-spacing:4px;
+            background:linear-gradient(135deg, #c9a84c, #f0d080, #c9a84c);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            text-decoration:none;
+            filter:drop-shadow(0 0 8px rgba(201,168,76,.4));
+        }
+        .nav-links{display:flex;gap:40px;list-style:none;}
+        .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.8rem;font-weight:500;transition:.3s;}
+        .nav-links a:hover,.nav-links a.active{color:var(--teal);}
+        .nav-btns{display:flex;gap:12px;}
+        .nav-btn{padding:8px 20px;border:1px solid rgba(0,212,212,.3);border-radius:20px;font-size:.75rem;text-decoration:none;transition:.3s;}
+        .nav-btn.back{background:rgba(0,212,212,.1);color:var(--teal);}
+        .nav-btn.back:hover{background:rgba(0,212,212,.2);transform:translateX(-3px);}
+        .nav-btn.info{background:transparent;color:var(--text-dim);}
+        .nav-btn.info:hover{border-color:var(--teal);color:var(--teal);}
+
+        /* ── HERO ── */
+        .hero-demo{
+            min-height:100vh;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;
+            padding:120px 20px 0;position:relative;text-align:center;
+            overflow:hidden;
+        }
+        .hero-demo::after{
+            content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+            width:45%;height:2px;background:var(--teal);border-radius:2px;
+            box-shadow:0 0 10px var(--teal),0 0 20px var(--teal),0 0 40px var(--teal),0 0 80px var(--teal-glow),0 -2px 30px var(--teal-glow);
+            animation:neonPulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes neonPulse{
+            from{opacity:1;}
+            to{opacity:.9;box-shadow:0 0 15px var(--teal),0 0 30px var(--teal),0 0 60px var(--teal),0 0 100px var(--teal-glow),0 -5px 50px var(--teal-glow);}
+        }
+        .hero-tag{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-dim);margin-bottom:20px;}
+        .hero-title{
+            font-family:'Bebas Neue',sans-serif;font-size:clamp(50px,8vw,110px);
+            letter-spacing:5px;line-height:.95;color:var(--white);margin-bottom:20px;
+        }
+        .hero-title .glow-text{
+            color:#c9a84c;position:relative;display:inline-block;
+            text-shadow:0 0 10px rgba(201,168,76,.8),0 0 20px rgba(201,168,76,.6),0 0 40px rgba(201,168,76,.4);
+        }
+        .hero-title .glow-text::after{
+            content:'';position:absolute;bottom:-8px;left:0;width:100%;height:3px;
+            background:#c9a84c;box-shadow:0 0 10px #c9a84c,0 0 20px #c9a84c,0 0 40px rgba(201,168,76,.8);border-radius:2px;
+        }
+        .hero-desc{font-size:.9rem;color:var(--text-dim);max-width:550px;line-height:1.8;margin:0 auto 30px;}
+        .hero-btns{display:flex;gap:16px;justify-content:center;}
+        .btn-hero{padding:12px 32px;border-radius:24px;font-size:.85rem;font-weight:600;text-decoration:none;transition:.3s;cursor:pointer;}
+        .btn-hero.primary{background:var(--teal);color:var(--bg);border:none;}
+        .btn-hero.primary:hover{background:var(--teal-glow);transform:translateY(-2px);}
+        .btn-hero.secondary{background:transparent;color:var(--teal);border:1px solid rgba(0,212,212,.4);}
+        .btn-hero.secondary:hover{background:rgba(0,212,212,.1);border-color:var(--teal);}
+
+        /* ── TICKER ── */
+        .ticker{
+            width:100%;overflow:hidden;background:rgba(0,0,0,.3);
+            border-top:1px solid rgba(0,212,212,.15);border-bottom:1px solid rgba(0,212,212,.15);
+            padding:12px 0;margin-top:80px;
+        }
+        .ticker-content{display:flex;gap:50px;animation:marquee 30s linear infinite;white-space:nowrap;}
+        .ticker-content span{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
+        .ticker-content span:nth-child(even){color:#c9a84c;font-weight:600;}
+        .ticker-content span:nth-child(odd){color:#4a9eff;}
+        @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+        /* ── GRID FONDOS ── */
+        .chars-section{padding:80px 60px;text-align:center;}
+        .chars-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;margin-bottom:50px;}
+        .chars-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:1200px;margin:0 auto;}
+        .char-card{
+            width:220px;background:var(--bg-card);border-radius:16px;
+            overflow:hidden;border:1px solid rgba(0,212,212,.15);
+            transition:.4s cubic-bezier(.34,1.56,.64,1);cursor:pointer;position:relative;
+        }
+        .char-card:hover{
+            transform:translateY(-10px) scale(1.05);border-color:var(--teal);
+            box-shadow:0 20px 40px rgba(0,212,212,.3),0 0 60px rgba(0,212,212,.2);
+            background:var(--bg-card-hover);
+        }
+        .char-info{
+            padding:14px;background:linear-gradient(to top,rgba(16,24,32,.95),transparent);
+            position:absolute;bottom:0;left:0;right:0;transition:.3s;
+        }
+        .char-name{font-size:.95rem;font-weight:600;color:var(--white);}
+        .neon-card{position:relative;overflow:hidden;}
+        .download-overlay{
+            position:absolute;inset:0;
+            background:linear-gradient(to top,rgba(10,16,20,.95) 0%,rgba(10,16,20,.7) 40%,transparent 100%);
+            display:flex;flex-direction:column;justify-content:flex-end;
+            align-items:center;padding-bottom:20px;opacity:0;transition:.4s;
+        }
+        .neon-card:hover .download-overlay{opacity:1;}
+        .neon-card:hover .char-info{opacity:0;}
+        .btn-download-trigger{
+            padding:10px 24px;background:var(--teal);color:var(--bg);
+            border:none;border-radius:20px;font-weight:700;font-size:.8rem;
+            cursor:pointer;transition:.3s;letter-spacing:1px;
+        }
+        .btn-download-trigger:hover{background:var(--teal-glow);transform:scale(1.05);}
+
+        /* ── DETAIL ── */
+        .detail-section{padding:100px 60px;max-width:1300px;margin:0 auto;}
+        .detail-grid{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:60px;align-items:center;}
+        .detail-title{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:4px;line-height:1;margin-bottom:30px;}
+        .detail-desc{font-size:.85rem;color:var(--text-dim);line-height:1.9;margin-bottom:20px;}
+        .detail-char{position:relative;text-align:center;}
+        .detail-char-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:4px;margin-top:20px;}
+        .detail-stats{display:flex;flex-direction:column;gap:30px;}
+        .stat-item{position:relative;padding-left:20px;}
+        .stat-item::before{content:'';position:absolute;left:0;top:8px;width:10px;height:1px;background:var(--teal);}
+        .stat-name{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:6px;}
+        .stat-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;}
+        .stat-rate{margin-top:20px;}
+        .stat-rate span{color:#ff6496;font-size:1.2rem;}
+
+        .btn-descargar{
+            display:inline-block;padding:12px 32px;
+            background:linear-gradient(135deg,#c9a84c,#b8994c);color:#000;
+            font-family:'Poppins',sans-serif;font-weight:600;font-size:.9rem;
+            text-transform:uppercase;letter-spacing:2px;border-radius:8px;
+            text-decoration:none;transition:all .3s;cursor:pointer;border:none;
+        }
+        .btn-descargar:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,.4);}
+
+        /* ── DOWNLOAD SECTION ── */
+        .download-sec{padding:80px 20px;text-align:center;}
+        .download-card{
+            background:var(--bg-card);border:1px solid rgba(0,212,212,.2);
+            border-radius:16px;max-width:450px;margin:0 auto;
+            padding:40px;box-shadow:0 20px 50px rgba(0,0,0,.5);
+        }
+        .download-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;margin-bottom:10px;}
+        .download-desc{font-size:.85rem;color:var(--text-dim);margin-bottom:30px;}
+        .btn-download{
+            display:inline-block;padding:14px 40px;background:var(--teal);color:var(--bg);
+            text-decoration:none;font-weight:700;border-radius:24px;
+            text-transform:uppercase;letter-spacing:2px;font-size:.85rem;
+            transition:.3s;box-shadow:0 10px 30px rgba(0,212,212,.4);cursor:pointer;border:none;
+        }
+        .btn-download:hover{background:var(--teal-glow);transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,212,212,.6);}
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:968px){
+            nav{padding:16px 24px;}
+            .nav-links{display:none;}
+            .hero-title{font-size:3rem;}
+            .detail-grid{grid-template-columns:1fr;gap:40px;}
+            .detail-char{order:-1;}
+            .chars-grid{gap:12px;}
+            .char-card{width:160px;}
+            .chars-section{padding:60px 20px;}
+            .detail-section{padding:60px 20px;}
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">ART PHILIP STUDIO</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#servicios">Servicios</a></li>
+            <li><a href="#" class="active">Fondos</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-btns">
+            <a href="index.html" class="nav-btn back">← Volver al inicio</a>
+            <a href="#download" class="nav-btn info">Descargar</a>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero-demo">
+        <canvas id="neuroCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+        <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
+            <div class="hero-tag">DESCARGA GRATIS</div>
+            <h1 class="hero-title">
+                FONDOS <span class="glow-text">ANIMADOS CSS</span>
+            </h1>
+            <p class="hero-desc">
+                Fondos animados listos para usar en OBS, TikTok, YouTube o tu web. Descarga el archivo y ábrelo en el navegador — sin instalar nada.
+            </p>
+            <div class="hero-btns">
+                <a href="#fondos" class="btn-hero primary">Ver Fondos</a>
+                <a href="#detail" class="btn-hero secondary">Detalles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TICKER ── -->
+    <div class="ticker">
+        <div class="ticker-content">
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>YO LO CREO PARA TI</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>ESCRÍBEME Y LO HACEMOS</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>TU IDEA HECHA REALIDAD</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>YO LO CREO PARA TI</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>ESCRÍBEME Y LO HACEMOS</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>TU IDEA HECHA REALIDAD</span>
+        </div>
+    </div>
+
+    <!-- ── GRID DE FONDOS ── -->
+    <section class="chars-section" id="fondos">
+        <h2 class="chars-title">FONDOS DISPONIBLES</h2>
+        <div class="chars-grid">
+
+            <!-- CARD 1: HEXÁGONOS NEÓN -->
+            <div class="char-card neon-card">
+                <div style="height:160px;background:#0d1117;position:relative;overflow:hidden;">
+                    <canvas id="prevHex" style="width:100%;height:100%;display:block;"></canvas>
+                </div>
+                <div class="char-info">
+                    <div class="char-name">Hexágonos Neón</div>
+                </div>
+                <div class="download-overlay">
+                    <button class="btn-download-trigger" onclick="downloadHex();event.stopPropagation();">↓ Descargar gratis</button>
+                </div>
+            </div>
+
+            <!-- CARD 2: ESTRELLAS STREAMERS -->
+            <div class="char-card neon-card">
+                <div style="height:160px;background:#020210;position:relative;overflow:hidden;">
+                    <canvas id="prevStar" style="width:100%;height:100%;display:block;"></canvas>
+                </div>
+                <div class="char-info">
+                    <div class="char-name">Estrellas Streamers</div>
+                </div>
+                <div class="download-overlay">
+                    <button class="btn-download-trigger" onclick="downloadStar();event.stopPropagation();">↓ Descargar gratis</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── TICKER 2 ── -->
+    <div class="ticker">
+        <div class="ticker-content">
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>YO LO CREO PARA TI</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>ESCRÍBEME Y LO HACEMOS</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>TU IDEA HECHA REALIDAD</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>YO LO CREO PARA TI</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>ESCRÍBEME Y LO HACEMOS</span>
+            <span>NUEVO FONDO DISPONIBLE</span>
+            <span>TU IDEA HECHA REALIDAD</span>
+        </div>
+    </div>
+
+    <!-- ── DETALLE FONDO 1 ── -->
+    <section class="detail-section" id="detail">
+        <div class="detail-grid" style="margin-bottom:80px;">
+            <div class="detail-info">
+                <h2 class="detail-title">HEXÁGONOS<br>NEÓN</h2>
+                <p class="detail-desc">
+                    Fondo animado con hexágonos que pulsan en neón naranja con partículas flotantes.
+                    Perfecto para streams, TikTok, YouTube o cualquier web con estilo gaming.
+                    Un solo archivo .html — ábrelo en el navegador o ponlo en OBS como Browser Source.
+                </p>
+                <button class="btn-descargar" onclick="downloadHex()">↓ Descargar gratis</button>
+            </div>
+            <div class="detail-char">
+                <canvas id="detailHex" style="width:100%;height:220px;border-radius:12px;background:#0d1117;display:block;"></canvas>
+                <div class="detail-char-name">HEXÁGONOS NEÓN</div>
+            </div>
+            <div class="detail-stats">
+                <div class="stat-item">
+                    <div class="stat-name">Canvas + JS</div>
+                    <div class="stat-desc">Animación fluida en 60fps. Sin librerías externas, pesa muy poco.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-name">Listo para OBS / TikTok</div>
+                    <div class="stat-desc">Abre en navegador o Browser Source en OBS directamente.</div>
+                </div>
+                <div class="stat-rate">
+                    <div class="stat-name">Rate :</div>
+                    <span>★★★★★</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── DETALLE FONDO 2 ── -->
+        <div class="detail-grid">
+            <div class="detail-info">
+                <h2 class="detail-title">ESTRELLAS<br>STREAMERS</h2>
+                <p class="detail-desc">
+                    Fondo espacial animado con estrellas parpadeantes y estrellas fugaces aleatorias.
+                    Incluye overlay con tu nombre ya integrado — solo edita el texto en el HTML.
+                    Ideal para streamers y creadores de contenido en TikTok y YouTube.
+                </p>
+                <button class="btn-descargar" onclick="downloadStar()">↓ Descargar gratis</button>
+            </div>
+            <div class="detail-char">
+                <canvas id="detailStar" style="width:100%;height:220px;border-radius:12px;background:#020210;display:block;"></canvas>
+                <div class="detail-char-name">ESTRELLAS STREAMERS</div>
+            </div>
+            <div class="detail-stats">
+                <div class="stat-item">
+                    <div class="stat-name">Overlay incluido</div>
+                    <div class="stat-desc">Texto "TU NOMBRE / Live Stream" ya integrado, solo edita el HTML.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-name">Estrellas fugaces</div>
+                    <div class="stat-desc">Aparecen aleatoriamente para un efecto espacial cinematográfico.</div>
+                </div>
+                <div class="stat-rate">
+                    <div class="stat-name">Rate :</div>
+                    <span>★★★★★</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DESCARGA FINAL ── -->
+    <section class="download-sec" id="download">
+        <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto;">
+            <div class="download-card" style="flex:1;min-width:260px;">
+                <h3 class="download-title">HEXÁGONOS NEÓN</h3>
+                <p class="download-desc">Fondo gaming naranja animado. Un archivo .html listo para OBS o web.</p>
+                <button class="btn-download" onclick="downloadHex()">↓ Descargar gratis</button>
+            </div>
+            <div class="download-card" style="flex:1;min-width:260px;">
+                <h3 class="download-title">ESTRELLAS</h3>
+                <p class="download-desc">Fondo espacial para streamers. Con overlay de nombre personalizable.</p>
+                <button class="btn-download" onclick="downloadStar()">↓ Descargar gratis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer style="background:#05080a;padding:60px 20px 40px;text-align:center;border-top:1px solid rgba(0,212,212,.2);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:400px;height:120px;background:radial-gradient(ellipse,rgba(0,212,212,.12) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:5px;background:linear-gradient(135deg,#c9a84c,#f0d080,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;">
+            ART PHILIP STUDIO
+        </div>
+        <p style="font-size:.75rem;letter-spacing:3px;color:#4a7a80;text-transform:uppercase;margin-bottom:40px;">
+            Quito, Ecuador — 2026
+        </p>
+        <div style="background:linear-gradient(135deg,rgba(0,212,212,.08),rgba(0,163,163,.04));border:1px solid rgba(0,212,212,.2);border-radius:16px;max-width:480px;margin:0 auto 40px;padding:30px 20px;">
+            <div style="font-size:.7rem;letter-spacing:3px;color:#4a7a80;text-transform:uppercase;margin-bottom:10px;">🎮 También hago juegos</div>
+            <p style="color:#ccc;font-size:.9rem;margin-bottom:20px;line-height:1.7;">
+                Juega mi primer lanzamiento gratis:<br>
+                <strong style="color:#00d4d4;">Octo Lunar Hunter</strong>
+            </p>
+            <a href="https://josetellodev.itch.io/octo-lunar-hunter" target="_blank"
+               style="background:#00d4d4;color:#05080a;padding:12px 32px;border-radius:24px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;display:inline-block;">
+                🛸 Jugar Ahora — Gratis
+            </a>
+        </div>
+        <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;">
+            <a href="https://github.com/art-philip-studio" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">GitHub</a>
+            <span style="color:#1a3a40;">|</span>
+            <a href="https://josetellodev.itch.io" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">itch.io</a>
+            <span style="color:#1a3a40;">|</span>
+            <a href="https://ko-fi.com/fernandoec" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">Ko-fi</a>
+        </div>
+        <p style="font-size:.7rem;color:#1e3a40;">© 2026 Art Philip Studio · Fondos animados CSS gratis para la comunidad</p>
+    </footer>
+
+    <script>
+    /* ══════════════ RED NEURONAL HERO ══════════════ */
+    (function(){
+        const cv = document.getElementById('neuroCanvas');
+        if(!cv) return;
+        function startNeuro(){
+        const cx = cv.getContext('2d');
+        function resize(){ cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+        const NODE_COUNT = 22;
+        const nodes = [];
+        for(let i = 0; i < NODE_COUNT; i++){
+            nodes.push({
+                x: Math.random() * cv.width, y: Math.random() * cv.height,
+                vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+                r: Math.random()*2.5+1, pulse: Math.random()*Math.PI*2, energy: Math.random()
+            });
+        }
+        const travelers = [];
+        function spawnTraveler(a,b){ travelers.push({a,b,t:0,speed:0.004+Math.random()*0.006}); }
+        let frame = 0;
+        function draw(){
+            frame++;
+            cx.clearRect(0,0,cv.width,cv.height);
+            const t = frame * 0.008;
+            nodes.forEach(n => {
+                n.x += n.vx; n.y += n.vy;
+                if(n.x < -50) n.x = cv.width+50;
+                if(n.x > cv.width+50) n.x = -50;
+                if(n.y < -50) n.y = cv.height+50;
+                if(n.y > cv.height+50) n.y = -50;
+                n.pulse += 0.025;
+                n.energy = 0.5 + 0.5*Math.sin(n.pulse);
+            });
+            const MAX_DIST = Math.min(cv.width, cv.height) * 0.38;
+            nodes.forEach((a,i) => {
+                nodes.forEach((b,j) => {
+                    if(j <= i) return;
+                    const dx=b.x-a.x, dy=b.y-a.y;
+                    const dist=Math.sqrt(dx*dx+dy*dy);
+                    if(dist > MAX_DIST) return;
+                    const strength = 1 - dist/MAX_DIST;
+                    const energy = (a.energy+b.energy)*0.5;
+                    cx.save();
+                    cx.beginPath();
+                    const mx=(a.x+b.x)*0.5+Math.sin(t+i)*18;
+                    const my=(a.y+b.y)*0.5+Math.cos(t+j)*18;
+                    cx.moveTo(a.x,a.y);
+                    cx.quadraticCurveTo(mx,my,b.x,b.y);
+                    const hue = 185 + energy*40;
+                    cx.strokeStyle=`hsla(${hue},100%,${55+energy*30}%,${strength*(0.25+energy*0.5)})`;
+                    cx.lineWidth=strength*(0.8+energy*1.8);
+                    cx.shadowColor=`hsla(${hue},100%,70%,${strength*energy*0.6})`;
+                    cx.shadowBlur=6+energy*14;
+                    cx.stroke();
+                    cx.restore();
+                    if(strength > 0.5){
+                        cx.save();
+                        cx.beginPath();
+                        cx.moveTo(a.x,a.y);
+                        cx.quadraticCurveTo(mx,my,b.x,b.y);
+                        cx.strokeStyle=`hsla(190,100%,90%,${strength*energy*0.4})`;
+                        cx.lineWidth=0.4; cx.stroke(); cx.restore();
+                    }
+                    if(frame%80===0 && Math.random()<0.15 && strength>0.5) spawnTraveler(a,b);
+                });
+            });
+            nodes.forEach(n => {
+                const h=185+n.energy*45;
+                const glow=cx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*8);
+                glow.addColorStop(0,`hsla(${h},100%,90%,${0.8*n.energy})`);
+                glow.addColorStop(0.3,`hsla(${h},100%,65%,${0.3*n.energy})`);
+                glow.addColorStop(1,'transparent');
+                cx.fillStyle=glow;
+                cx.beginPath(); cx.arc(n.x,n.y,n.r*8,0,Math.PI*2); cx.fill();
+                cx.beginPath(); cx.arc(n.x,n.y,n.r*(0.8+n.energy*0.8),0,Math.PI*2);
+                cx.fillStyle=`hsla(${h},100%,92%,${0.7+n.energy*0.3})`;
+                cx.shadowColor=`hsla(${h},100%,80%,0.9)`; cx.shadowBlur=10+n.energy*18;
+                cx.fill(); cx.shadowBlur=0;
+            });
+            for(let i=travelers.length-1;i>=0;i--){
+                const tr=travelers[i]; tr.t+=tr.speed;
+                if(tr.t>=1){travelers.splice(i,1);continue;}
+                const px=tr.a.x+(tr.b.x-tr.a.x)*tr.t;
+                const py=tr.a.y+(tr.b.y-tr.a.y)*tr.t;
+                cx.beginPath(); cx.arc(px,py,2.5,0,Math.PI*2);
+                cx.fillStyle='rgba(150,240,255,0.95)';
+                cx.shadowColor='rgba(100,220,255,1)'; cx.shadowBlur=14;
+                cx.fill(); cx.shadowBlur=0;
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+        } // end startNeuro
+        // Arranca el canvas DESPUÉS de que la página ya se ve — no bloquea el render
+        if('requestIdleCallback' in window){
+            requestIdleCallback(startNeuro, {timeout:600});
+        } else {
+            window.addEventListener('load', startNeuro);
+        }
+    })();
+
+    /* ══ PREVIEW HEXÁGONOS ══ */
+    function initHex(canvasId){
+        const cv=document.getElementById(canvasId);
+        if(!cv) return;
+        const cx=cv.getContext('2d');
+        cv.width=cv.offsetWidth; cv.height=cv.offsetHeight;
+        const S=36, hexes=[];
+        function hexPts(x,y,r){const p=[];for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-30);p.push([x+r*Math.cos(a),y+r*Math.sin(a)]);}return p;}
+        function build(){hexes.length=0;const w=cv.width,h=cv.height,H=S*Math.sqrt(3),cols=Math.ceil(w/(S*1.5))+2,rows=Math.ceil(h/H)+2;for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++)hexes.push({cx:c*S*1.5,cy:r*H+(c%2===0?0:H/2),ph:Math.random()*Math.PI*2,sp:0.3+Math.random()*0.7});}
+        build();
+        let fr=0;
+        (function draw(){
+            fr++;
+            cx.fillStyle='#0d1117'; cx.fillRect(0,0,cv.width,cv.height);
+            const t=fr*.012;
+            hexes.forEach(h=>{
+                const pulse=0.3+0.7*Math.abs(Math.sin(t*h.sp+h.ph));
+                const pts=hexPts(h.cx,h.cy,S-2);
+                cx.beginPath(); cx.moveTo(pts[0][0],pts[0][1]);
+                for(let i=1;i<6;i++) cx.lineTo(pts[i][0],pts[i][1]);
+                cx.closePath(); cx.fillStyle='#0d1117'; cx.fill();
+                cx.beginPath(); cx.moveTo(pts[0][0],pts[0][1]);
+                for(let i=1;i<6;i++) cx.lineTo(pts[i][0],pts[i][1]);
+                cx.closePath();
+                cx.strokeStyle='rgba(255,'+(100+Math.floor(pulse*80))+',0,'+(0.3+pulse*0.7)+')';
+                cx.lineWidth=1+pulse;
+                cx.shadowColor='rgba(255,140,0,'+(pulse*.8)+')'; cx.shadowBlur=6+pulse*10;
+                cx.stroke(); cx.shadowBlur=0;
+            });
+            requestAnimationFrame(draw);
+        })();
+    }
+
+    /* ══ PREVIEW ESTRELLAS ══ */
+    function initStar(canvasId){
+        const cv=document.getElementById(canvasId);
+        if(!cv) return;
+        const cx=cv.getContext('2d');
+        cv.width=cv.offsetWidth; cv.height=cv.offsetHeight;
+        const stars=Array.from({length:80},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.5+.3,sp:Math.random()*.3+.05,p:Math.random()*Math.PI*2}));
+        const T=[];let fr=0;
+        (function draw(){
+            fr++;
+            cx.clearRect(0,0,cv.width,cv.height);
+            const g=cx.createLinearGradient(0,0,cv.width,cv.height);
+            g.addColorStop(0,'#020210'); g.addColorStop(1,'#020215');
+            cx.fillStyle=g; cx.fillRect(0,0,cv.width,cv.height);
+            stars.forEach(s=>{
+                s.p+=.02; s.y-=s.sp*.3; if(s.y<0) s.y=cv.height;
+                cx.beginPath(); cx.arc(s.x,s.y,s.r,0,Math.PI*2);
+                cx.fillStyle='rgba(200,220,255,'+(0.4+0.5*Math.abs(Math.sin(s.p)))+')'; cx.fill();
+            });
+            if(fr%90===0) T.push({x:Math.random()*cv.width,y:Math.random()*cv.height*.5,l:Math.random()*80+40,sp:Math.random()*6+4,o:1,a:Math.PI/5});
+            for(let i=T.length-1;i>=0;i--){
+                const s=T[i]; cx.save(); cx.globalAlpha=s.o;
+                cx.beginPath(); cx.moveTo(s.x,s.y); cx.lineTo(s.x-Math.cos(s.a)*s.l,s.y-Math.sin(s.a)*s.l);
+                const sg=cx.createLinearGradient(s.x,s.y,s.x-Math.cos(s.a)*s.l,s.y-Math.sin(s.a)*s.l);
+                sg.addColorStop(0,'rgba(255,255,255,.9)'); sg.addColorStop(1,'rgba(255,255,255,0)');
+                cx.strokeStyle=sg; cx.lineWidth=1.2; cx.stroke(); cx.restore();
+                s.x+=Math.cos(s.a)*s.sp; s.y+=Math.sin(s.a)*s.sp; s.o-=.018;
+                if(s.o<=0) T.splice(i,1);
+            }
+            requestAnimationFrame(draw);
+        })();
+    }
+
+    window.addEventListener('load',()=>{
+        initHex('prevHex'); initHex('detailHex');
+        initStar('prevStar'); initStar('detailStar');
+    });
+
+    /* ══ DESCARGAS ══ */
+    function downloadHex(){
+        const html=`<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fondo Hexágonos Neón — Art Philip Studio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{overflow:hidden;background:#0d1117;}
+canvas{display:block;width:100vw;height:100vh;}
+.credit{position:fixed;bottom:14px;right:18px;font-family:sans-serif;font-size:10px;letter-spacing:2px;color:rgba(255,140,0,.4);text-transform:uppercase;text-decoration:none;}
+.credit:hover{color:rgba(255,140,0,.8);}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<a class="credit" href="https://art-philip-studio.github.io/Art-Philip-Studio/" target="_blank">Art Philip Studio</a>
+<script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;buildGrid();}
+window.addEventListener('resize',resize);
+const S=72,hexes=[],particles=[];
+function hexPts(cx,cy,r){const p=[];for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-30);p.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}return p;}
+function buildGrid(){hexes.length=0;const w=canvas.width,h=canvas.height,H=S*Math.sqrt(3),cols=Math.ceil(w/(S*1.5))+2,rows=Math.ceil(h/H)+2;for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++)hexes.push({cx:c*S*1.5,cy:r*H+(c%2===0?0:H/2),ph:Math.random()*Math.PI*2,sp:0.3+Math.random()*0.7});}
+resize();
+let fr=0;
+function spP(){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,vx:(Math.random()-.5)*.8,vy:-(Math.random()*.6+.2),l:1});}
+function draw(){fr++;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#0d1117';ctx.fillRect(0,0,canvas.width,canvas.height);const t=fr*.012;hexes.forEach(h=>{const pulse=0.3+0.7*Math.abs(Math.sin(t*h.sp+h.ph)),pts=hexPts(h.cx,h.cy,S-3);ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<6;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();const g=ctx.createRadialGradient(h.cx,h.cy,0,h.cx,h.cy,S);g.addColorStop(0,'rgba(25,35,50,0.9)');g.addColorStop(1,'rgba(8,12,20,0.98)');ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<6;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();ctx.strokeStyle='rgba(255,'+(100+Math.floor(pulse*80))+',0,'+(0.3+pulse*0.7)+')';ctx.lineWidth=1.5+pulse*1.5;ctx.shadowColor='rgba(255,140,0,'+(pulse*.8)+')';ctx.shadowBlur=8+pulse*14;ctx.stroke();ctx.shadowBlur=0;const ip=hexPts(h.cx,h.cy,S-14);ctx.beginPath();ctx.moveTo(ip[0][0],ip[0][1]);for(let i=1;i<6;i++)ctx.lineTo(ip[i][0],ip[i][1]);ctx.closePath();ctx.strokeStyle='rgba(255,160,30,'+(pulse*.35)+')';ctx.lineWidth=0.8;ctx.stroke();});if(fr%18===0)spP();for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.l-=.008;if(p.l<=0){particles.splice(i,1);continue;}ctx.beginPath();ctx.arc(p.x,p.y,p.r*p.l,0,Math.PI*2);ctx.fillStyle='rgba(255,'+(120+Math.floor(p.l*80))+',20,'+(p.l*.9)+')';ctx.fill();}requestAnimationFrame(draw);}draw();
+<\/script>
+</body>
+</html>`;
+        const blob=new Blob([html],{type:'text/html'});
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fondo-hexagonos-neon-artphilip.html';a.click();
+    }
+
+    function downloadStar(){
+        const html=`<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Fondo Estrellas - Art Philip Studio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{overflow:hidden;background:#020210;}
+canvas{display:block;width:100vw;height:100vh;}
+.overlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.overlay h1{font-family:sans-serif;font-size:3rem;font-weight:700;color:#fff;letter-spacing:8px;text-transform:uppercase;text-shadow:0 0 40px rgba(120,180,255,0.8);}
+.overlay p{font-family:sans-serif;font-size:.9rem;letter-spacing:6px;color:rgba(255,255,255,.4);margin-top:10px;text-transform:uppercase;}
+.credit{position:fixed;bottom:14px;right:18px;font-family:sans-serif;font-size:.6rem;letter-spacing:2px;color:rgba(255,255,255,.2);text-transform:uppercase;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="overlay"><h1>TU NOMBRE</h1><p>Live Stream</p></div>
+<div class="credit">art-philip-studio.github.io</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+function r(){c.width=innerWidth;c.height=innerHeight;}r();window.onresize=r;
+const S=Array.from({length:220},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.8+.3,sp:Math.random()*.4+.05,p:Math.random()*Math.PI*2}));
+const T=[];let f=0;
+function sp(){T.push({x:Math.random()*c.width,y:Math.random()*c.height*.5,l:Math.random()*120+60,sp:Math.random()*8+6,o:1,a:Math.PI/5});}
+function draw(){f++;x.clearRect(0,0,c.width,c.height);const g=x.createLinearGradient(0,0,c.width,c.height);g.addColorStop(0,'#020210');g.addColorStop(.5,'#050520');g.addColorStop(1,'#020215');x.fillStyle=g;x.fillRect(0,0,c.width,c.height);S.forEach(s=>{s.p+=.02;s.y-=s.sp*.3;if(s.y<0)s.y=c.height;const o=.4+.5*Math.abs(Math.sin(s.p));x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);x.fillStyle='rgba(200,220,255,'+o+')';x.fill();});if(f%90===0)sp();for(let i=T.length-1;i>=0;i--){const s=T[i];x.save();x.globalAlpha=s.o;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-Math.cos(s.a)*s.l,s.y-Math.sin(s.a)*s.l);const sg=x.createLinearGradient(s.x,s.y,s.x-Math.cos(s.a)*s.l,s.y-Math.sin(s.a)*s.l);sg.addColorStop(0,'rgba(255,255,255,.9)');sg.addColorStop(1,'rgba(255,255,255,0)');x.strokeStyle=sg;x.lineWidth=1.5;x.stroke();x.restore();s.x+=Math.cos(s.a)*s.sp;s.y+=Math.sin(s.a)*s.sp;s.o-=.015;if(s.o<=0)T.splice(i,1);}requestAnimationFrame(draw);}draw();
+<\/script>
+</body>
+</html>`;
+        const blob=new Blob([html],{type:'text/html'});
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fondo-estrellas-artphilip.html';a.click();
+    }
+    </script>
+</body>
+</html>
