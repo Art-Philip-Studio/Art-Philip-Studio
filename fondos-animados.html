@@ -8,6 +8,7 @@
     <style>
         :root {
             --teal:#00d4d4; --teal-dark:#00a3a3; --teal-glow:#00ffff;
+            --gold:#c9a84c; --gold-light:#f0d080;
             --bg:#0a1014; --bg-card:#101820; --bg-card-hover:#14202a;
             --text:#e8f4f4; --text-dim:#7a9ca0; --white:#ffffff;
         }
@@ -34,15 +35,10 @@
             backdrop-filter:blur(10px);
         }
         .nav-logo{
-            font-family:'Bebas Neue',sans-serif;
-            font-size:1rem;
-            letter-spacing:4px;
+            font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;
             background:linear-gradient(135deg, #c9a84c, #f0d080, #c9a84c);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-clip:text;
-            text-decoration:none;
-            filter:drop-shadow(0 0 8px rgba(201,168,76,.4));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            text-decoration:none;filter:drop-shadow(0 0 8px rgba(201,168,76,.4));
         }
         .nav-links{display:flex;gap:40px;list-style:none;}
         .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.8rem;font-weight:500;transition:.3s;}
@@ -58,8 +54,7 @@
         .hero-demo{
             min-height:100vh;display:flex;flex-direction:column;
             align-items:center;justify-content:center;
-            padding:120px 20px 0;position:relative;text-align:center;
-            overflow:hidden;
+            padding:120px 20px 0;position:relative;text-align:center;overflow:hidden;
         }
         .hero-demo::after{
             content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
@@ -85,7 +80,7 @@
             background:#c9a84c;box-shadow:0 0 10px #c9a84c,0 0 20px #c9a84c,0 0 40px rgba(201,168,76,.8);border-radius:2px;
         }
         .hero-desc{font-size:.9rem;color:var(--text-dim);max-width:550px;line-height:1.8;margin:0 auto 30px;}
-        .hero-btns{display:flex;gap:16px;justify-content:center;}
+        .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
         .btn-hero{padding:12px 32px;border-radius:24px;font-size:.85rem;font-weight:600;text-decoration:none;transition:.3s;cursor:pointer;}
         .btn-hero.primary{background:var(--teal);color:var(--bg);border:none;}
         .btn-hero.primary:hover{background:var(--teal-glow);transform:translateY(-2px);}
@@ -163,7 +158,105 @@
         }
         .btn-descargar:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,.4);}
 
-        /* ── DOWNLOAD SECTION ── */
+        /* ── PREMIUM SECTION ── */
+        .premium-section{
+            padding:80px 20px;
+            background:linear-gradient(180deg, transparent 0%, rgba(0,212,212,.03) 50%, transparent 100%);
+            border-top:1px solid rgba(0,212,212,.1);
+            border-bottom:1px solid rgba(0,212,212,.1);
+        }
+        .premium-inner{max-width:900px;margin:0 auto;text-align:center;}
+        .premium-badge{
+            display:inline-block;padding:6px 20px;
+            background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(240,208,128,.1));
+            border:1px solid rgba(201,168,76,.4);border-radius:20px;
+            font-size:.65rem;letter-spacing:4px;text-transform:uppercase;
+            color:var(--gold);margin-bottom:20px;
+        }
+        .premium-title{
+            font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);
+            letter-spacing:4px;margin-bottom:16px;
+            background:linear-gradient(135deg,#c9a84c,#f0d080,#c9a84c);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        }
+        .premium-desc{font-size:.9rem;color:var(--text-dim);line-height:1.8;max-width:600px;margin:0 auto 50px;}
+
+        /* ── PACK CARDS ── */
+        .pack-grid{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;}
+        .pack-card{
+            background:var(--bg-card);border-radius:20px;padding:36px 32px;
+            flex:1;min-width:260px;max-width:340px;
+            border:1px solid rgba(0,212,212,.15);
+            position:relative;transition:.3s;
+        }
+        .pack-card:hover{border-color:rgba(0,212,212,.4);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4);}
+        .pack-card.featured{border-color:rgba(201,168,76,.4);background:linear-gradient(135deg,#101820,#141e24);}
+        .pack-card.featured::before{
+            content:'MÁS POPULAR';position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+            background:linear-gradient(135deg,#c9a84c,#f0d080);color:#000;
+            font-size:.6rem;letter-spacing:3px;font-weight:700;
+            padding:4px 16px;border-radius:10px;
+        }
+        .pack-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;margin-bottom:8px;}
+        .pack-price{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;color:var(--teal);margin-bottom:4px;}
+        .pack-price.gold{color:var(--gold);}
+        .pack-price-sub{font-size:.7rem;color:var(--text-dim);letter-spacing:2px;margin-bottom:24px;}
+        .pack-features{list-style:none;text-align:left;margin-bottom:28px;display:flex;flex-direction:column;gap:10px;}
+        .pack-features li{font-size:.8rem;color:var(--text-dim);display:flex;align-items:center;gap:10px;}
+        .pack-features li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+        .pack-features li.gold-feature::before{background:var(--gold);}
+
+        /* ── BOTONES DE DESCARGA ── */
+        .btn-free{
+            display:flex;align-items:center;justify-content:center;gap:8px;
+            width:100%;padding:13px 20px;background:var(--teal);color:var(--bg);
+            border:none;border-radius:14px;font-family:'Poppins',sans-serif;
+            font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;
+            cursor:pointer;transition:.3s;text-decoration:none;
+        }
+        .btn-free:hover{background:var(--teal-glow);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,212,.4);}
+
+        .btn-kofi{
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            width:100%;padding:13px 20px;
+            background:linear-gradient(135deg,#ff5f5f,#e83d3d);color:#fff;
+            border:none;border-radius:14px;font-family:'Poppins',sans-serif;
+            font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;
+            cursor:pointer;transition:.3s;text-decoration:none;margin-bottom:10px;
+        }
+        .btn-kofi:hover{background:linear-gradient(135deg,#ff7070,#f04444);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,95,95,.4);}
+        .btn-kofi svg{flex-shrink:0;}
+
+        .btn-gumroad{
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            width:100%;padding:13px 20px;
+            background:linear-gradient(135deg,#c9a84c,#b8994c);color:#000;
+            border:none;border-radius:14px;font-family:'Poppins',sans-serif;
+            font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;
+            cursor:pointer;transition:.3s;text-decoration:none;
+        }
+        .btn-gumroad:hover{background:linear-gradient(135deg,#d4b460,#c9a84c);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.4);}
+
+        .btn-divider{
+            text-align:center;font-size:.65rem;letter-spacing:2px;
+            color:var(--text-dim);margin:6px 0;text-transform:uppercase;
+        }
+
+        /* ── WHAT'S INCLUDED ── */
+        .included-note{
+            margin-top:40px;background:rgba(0,212,212,.05);
+            border:1px solid rgba(0,212,212,.1);border-radius:12px;
+            padding:20px 24px;text-align:left;
+        }
+        .included-title{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+        .included-list{display:flex;flex-wrap:wrap;gap:10px;}
+        .included-tag{
+            padding:4px 12px;border-radius:20px;font-size:.7rem;letter-spacing:1px;
+            background:rgba(0,212,212,.08);border:1px solid rgba(0,212,212,.15);color:var(--text-dim);
+        }
+        .included-tag.gold{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.2);color:var(--gold);}
+
+        /* ── DOWNLOAD SECTION (gratis) ── */
         .download-sec{padding:80px 20px;text-align:center;}
         .download-card{
             background:var(--bg-card);border:1px solid rgba(0,212,212,.2);
@@ -191,6 +284,7 @@
             .char-card{width:160px;}
             .chars-section{padding:60px 20px;}
             .detail-section{padding:60px 20px;}
+            .pack-card{min-width:280px;}
         }
     </style>
 </head>
@@ -206,7 +300,7 @@
         </ul>
         <div class="nav-btns">
             <a href="index.html" class="nav-btn back">← Volver al inicio</a>
-            <a href="#download" class="nav-btn info">Descargar</a>
+            <a href="#premium" class="nav-btn info">Pack Premium</a>
         </div>
     </nav>
 
@@ -214,7 +308,7 @@
     <section class="hero-demo">
         <canvas id="neuroCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
         <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
-            <div class="hero-tag">DESCARGA GRATIS</div>
+            <div class="hero-tag">DESCARGA GRATIS — PACK PREMIUM DISPONIBLE</div>
             <h1 class="hero-title">
                 FONDOS <span class="glow-text">ANIMADOS CSS</span>
             </h1>
@@ -222,8 +316,8 @@
                 Fondos animados listos para usar en OBS, TikTok, YouTube o tu web. Descarga el archivo y ábrelo en el navegador — sin instalar nada.
             </p>
             <div class="hero-btns">
-                <a href="#fondos" class="btn-hero primary">Ver Fondos</a>
-                <a href="#detail" class="btn-hero secondary">Detalles</a>
+                <a href="#fondos" class="btn-hero primary">Ver Fondos Gratis</a>
+                <a href="#premium" class="btn-hero secondary">⭐ Pack Premium $5</a>
             </div>
         </div>
     </section>
@@ -250,9 +344,9 @@
         </div>
     </div>
 
-    <!-- ── GRID DE FONDOS ── -->
+    <!-- ── GRID DE FONDOS GRATIS ── -->
     <section class="chars-section" id="fondos">
-        <h2 class="chars-title">FONDOS DISPONIBLES</h2>
+        <h2 class="chars-title">FONDOS GRATIS</h2>
         <div class="chars-grid">
 
             <!-- CARD 1: HEXÁGONOS NEÓN -->
@@ -287,22 +381,22 @@
     <!-- ── TICKER 2 ── -->
     <div class="ticker">
         <div class="ticker-content">
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>YO LO CREO PARA TI</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>ESCRÍBEME Y LO HACEMOS</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>TU IDEA HECHA REALIDAD</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>¿QUIERES UN FONDO PERSONALIZADO?</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>YO LO CREO PARA TI</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>ESCRÍBEME Y LO HACEMOS</span>
-            <span>NUEVO FONDO DISPONIBLE</span>
-            <span>TU IDEA HECHA REALIDAD</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>SIN CRÉDITO · CON INSTRUCCIONES</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>DISPONIBLE EN KO-FI Y GUMROAD</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>SOLO $5 USD</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>SIN CRÉDITO · CON INSTRUCCIONES</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>DISPONIBLE EN KO-FI Y GUMROAD</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>SOLO $5 USD</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>SIN CRÉDITO · CON INSTRUCCIONES</span>
+            <span>PACK PREMIUM — 5 FONDOS</span>
+            <span>DISPONIBLE EN KO-FI Y GUMROAD</span>
         </div>
     </div>
 
@@ -370,7 +464,98 @@
         </div>
     </section>
 
-    <!-- ── DESCARGA FINAL ── -->
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- ── PACK PREMIUM ── -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="premium-section" id="premium">
+        <div class="premium-inner">
+            <div class="premium-badge">⭐ Pack Premium</div>
+            <h2 class="premium-title">LLEVA TU STREAM<br>AL SIGUIENTE NIVEL</h2>
+            <p class="premium-desc">
+                Los fondos gratis son solo una muestra. El pack premium incluye 5 fondos exclusivos sin crédito, instrucciones en PDF y soporte para personalizar colores y texto.
+            </p>
+
+            <div class="pack-grid">
+
+                <!-- CARD GRATIS -->
+                <div class="pack-card">
+                    <div class="pack-name">Pack Gratis</div>
+                    <div class="pack-price">$0</div>
+                    <div class="pack-price-sub">Descarga directa · Sin registro</div>
+                    <ul class="pack-features">
+                        <li>2 fondos animados CSS</li>
+                        <li>Hexágonos Neón + Estrellas</li>
+                        <li>Listo para OBS / TikTok</li>
+                        <li>Con crédito Art Philip Studio</li>
+                    </ul>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                        <button class="btn-free" onclick="downloadHex()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Hexágonos — Gratis
+                        </button>
+                        <button class="btn-free" onclick="downloadStar()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Estrellas — Gratis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD PREMIUM (featured) -->
+                <div class="pack-card featured">
+                    <div class="pack-name" style="color:var(--gold);">Pack Premium</div>
+                    <div class="pack-price gold">$5</div>
+                    <div class="pack-price-sub">USD · Pago único · Descarga inmediata</div>
+                    <ul class="pack-features">
+                        <li class="gold-feature">5 fondos animados exclusivos</li>
+                        <li class="gold-feature">Sin crédito — 100% tuyo</li>
+                        <li class="gold-feature">Instrucciones PDF incluidas</li>
+                        <li class="gold-feature">Soporte por WhatsApp</li>
+                        <li class="gold-feature">Actualizaciones gratis</li>
+                    </ul>
+
+                    <!-- BOTÓN KO-FI -->
+                    <a href="https://ko-fi.com/fernandoec" target="_blank" class="btn-kofi">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 2.655.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
+                        </svg>
+                        Comprar en Ko-fi
+                    </a>
+
+                    <div class="btn-divider">— o también en —</div>
+
+                    <!-- BOTÓN GUMROAD -->
+                    <a href="https://fernandovibes0145.gumroad.com/l/wroyp" target="_blank" class="btn-gumroad">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 14.386c-.47 2.099-2.51 3.614-5.894 3.614s-6-2.1-6-4.5v-3c0-2.4 2.616-4.5 6-4.5s6 2.1 6 4.5v.5h-6v-1h4.5C16.2 8.5 14.3 7.5 12 7.5c-2.485 0-4.5 1.35-4.5 3v3c0 1.65 2.015 3 4.5 3 1.98 0 3.45-.75 4.1-1.8H12v-1h5.894z"/>
+                        </svg>
+                        Comprar en Gumroad
+                    </a>
+
+                    <p style="font-size:.65rem;color:var(--text-dim);text-align:center;margin-top:14px;letter-spacing:1px;">
+                        Ko-fi cobra 0% comisión · Gumroad acepta más métodos de pago
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- QUÉ INCLUYE EL PACK -->
+            <div class="included-note">
+                <div class="included-title">El pack premium incluye</div>
+                <div class="included-list">
+                    <span class="included-tag gold">Hexágonos Neón</span>
+                    <span class="included-tag gold">Estrellas Streamers</span>
+                    <span class="included-tag gold">Lluvia de Código Matrix</span>
+                    <span class="included-tag gold">Gradiente Animado</span>
+                    <span class="included-tag gold">Partículas Flotantes</span>
+                    <span class="included-tag">Sin crédito visible</span>
+                    <span class="included-tag">Instrucciones PDF</span>
+                    <span class="included-tag">Guía OBS paso a paso</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DESCARGA FINAL (gratis) ── -->
     <section class="download-sec" id="download">
         <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto;">
             <div class="download-card" style="flex:1;min-width:260px;">
@@ -412,6 +597,8 @@
             <a href="https://josetellodev.itch.io" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">itch.io</a>
             <span style="color:#1a3a40;">|</span>
             <a href="https://ko-fi.com/fernandoec" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">Ko-fi</a>
+            <span style="color:#1a3a40;">|</span>
+            <a href="https://fernandovibes0145.gumroad.com/l/wroyp" target="_blank" style="color:#4a7a80;text-decoration:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;">Gumroad</a>
         </div>
         <p style="font-size:.7rem;color:#1e3a40;">© 2026 Art Philip Studio · Fondos animados CSS gratis para la comunidad</p>
     </footer>
@@ -510,8 +697,7 @@
             requestAnimationFrame(draw);
         }
         draw();
-        } // end startNeuro
-        // Arranca el canvas DESPUÉS de que la página ya se ve — no bloquea el render
+        }
         if('requestIdleCallback' in window){
             requestIdleCallback(startNeuro, {timeout:600});
         } else {
