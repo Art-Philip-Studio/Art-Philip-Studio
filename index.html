@@ -670,6 +670,189 @@ footer {
   .hero-role{font-size:14px;justify-content:center;}
   .c-logo-sub{display:none;}
 }
+
+/* ══ JUEGOS + FIVERR + MÓVIL (añadido) ══ */
+.games-sub{max-width:620px;margin:0 0 36px;color:var(--text-mid);line-height:1.7;font-size:.95rem}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1100px}
+.gcard{background:var(--card-bg);border:1px solid var(--border-strong);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.gcard h3{font-size:1.15rem;margin-top:8px;color:var(--text)}
+.gcard small{color:var(--gold);font-size:.78rem}
+.gcard p{color:var(--text-mid);font-size:.88rem;line-height:1.6;flex:1}
+.gcard-img{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#06121a}
+.gcard-img img{width:100%;height:100%;object-fit:cover;display:block}
+.gcard-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:3rem;color:var(--gold)}
+.gcard-img.noimg img{display:none}.gcard-img.noimg .gcard-fallback{display:flex}
+.gactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.gbtn{padding:9px 14px;border-radius:8px;border:1px solid var(--border-strong);color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600}
+.gbtn.main{background:var(--gold);color:#031820;border-color:var(--gold)}
+.gbtn:focus-visible,.btn-fiverr:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.games-more{margin-top:32px}
+.btn-fiverr{display:inline-block;background:#1dbf73;color:#fff!important;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;font-size:.8rem}
+.btn-fiverr[hidden],.gbtn[hidden],[data-link-show][hidden]{display:none!important}
+.fiverr-note{margin-top:8px;font-size:.78rem;color:var(--text-dim)}
+.services-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center}
+@media(max-width:860px){
+  section.sec{padding:70px 18px}
+  #demos>div[style*="height:500px"]{height:auto!important;min-height:560px}
+  #demos .food-slide{flex-direction:column!important;gap:12px!important;padding:24px 16px 44px!important;text-align:center}
+  #demos .food-slide img{width:170px!important}
+  #demos .food-slide h1{font-size:3rem!important}
+  #demos .food-slide h2{font-size:2rem!important}
+  #demos .food-slide .btn-ver{letter-spacing:1px!important;font-size:.65rem!important;padding:10px 16px!important}
+  .games-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){.games-grid{grid-template-columns:1fr}.hero-cta-row{flex-wrap:wrap;gap:12px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ══ MÓVIL v2 — menú hamburguesa, tarjeta compacta, robot/WA pequeños, demos al entrar ══ */
+section[id]{scroll-margin-top:72px}
+.nav-burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--border-strong);background:rgba(160,120,40,.08);cursor:pointer;flex-shrink:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;-webkit-tap-highlight-color:transparent}
+.nav-burger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--gold);transition:transform .3s,opacity .3s}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-collapse{display:flex;align-items:center;justify-content:space-between;flex:1;gap:16px}
+.nav-collapse .nav-links{margin:0 auto}
+.hero-section{flex-direction:column;gap:22px}
+.quick-demos{position:relative;z-index:2;width:100%;max-width:1060px}
+.qd-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.qd-title{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.qd-all{font-size:.7rem;letter-spacing:1.5px;color:var(--text-dim);text-decoration:none;white-space:nowrap}
+.qd-all:hover{color:var(--gold)}
+.qd-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.qd-card{display:flex;flex-direction:column;gap:3px;padding:10px;border-radius:14px;border:1px solid var(--border-strong);background:var(--card-bg);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.qd-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.qd-card b{font-size:.82rem;margin-top:6px}
+.qd-card small{font-size:.68rem;color:var(--text-dim)}
+.qd-img{height:84px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:2rem;color:var(--gold)}
+.qd-img img{height:100%;width:auto;object-fit:contain}
+.qd-games{background:linear-gradient(135deg,#0a3a4e,#1DAFDD33)}
+.qd-bg{background:linear-gradient(135deg,#1a0b3a,#c4622d55)}
+.qd-price{background:linear-gradient(135deg,#0b3a24,#25D36655);color:#7dffb0}
+
+@media(max-width:860px){
+  html,body{overflow-x:hidden}
+  body{padding-top:0}
+  nav.main-nav{padding:8px 14px;gap:8px;flex-wrap:wrap}
+  .nav-logo-wrap{gap:10px;min-width:0}
+  .nav-logo-img{width:36px;height:36px}
+  .nav-logo-main{font-size:.74rem;letter-spacing:3px;white-space:nowrap}
+  .nav-logo-sub{display:none}
+  .nav-burger{display:flex;margin-left:auto}
+  .nav-collapse{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:6px;padding:10px 18px 18px;background:rgba(3,24,32,.98);border-bottom:1px solid var(--border-strong);box-shadow:0 18px 30px rgba(0,0,0,.35);max-height:calc(100vh - 56px);overflow-y:auto}
+  body.theme-noche .nav-collapse{background:rgba(8,8,8,.99)}
+  .nav-collapse.open{display:flex}
+  .nav-collapse .nav-links{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:0}
+  .nav-collapse .nav-links a{display:block;padding:13px 6px;font-size:.8rem;border-bottom:1px solid var(--border)}
+  .nav-collapse .toggles-wrap{flex-direction:column;align-items:stretch;gap:12px;padding-top:12px}
+  .nav-collapse .toggle-row{justify-content:space-between;gap:10px}
+  .nav-collapse .toggle-label-left,.nav-collapse .toggle-label-right{display:inline;font-size:.68rem;min-width:70px}
+  .nav-collapse .toggle-label-right{text-align:right}
+
+  .hero-section{min-height:0;align-items:center;justify-content:flex-start;padding:70px 12px 22px;gap:14px}
+  .hero-aps{display:none}
+  .card-nav{padding:7px 12px;flex-wrap:nowrap;gap:8px}
+  .c-logo-icon{width:26px;height:26px}
+  .c-logo-name{font-size:11.5px}
+  .c-logo-sub{display:none}
+  .btn-contratar{padding:7px 12px!important;font-size:.72rem!important}
+  .card-body{padding:6px 14px 10px;gap:0}
+  .logo-area{transform:scale(.6);margin:-30px 0 -6px;transform-origin:center center}
+  .logo-flip-hint{display:none}
+  .soc-icon{width:40px;height:40px}
+  .soc-icon svg{width:18px;height:18px}
+  .hero-greeting{font-size:.62rem!important;letter-spacing:2px!important;margin-bottom:2px}
+  .hero-name{font-size:30px;line-height:1.05}
+  .hero-role{font-size:12.5px;margin:2px 0}
+  .hero-bio{font-size:.78rem;line-height:1.5;margin:6px 0 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .hero-cta-row{gap:8px;flex-wrap:wrap}
+  .hero-cta-row a{padding:9px 14px!important;font-size:.68rem!important;letter-spacing:1px!important}
+  .card-stats{grid-template-columns:repeat(4,1fr)}
+  .card-stats .stat{padding:8px 4px!important;border-top:none!important;border-right:1px solid var(--border)}
+  .card-stats .stat:last-child{border-right:none}
+  .card-stats .stat-num{font-size:1.05rem!important}
+  .card-stats .stat-lbl{font-size:.5rem!important;letter-spacing:.5px!important;line-height:1.25}
+  .quick-demos{padding:0 2px}
+  .qd-title{font-size:.7rem;letter-spacing:2px}
+  .qd-row{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .qd-row::-webkit-scrollbar{display:none}
+  .qd-card{flex:0 0 132px;scroll-snap-align:start;padding:8px}
+  .qd-img{height:64px;font-size:1.6rem}
+
+  /* Robot y WhatsApp pequeños */
+  .ai-robot-wrap{width:56px;right:10px;bottom:72px}
+  .ai-robot-wrap canvas{width:56px!important;height:56px!important}
+  .ai-badge{width:15px;height:15px;font-size:.5rem;top:0;right:0}
+  .ai-tooltip{display:none}
+  .wa-float{bottom:14px;right:12px}
+  .wa-float-btn{width:46px;height:46px;border-radius:13px}
+  .wa-float-btn.wa-day svg{width:32px!important;height:32px!important}
+  .wa-float-btn.wa-night svg{width:46px!important;height:46px!important}
+  .welcome-bubble-wrap{right:6px;bottom:128px}
+  .wb-body{width:158px;padding:11px 13px 10px;border-radius:18px}
+  .wb-text{font-size:.7rem!important}
+  .chat-window{left:10px;right:10px;bottom:132px;width:auto;max-height:min(62vh,460px)}
+  .chat-opt{font-size:.62rem;letter-spacing:1px;padding:7px 10px}
+}
+@media(max-width:380px){.qd-card{flex-basis:118px}.hero-cta-row a{padding:8px 11px!important}}
+.chat-nav-btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:999px;background:var(--gold);color:#031820;font-size:.72rem;font-weight:700;letter-spacing:1px;border:none;cursor:pointer;text-decoration:none}
+
+/* ══ DESTACADOS + MODALES (añadido) ══ */
+.rail-wrap{max-width:1060px;margin:0 auto}
+.rail{position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.rail.drag{cursor:grabbing}
+.rail-track{display:flex;gap:18px;width:max-content;will-change:transform}
+.rcard{width:220px;flex:none;border:1px solid var(--border-strong);background:var(--card-bg);border-radius:14px;overflow:hidden;color:var(--text);text-decoration:none;user-select:none;-webkit-user-drag:none}
+.rthumb{height:110px;overflow:hidden;position:relative}
+.rthumb i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;font-size:2.2rem;font-style:normal;background-position:center;background-size:cover;background-repeat:no-repeat}
+.rthumb i.kb{animation:rkb 9s ease-in-out infinite alternate}
+@keyframes rkb{to{transform:scale(1.12)}}
+@keyframes raurora{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+@keyframes rfloat{50%{transform:translateY(-8px)}}
+.t-demo{background-color:#f4ecd8;background-size:contain!important}
+.t-fondos{background:#0d1117}.rfx{position:absolute;inset:0;width:100%;height:100%;display:block}
+.t-serv{background:linear-gradient(135deg,#06222f,#0a4a6e)}
+.t-serv span{animation:rfloat 3s ease-in-out infinite}
+.t-serv span:nth-child(2){animation-delay:.4s}.t-serv span:nth-child(3){animation-delay:.8s}
+.rcard b{display:block;padding:10px 12px 2px;font-size:.92rem}
+.rcard small{display:block;padding:0 12px 12px;color:var(--text-mid);font-size:.76rem}@media(max-width:600px){.rcard{width:170px}.rthumb{height:90px}}
+.rarrows{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.rarrows button{width:42px;height:42px;border-radius:50%;border:1px solid var(--border-strong);background:var(--card-bg);color:var(--text);font-size:1.2rem;cursor:pointer}
+.rarrows button:hover{border-color:var(--gold)}
+.service-item[role=button]{cursor:pointer;transition:filter .25s}
+.service-item[role=button]:hover{filter:brightness(1.15)}
+.glist{list-style:none;margin:0;padding:0;max-width:640px}
+.grow{width:100%;display:flex;align-items:baseline;gap:12px;padding:15px 4px;background:none;border:0;border-bottom:1px solid var(--border);color:var(--text);text-align:left;cursor:pointer;font:inherit;transition:padding .25s,color .25s}
+.grow:hover{padding-left:14px;color:var(--gold-bright)}
+.grow .gname{font-size:1.1rem;font-weight:600}
+.grow .gtag{flex:1;color:var(--text-dim);font-size:.85rem}
+.grow .garrow{color:var(--gold);font-size:.8rem}
+dialog.aps-dlg{margin:auto;border:1px solid var(--border-strong);border-radius:16px;background:var(--surface);color:var(--text);width:min(440px,92vw);padding:26px;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .25s,transform .25s,overlay .25s allow-discrete,display .25s allow-discrete}
+dialog.aps-dlg[open]{opacity:1;transform:none}
+@starting-style{dialog.aps-dlg[open]{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.aps-dlg h3{margin:0 0 6px;font-size:1.35rem}
+.aps-dlg p{margin:0 0 18px;color:var(--text-mid);font-size:.92rem}
+.aps-dlg .dcover{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:14px;display:block}
+.aps-dlg .dclose{float:right;background:none;border:0;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1}
+.dopts{display:grid;gap:10px}
+.dopt{display:block;padding:14px 16px;border-radius:10px;text-align:center;text-decoration:none;font-weight:700;font-size:.9rem;border:1px solid var(--border-strong);color:var(--text);transition:transform .2s}
+.dopt:hover{transform:translateY(-2px)}
+.dopt.fv{background:#1dbf73;border-color:#1dbf73;color:#04161f}
+.dopt.wa{background:#25d366;border-color:#25d366;color:#04161f}
+.dopt.mn{background:var(--gold);border-color:var(--gold);color:#031820}
+@media (prefers-reduced-motion:reduce){.rthumb i,.t-serv span,.t-fondos{animation:none}dialog.aps-dlg{transition:none}}
+
+.games-layout{display:grid;grid-template-columns:minmax(0,640px) minmax(0,380px);gap:56px;align-items:start;max-width:1100px}
+.glaunch{border:1px solid var(--border-strong);border-radius:16px;background:var(--card-bg);padding:26px;text-align:center}
+.glaunch .gl-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px}
+.glaunch .gl-text{color:var(--text);font-size:.95rem}
+.glaunch .gl-name{display:block;margin:6px 0 20px;font-size:1.25rem;font-weight:700;color:var(--gold-bright)}
+.glaunch .dopt{margin:0 auto;max-width:280px}
+.gl-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.gl-links a{color:var(--text-dim);text-decoration:none;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.gl-links a:hover{color:var(--gold)}
+@media(max-width:860px){.games-layout{grid-template-columns:1fr;gap:28px}}
 </style>
 </head>
 <body>
@@ -745,9 +928,12 @@ footer {
       <div class="nav-logo-sub" id="navSub">Dev &amp; Soluciones Digitales</div>
     </div>
   </a>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navCollapse"><span></span><span></span><span></span></button>
+  <div class="nav-collapse" id="navCollapse">
   <ul class="nav-links" id="navLinks">
     <li><a href="fondos-animados.html" data-es="Fondos" data-en="Backgrounds">Fondos</a></li>
     <li><a href="#demos" data-es="Demos" data-en="Demos">Demos</a></li>
+    <li><a href="#juegos" data-es="Juegos" data-en="Games">Juegos</a></li>
     <li><a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a></li>
     <li><a href="#sobre-mi" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
     <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
@@ -767,6 +953,7 @@ footer {
       </div>
       <span class="toggle-label-right" id="lblNight">🌙 Noche</span>
     </div>
+  </div>
   </div>
 </nav>
 
@@ -828,17 +1015,33 @@ footer {
           <div class="hero-cta-row">
             <a href="#demos" class="btn-ver" id="btnVerDemos">Ver Demos</a>
             <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios" target="_blank" class="btn-wa-hero" id="btnHire">Contratar</a>
+            <a href="#juegos" class="btn-wa-hero" data-es="Ver Juegos" data-en="Play Games">Ver Juegos</a>
+            <a data-link="fiverr" target="_blank" rel="noopener" class="btn-fiverr" hidden data-es="Contratar en Fiverr" data-en="Hire on Fiverr">Contratar en Fiverr</a>
           </div>
         </div>
       </div>
       <div class="card-stats">
         <div class="stat"><div class="stat-num">72<sup>h</sup></div><div class="stat-lbl" id="stat1">Entrega garantizada</div></div>
-        <div class="stat"><div class="stat-num">10<sup>+</sup></div><div class="stat-lbl" id="stat2">Proyectos completados</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-lbl" id="stat2">Juegos publicados</div></div>
         <div class="stat"><div class="stat-num">3<sup>+</sup></div><div class="stat-lbl" id="stat3">Tipos de servicio</div></div>
-        <div class="stat"><div class="stat-num">100<sup>%</sup></div><div class="stat-lbl" id="stat4">Clientes satisfechos</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-lbl" id="stat4">Revisiones incluidas</div></div>
       </div>
     </div>
   </div>
+  <div class="quick-demos" id="quickDemos">
+      <div class="qd-head"><span class="qd-title" data-es="✦ Demos destacados" data-en="✦ Featured demos">✦ Demos destacados</span><a href="#demos" class="qd-all" data-es="Ver todos →" data-en="See all →">Ver todos →</a></div>
+      <div class="rail-wrap">
+        <div class="rail" id="rail" aria-label="Demos destacados">
+          <div class="rail-track" id="railTrack">
+            <a class="rcard" href="#demoSlides"><div class="rthumb"><i class="kb t-demo" style="background-image:url('assets/img/demos/burger-triple.png')"></i></div><b data-es="Demos de página" data-en="Page demos">Demos de página</b><small data-es="Landing + WhatsApp" data-en="Landing + WhatsApp">Landing + WhatsApp</small></a>
+            <a class="rcard" href="#juegos"><div class="rthumb"><i class="kb" style="background-image:url('assets/img/juegos/snakeplay.png')"></i></div><b data-es="Juegos" data-en="Games">Juegos</b><small data-es="Jugables en celular" data-en="Mobile-ready">Jugables en celular</small></a>
+            <a class="rcard" href="fondos-animados.html"><div class="rthumb"><i class="t-fondos"><canvas class="rfx" aria-hidden="true"></canvas></i></div><b data-es="Fondos animados" data-en="Animated backgrounds">Fondos animados</b><small data-es="CSS · gratis" data-en="CSS · free">CSS · gratis</small></a>
+            <a class="rcard" href="#servicios"><div class="rthumb"><i class="t-serv"><span>⚡</span><span>🎯</span><span>🛒</span></i></div><b data-es="Servicios" data-en="Services">Servicios</b><small data-es="Desde $150" data-en="From $150">Desde $150</small></a>
+          </div>
+        </div>
+        <div class="rarrows"><button id="railPrev" aria-label="Anterior">‹</button><button id="railNext" aria-label="Siguiente">›</button></div>
+      </div>
+    </div>
 </section>
 
 <!-- DEMOS -->
@@ -848,7 +1051,7 @@ footer {
     <h2 class="demos-title"><span class="dim" id="demosTitle1">Diseños que</span><br><span class="gd" id="demosTitle2">consiguen</span> <span class="or" id="demosTitle3">clientes</span></h2>
     <p class="demos-sub" id="demosSub">Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.</p>
   </div>
-  <div style="width:100%;max-width:1060px;margin:0 auto;border-radius:20px;overflow:hidden;position:relative;height:500px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.15);border:1px solid rgba(0,0,0,.06);">
+  <div id="demoSlides" style="width:100%;max-width:1060px;margin:0 auto;border-radius:20px;overflow:hidden;position:relative;height:500px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.15);border:1px solid rgba(0,0,0,.06);">
     <div class="food-slide active" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;padding:40px;opacity:1;transition:opacity 0.8s ease;">
       <img src="assets/img/demos/burger-triple.png" style="width:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));animation:floatPlate 6s ease-in-out infinite;" alt="Burger">
       <div style="text-align:center;">
@@ -878,6 +1081,28 @@ footer {
   </div>
 </section>
 
+<!-- JUEGOS -->
+<section class="games-section sec" id="juegos">
+  <div class="section-header fade-up"><h2 class="section-title" data-es="Juegos" data-en="Games">Juegos</h2><div class="section-line"></div></div>
+  <p class="games-sub" data-es="Los hice yo, se juegan en el navegador y en el celular. Así es como construyo páginas que cargan rápido y se sienten bien." data-en="I built them all. They play in the browser and on mobile. This is how I build pages that load fast and feel good.">Los hice yo, se juegan en el navegador y en el celular. Así es como construyo páginas que cargan rápido y se sienten bien.</p>
+  <div class="games-layout">
+    <ul class="glist" id="glist"></ul>
+    <aside class="glaunch">
+      <div class="gl-tag" data-es="🎮 Mi primer lanzamiento" data-en="🎮 My first release">🎮 Mi primer lanzamiento</div>
+      <div class="gl-text" data-es="Juega gratis:" data-en="Play it for free:">Juega gratis:</div>
+      <strong class="gl-name">Octo Lunar Hunter</strong>
+      <a class="dopt mn" href="https://josetellodev.itch.io/octo-lunar-hunter" target="_blank" rel="noopener" data-es="🛸 Jugar ahora — Gratis" data-en="🛸 Play now — Free">🛸 Jugar ahora — Gratis</a>
+      <div class="gl-links">
+        <a href="https://github.com/art-philip-studio" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://josetellodev.itch.io" target="_blank" rel="noopener">itch.io</a>
+        <a href="https://ko-fi.com/fernandoec" target="_blank" rel="noopener">Ko-fi</a>
+        <a href="https://fernandovibes0145.gumroad.com/l/wroyp" target="_blank" rel="noopener">Gumroad</a>
+      </div>
+    </aside>
+  </div>
+  <div class="games-more"><a data-link="palabraplay" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;padding:14px 28px;text-decoration:none;" data-es="Ver todos en PalabraPlay" data-en="See all on PalabraPlay">Ver todos en PalabraPlay</a></div>
+</section>
+
 <!-- SERVICIOS -->
 <section class="services sec" id="servicios">
   <div class="section-header fade-up"><span class="section-num">01 /</span><h2 class="section-title" id="secServicios">Servicios</h2><div class="section-line"></div></div>
@@ -886,7 +1111,9 @@ footer {
     <div class="service-item fade-up delay-1"><div class="service-num">002</div><span class="service-icon">🎯</span><h3 class="service-title" id="srv2title">Sitio Web<br>Corporativo</h3><p class="service-desc" id="srv2desc">Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.</p><div class="service-price">$350 USD <span id="srv2sub">/ proyecto</span></div></div>
     <div class="service-item fade-up delay-2"><div class="service-num">003</div><span class="service-icon">🛒</span><h3 class="service-title" id="srv3title">Tienda<br>Online</h3><p class="service-desc" id="srv3desc">Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.</p><div class="service-price">$650 USD <span id="srv3sub">/ proyecto</span></div></div>
   </div>
-  <div class="services-cta fade-up delay-2"><a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20cotizar%20un%20servicio%20%F0%9F%91%8D" target="_blank" class="btn-wa-big" id="btnQuote">💬 Cotizar por WhatsApp</a></div>
+  <div class="services-cta fade-up delay-2"><a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20cotizar%20un%20servicio%20%F0%9F%91%8D" target="_blank" class="btn-wa-big" id="btnQuote">💬 Cotizar por WhatsApp</a>
+    <a data-link="fiverr" target="_blank" rel="noopener" class="btn-fiverr" hidden data-es="Contratar en Fiverr" data-en="Hire on Fiverr">Contratar en Fiverr</a>
+    <p class="fiverr-note" data-link-show="fiverr" hidden data-es="Pago protegido por Fiverr" data-en="Payment protected by Fiverr">Pago protegido por Fiverr</p></div>
 </section>
 
 <!-- SOBRE MÍ -->
@@ -1076,7 +1303,7 @@ document.addEventListener('DOMContentLoaded',function(){
 (function(){
   const btn=document.getElementById('toggleLang'),lblEs=document.getElementById('lblEs'),lblEn=document.getElementById('lblEn');
   let isEn=false;
-  const t={navSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},cardSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},heroGreeting:{es:'Quito, Ecuador — Disponible Ahora',en:'Quito, Ecuador — Available Now'},heroRole:{es:'Philip - Web Designer Internacional',en:'Philip - International Web Designer'},heroBio:{es:'Soy Philip, diseñador web en Quito, Ecuador. Desarrollo páginas web para negocios en México, Colombia, España y todo el mundo. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.',en:"I'm Philip, a web designer based in Quito, Ecuador. I build websites for businesses in Mexico, Colombia, Spain and worldwide. Your landing page or online store ready in 72h, professionally designed to get you clients via WhatsApp from any country."},btnVerDemos:{es:'Ver Demos',en:'View Demos'},btnHire:{es:'Contratar',en:'Hire Me'},btnContratar:{es:'↓ Contratar',en:'↓ Hire Me'},flipHint:{es:'clic para girar ↻',en:'click to flip ↻'},stat1:{es:'Entrega garantizada',en:'Guaranteed delivery'},stat2:{es:'Proyectos completados',en:'Completed projects'},stat3:{es:'Tipos de servicio',en:'Service types'},stat4:{es:'Clientes satisfechos',en:'Satisfied clients'},demosTag:{es:'Mi colección',en:'My collection'},demosTitle1:{es:'Diseños que',en:'Designs that'},demosTitle2:{es:'consiguen',en:'get you'},demosTitle3:{es:'clientes',en:'clients'},demosSub:{es:'Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.',en:'Scroll through each demo. Click "View Demo" to see it in full.'},secServicios:{es:'Servicios',en:'Services'},srv1title:{es:'Landing Page<br>Premium',en:'Premium<br>Landing Page'},srv1desc:{es:'Tu negocio online en 72 horas. Diseño exclusivo, adaptado a celular y pensado para que los visitantes te llamen o escriban. Incluye 2 revisiones hasta que quedes 100% satisfecho.',en:"Your business online in 72 hours. Exclusive design, mobile-ready and built to make visitors call or message you. Includes 2 revisions until you're 100% happy."},srv1sub:{es:'/ página',en:'/ page'},srv2title:{es:'Sitio Web<br>Corporativo',en:'Corporate<br>Website'},srv2desc:{es:'Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.',en:'Your company looks professional on Google and any device. Includes contact form, photo gallery, basic SEO optimization and delivery in 5–7 days.'},srv2sub:{es:'/ proyecto',en:'/ project'},srv3title:{es:'Tienda<br>Online',en:'Online<br>Store'},srv3desc:{es:'Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.',en:'Start selling your products online. Your store with catalog, shopping cart, secure payments and a dashboard so you manage everything yourself.'},srv3sub:{es:'/ proyecto',en:'/ project'},btnQuote:{es:'💬 Cotizar por WhatsApp',en:'💬 Get a Quote on WhatsApp'},secAbout:{es:'Sobre mí',en:'About Me'},aboutTag:{es:'Desarrollador Freelance',en:'Freelance Developer'},aboutP1:{es:'Soy Philip, desarrollador web freelance con base en Quito. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes.',en:"I'm Philip, a freelance web developer based in Quito. I specialize in building websites for <strong>small businesses and entrepreneurs</strong> who want to look professional online and get more clients."},aboutP2:{es:'No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.',en:"I'm not an agency. When you hire me, <strong>you work directly with me</strong> — from the first conversation until your site is live. That means direct communication, no middlemen, no surprise fees and no delays."},aboutP3:{es:'Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.',en:"I take every project seriously because I know that behind every business there's a person who bet on something. My job is to make that bet visible and felt online."},btnTalkPhilip:{es:'💬 Hablar con Philip',en:'💬 Talk to Philip'},contactTitle1:{es:'¿Listo para',en:'Ready to'},contactTitle2:{es:'empezar?',en:'start?'},contactSub:{es:'Tu negocio merece una presencia digital que realmente funcione. Escríbeme directamente o usa el formulario y te respondo hoy.',en:"Your business deserves a digital presence that really works. Message me directly or use the form and I'll reply today."},contactDirect:{es:'Contacto directo',en:'Direct contact'},contactOr:{es:'o',en:'or'},contactNote:{es:'Respondo en menos de 2 horas en horario de Quito. Si es urgente, WhatsApp es la vía más rápida.',en:'I reply within 2 hours during Quito business hours. For urgent matters, WhatsApp is fastest.'},contactSendMsg:{es:'Enviar mensaje',en:'Send a message'},labelName:{es:'Nombre',en:'Name'},labelEmail:{es:'Correo',en:'Email'},labelMsg:{es:'Mensaje',en:'Message'},submitBtn:{es:'Enviar mensaje',en:'Send message'},footerTagline:{es:'Soluciones Digitales',en:'Digital Solutions'}};
+  const t={navSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},cardSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},heroGreeting:{es:'Quito, Ecuador — Disponible Ahora',en:'Quito, Ecuador — Available Now'},heroRole:{es:'Philip - Web Designer Internacional',en:'Philip - International Web Designer'},heroBio:{es:'Soy Philip, diseñador web en Quito, Ecuador. Desarrollo páginas web para negocios en México, Colombia, España y todo el mundo. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.',en:"I'm Philip, a web designer based in Quito, Ecuador. I build websites for businesses in Mexico, Colombia, Spain and worldwide. Your landing page or online store ready in 72h, professionally designed to get you clients via WhatsApp from any country."},btnVerDemos:{es:'Ver Demos',en:'View Demos'},btnHire:{es:'Contratar',en:'Hire Me'},btnContratar:{es:'↓ Contratar',en:'↓ Hire Me'},flipHint:{es:'clic para girar ↻',en:'click to flip ↻'},stat1:{es:'Entrega garantizada',en:'Guaranteed delivery'},stat2:{es:'Juegos publicados',en:'Published games'},stat3:{es:'Tipos de servicio',en:'Service types'},stat4:{es:'Revisiones incluidas',en:'Revisions included'},demosTag:{es:'Mi colección',en:'My collection'},demosTitle1:{es:'Diseños que',en:'Designs that'},demosTitle2:{es:'consiguen',en:'get you'},demosTitle3:{es:'clientes',en:'clients'},demosSub:{es:'Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.',en:'Scroll through each demo. Click "View Demo" to see it in full.'},secServicios:{es:'Servicios',en:'Services'},srv1title:{es:'Landing Page<br>Premium',en:'Premium<br>Landing Page'},srv1desc:{es:'Tu negocio online en 72 horas. Diseño exclusivo, adaptado a celular y pensado para que los visitantes te llamen o escriban. Incluye 2 revisiones hasta que quedes 100% satisfecho.',en:"Your business online in 72 hours. Exclusive design, mobile-ready and built to make visitors call or message you. Includes 2 revisions until you're 100% happy."},srv1sub:{es:'/ página',en:'/ page'},srv2title:{es:'Sitio Web<br>Corporativo',en:'Corporate<br>Website'},srv2desc:{es:'Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.',en:'Your company looks professional on Google and any device. Includes contact form, photo gallery, basic SEO optimization and delivery in 5–7 days.'},srv2sub:{es:'/ proyecto',en:'/ project'},srv3title:{es:'Tienda<br>Online',en:'Online<br>Store'},srv3desc:{es:'Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.',en:'Start selling your products online. Your store with catalog, shopping cart, secure payments and a dashboard so you manage everything yourself.'},srv3sub:{es:'/ proyecto',en:'/ project'},btnQuote:{es:'💬 Cotizar por WhatsApp',en:'💬 Get a Quote on WhatsApp'},secAbout:{es:'Sobre mí',en:'About Me'},aboutTag:{es:'Desarrollador Freelance',en:'Freelance Developer'},aboutP1:{es:'Soy Philip, desarrollador web freelance con base en Quito. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes.',en:"I'm Philip, a freelance web developer based in Quito. I specialize in building websites for <strong>small businesses and entrepreneurs</strong> who want to look professional online and get more clients."},aboutP2:{es:'No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.',en:"I'm not an agency. When you hire me, <strong>you work directly with me</strong> — from the first conversation until your site is live. That means direct communication, no middlemen, no surprise fees and no delays."},aboutP3:{es:'Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.',en:"I take every project seriously because I know that behind every business there's a person who bet on something. My job is to make that bet visible and felt online."},btnTalkPhilip:{es:'💬 Hablar con Philip',en:'💬 Talk to Philip'},contactTitle1:{es:'¿Listo para',en:'Ready to'},contactTitle2:{es:'empezar?',en:'start?'},contactSub:{es:'Tu negocio merece una presencia digital que realmente funcione. Escríbeme directamente o usa el formulario y te respondo hoy.',en:"Your business deserves a digital presence that really works. Message me directly or use the form and I'll reply today."},contactDirect:{es:'Contacto directo',en:'Direct contact'},contactOr:{es:'o',en:'or'},contactNote:{es:'Respondo en menos de 2 horas en horario de Quito. Si es urgente, WhatsApp es la vía más rápida.',en:'I reply within 2 hours during Quito business hours. For urgent matters, WhatsApp is fastest.'},contactSendMsg:{es:'Enviar mensaje',en:'Send a message'},labelName:{es:'Nombre',en:'Name'},labelEmail:{es:'Correo',en:'Email'},labelMsg:{es:'Mensaje',en:'Message'},submitBtn:{es:'Enviar mensaje',en:'Send message'},footerTagline:{es:'Soluciones Digitales',en:'Digital Solutions'}};
   function applyLang(en){isEn=en;btn.classList.toggle('on',en);btn.setAttribute('aria-checked',en?'true':'false');if(lblEs)lblEs.classList.toggle('on',!en);if(lblEn)lblEn.classList.toggle('on',en);const lang=en?'en':'es';document.documentElement.lang=lang;Object.keys(t).forEach(function(id){const el=document.getElementById(id);if(!el)return;const val=t[id][lang];if(id==='submitBtn'){if(!el.disabled)el.textContent=val;}else if(val&&val.includes('<'))el.innerHTML=val;else if(val)el.textContent=val;});document.querySelectorAll('[data-es][data-en]').forEach(function(el){el.innerHTML=el.getAttribute('data-'+lang);});const ci=document.getElementById('chatInput');if(ci)ci.placeholder=en?'Type your question...':'Escribe tu pregunta...';try{localStorage.setItem('aps-lang',en?'en':'es');}catch(e){}}
   try{const s=localStorage.getItem('aps-lang');if(s==='en')applyLang(true);}catch(e){}
   btn.addEventListener('click',function(){applyLang(!isEn);});
@@ -1192,7 +1419,7 @@ function startGreeting(){
 function showQuickOptions(){
   const opts=document.getElementById('chatOptions');
   if(!opts) return;
-  const q=['¿Cuánto cuesta una web?','¿Cuánto tardas?','¿Tienes ejemplos?','¿Cómo te contacto?'];
+  const q=['¿Cuánto cuesta una web?','¿Cuánto tardas?','Ver demos','Ver juegos','Fondos animados','Contactar'];
   opts.innerHTML=q.map(t=>`<button class="chat-opt" onclick="sendQuick('${t}')">${t}</button>`).join('');
 }
 
@@ -1244,20 +1471,78 @@ function detectEmotion(userMsg,botReply){
   return 'smile';
 }
 
+const APS_INTENTS=[
+  {re:/demo|ejemplo|portafolio|trabajos|muestra|restaurante|example|portfolio/i,go:'#demos',label:'Ir a Demos',emo:'happy',
+   es:'Mira los demos: son páginas reales para negocios, con botón directo a WhatsApp. Te llevo allí 👇'},
+  {re:/juego|game|play|jugar|lexo|snake|octopus|hilario/i,go:'#juegos',label:'Ir a Juegos',emo:'happy',
+   es:'Hice juegos que se juegan en el celular y el navegador. ¡Te los muestro! 🎮'},
+  {re:/fondo|animad|background|hexágono|hexagono|estrellas|hud/i,go:'fondos-animados.html',label:'Ver Fondos animados',emo:'happy',
+   es:'Los fondos animados en CSS: hay gratis y un pack premium de $5. Te llevo a verlos ✨'},
+  {re:/precio|cuesta|cuánto cuesta|costo|cotiz|tarifa|price|cost|cuanto cuesta|plan/i,go:'#servicios',label:'Ver Servicios',emo:'love',
+   es:'Landing Page Premium $150 (72 h) · Sitio Corporativo $350 (5–7 días) · Tienda Online $650. Fondos animados: gratis o Pack Premium $5. Aquí el detalle 👇'},
+  {re:/tard|tiempo|entrega|días|dias|rápido|rapido|how long|delivery/i,go:'#servicios',label:'Ver Servicios',emo:'smile',
+   es:'La Landing Page se entrega en 72 horas, el sitio corporativo en 5–7 días. Incluye 2 revisiones.'},
+  {re:/contact|whatsapp|escrib|hablar|contratar|hire|correo|mail|llamar/i,go:'#contacto',label:'Ir a Contacto',emo:'mail',
+   es:'Lo más rápido es WhatsApp: +593 96 835 2133 (respuesta en menos de 2 horas). También puedes usar el formulario.'},
+  {re:/sobre|quién|quien|about|philip|experiencia/i,go:'#sobre-mi',label:'Sobre mí',emo:'smile',
+   es:'Philip es diseñador web en Quito, Ecuador, y trabaja con clientes de todo el mundo. Te llevo a conocerlo 😊'},
+  {re:/servicio|service|ofreces|qué haces|que haces/i,go:'#servicios',label:'Ver Servicios',emo:'smile',
+   es:'Hago landing pages, sitios corporativos y tiendas online, todo pensado para móvil y para que te escriban por WhatsApp.'}
+];
+function localIntent(t){return APS_INTENTS.find(x=>x.re.test(t))||null;}
+
+function guideTo(target,label){
+  if(window.setRobotEmotion) setRobotEmotion('happy',2500);
+  const go=()=>{
+    if(target.endsWith('.html')){window.location.href=target;return;}
+    const el=document.querySelector(target);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  if(chatOpen && window.innerWidth<=860){toggleChat();setTimeout(go,150);} else go();
+}
+
+function appendNavBtn(intent){
+  const msgs=document.getElementById('chatMessages');
+  if(!msgs||!intent||!intent.go) return;
+  const b=document.createElement('button');
+  b.className='chat-nav-btn';b.type='button';b.textContent='→ '+intent.label;
+  b.onclick=()=>guideTo(intent.go,intent.label);
+  const last=msgs.lastElementChild;
+  if(last&&last.classList.contains('bot')) last.appendChild(b); else msgs.appendChild(b);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
 async function processMessage(text){
   appendMsg('user',text);
   chatHistory.push({role:'user',content:text});
   resetInactivityTimer();
   showTyping();
   if(window.setRobotEmotion) setRobotEmotion('loading',-1);
+  const intent=localIntent(text);
+  // 1) Respuesta local instantánea (no gasta nada y funciona sin internet)
+  if(intent){
+    await new Promise(r=>setTimeout(r,500));
+    removeTyping();
+    if(window.setRobotEmotion) setRobotEmotion('talking',-1);
+    appendMsg('bot',intent.es);
+    appendNavBtn(intent);
+    chatHistory.push({role:'assistant',content:intent.es});
+    setTimeout(()=>{ if(window.setRobotEmotion) setRobotEmotion(intent.emo,4000); },400);
+    if(chatHistory.filter(m=>m.role==='assistant').length>=2) showWaButton();
+    return;
+  }
+  // 2) Sin coincidencia: intenta la IA (si hay un backend configurado) y si falla, respuesta amable
   try{
+    const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),8000);
     const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
+      method:'POST',signal:ctrl.signal,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:APS_SYSTEM,messages:chatHistory})
     });
+    clearTimeout(to);
     const data=await res.json();
-    const reply=data.content?.[0]?.text||'Hubo un error. Escríbeme por WhatsApp: +593 96 835 2133 📱';
+    const reply=data.content?.[0]?.text;
+    if(!reply) throw new Error('no-reply');
     removeTyping();
     if(window.setRobotEmotion) setRobotEmotion('talking',-1);
     appendMsg('bot',reply);
@@ -1267,8 +1552,12 @@ async function processMessage(text){
     if(chatHistory.filter(m=>m.role==='assistant').length>=2) showWaButton();
   }catch(e){
     removeTyping();
-    appendMsg('bot','Error de conexión. Escríbeme directo por WhatsApp: +593 96 835 2133 📱');
-    if(window.setRobotEmotion) setRobotEmotion('sad',3000);
+    const msg='Eso lo mejor te lo responde Philip directo por WhatsApp (+593 96 835 2133). Mientras, ¿te llevo a alguna sección?';
+    if(window.setRobotEmotion) setRobotEmotion('smile',3000);
+    appendMsg('bot',msg);
+    chatHistory.push({role:'assistant',content:msg});
+    showQuickOptions();
+    showWaButton();
   }
 }
 
@@ -1454,18 +1743,10 @@ function showWaButton(){
   function loop(ts){drawHead(ts);requestAnimationFrame(loop);}
   requestAnimationFrame(loop);
 
-  C.addEventListener('click',()=>{
-    if(!chatOpen){
-      setRobotEmotion('heart',2000);
-      showWelcomeBubbleAgain();
-    }
-  });
   const wrap=document.getElementById('aiRobotWrap');
-  if(wrap) wrap.addEventListener('click',function(e){
-    if(e.target!==C){
-      setRobotEmotion('heart',2000);
-      toggleChat();
-    }
+  if(wrap) wrap.addEventListener('click',function(){
+    setRobotEmotion('heart',2000);
+    toggleChat();
   });
 })();
 
@@ -1480,6 +1761,130 @@ function openStory(stories,index){const overlay=document.getElementById('storyOv
 function closeStory(){document.getElementById('storyOverlay').classList.remove('open');document.getElementById('storyMedia').innerHTML='';clearTimeout(storyTimer);checkAvatarStory();}
 function checkAvatarStory(){const stories=JSON.parse(localStorage.getItem('aps_stories')||'[]');const now=Date.now();const valid=stories.filter(s=>now-s.timestamp<STORY_DURATION);const avatar=document.getElementById('avatarWithStory');const ring=document.getElementById('avatarStoryRing');const plus=document.getElementById('storyPlusIcon');if(!avatar)return;if(valid.length>0){ring.style.display='block';avatar.classList.add('has-story');const viewed=JSON.parse(localStorage.getItem('viewed_stories')||'[]');if(viewed.length>=valid.length)avatar.classList.add('viewed');else avatar.classList.remove('viewed');}else{ring.style.display='none';avatar.classList.remove('has-story','viewed');}if(localStorage.getItem('aps_admin')==='true')plus.style.display='flex';}
 document.addEventListener('DOMContentLoaded',checkAvatarStory);
+</script>
+<script>
+(function(){
+  var b=document.getElementById('navBurger'),c=document.getElementById('navCollapse');
+  if(!b||!c) return;
+  function set(o){c.classList.toggle('open',o);b.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');}
+  b.addEventListener('click',function(e){e.stopPropagation();set(!c.classList.contains('open'));});
+  c.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('click',function(e){if(!c.contains(e.target)&&!b.contains(e.target))set(false);});
+  window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);});
+})();
+</script>
+
+<dialog class="aps-dlg" id="dlgService">
+  <button class="dclose" data-close aria-label="Cerrar">×</button>
+  <h3 id="svcTitle">Servicio</h3>
+  <p data-es="¿Por dónde prefieres contratarme?" data-en="How would you like to hire me?">¿Por dónde prefieres contratarme?</p>
+  <div class="dopts">
+    <a class="dopt fv" id="svcFiverr" target="_blank" rel="noopener" data-es="Contratar por Fiverr (pago protegido)" data-en="Hire on Fiverr (protected payment)">Contratar por Fiverr (pago protegido)</a>
+    <a class="dopt wa" id="svcWa" target="_blank" rel="noopener" data-es="Escribirme por WhatsApp" data-en="Message me on WhatsApp">Escribirme por WhatsApp</a>
+  </div>
+</dialog>
+<dialog class="aps-dlg" id="dlgGame">
+  <button class="dclose" data-close aria-label="Cerrar">×</button>
+  <img class="dcover" id="gameCover" alt="" hidden>
+  <h3 id="gameTitle">Juego</h3>
+  <p data-es="Elige qué quieres hacer." data-en="Choose what you want to do.">Elige qué quieres hacer.</p>
+  <div class="dopts">
+    <a class="dopt mn" id="gamePlay" target="_blank" rel="noopener" data-es="▶ Jugar ahora" data-en="▶ Play now">▶ Jugar ahora</a>
+    <a class="dopt" id="gameHub" target="_blank" rel="noopener" data-es="Ver todos en PalabraPlay" data-en="See all on PalabraPlay">Ver todos en PalabraPlay</a>
+  </div>
+</dialog>
+<script>
+/* ═══ CONFIGURA AQUÍ TUS LINKS ═══ (déjalos '' y el botón se oculta solo) */
+var LINKS={
+  'fiverr':'https://www.fiverr.com/fernandotell662',
+  'palabraplay':'https://palabraplay.netlify.app',
+  'itch-octopus':'',  'itch-lexo':'https://josetellodev.itch.io/lexo','itch-snakeplay':'https://josetellodev.itch.io/snakeplay-io','itch-pytito':'https://josetellodev.itch.io/py-tito-fight-pixel-code-brawl','itch-hilario':'','itch-girasol':'',
+  'github-octopus':'','github-lexo':'','github-snakeplay':'','github-hilario':'','github-girasol':''
+};
+document.querySelectorAll('[data-link]').forEach(function(a){var u=LINKS[a.getAttribute('data-link')];if(u){a.href=u;a.hidden=false;}});
+document.querySelectorAll('[data-link-show]').forEach(function(e){if(LINKS[e.getAttribute('data-link-show')])e.hidden=false;});
+</script>
+<script>
+(function(){
+  var WA='593968352133', $=function(i){return document.getElementById(i)};
+  var GAMES=[
+    {k:'lexo',n:'Lexo',es:'Wordle en español',en:'Wordle in Spanish',img:'lexo.png'},
+    {k:'snakeplay',n:'SnakePlay',es:'Snake multijugador',en:'Multiplayer snake',img:'snakeplay.png'},
+    {k:'octopus',n:'Octopus Game',es:'Aventura submarina',en:'Underwater adventure',img:'octopus.png'},
+    {k:'hilario',n:'Hilario',es:'Sopa de letras',en:'Word search',img:''},
+    {k:'girasol',n:'Word Girasol',es:'Palabras con letras',en:'Letter wheel words',img:''},
+    {k:'pytito',n:'PY-TITO FIGHT',es:'Pelea de 2 jugadores',en:'2-player code brawler',img:'pytito.png'}
+  ];
+  var isEn=function(){return document.documentElement.lang==='en'};
+
+  /* Modales */
+  document.querySelectorAll('dialog.aps-dlg').forEach(function(d){
+    d.addEventListener('click',function(e){if(e.target===d||e.target.hasAttribute('data-close'))d.close();});
+  });
+
+  /* Servicios -> Fiverr o WhatsApp */
+  document.querySelectorAll('.service-item').forEach(function(it){
+    it.setAttribute('role','button');it.setAttribute('tabindex','0');
+    function open(){
+      var t=(it.querySelector('.service-title').innerHTML||'').replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+      $('svcTitle').textContent=t;
+      $('svcFiverr').href=LINKS.fiverr||'#';
+      $('svcFiverr').hidden=!LINKS.fiverr;
+      $('svcWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent((isEn()?'Hi! I am interested in: ':'¡Hola! Me interesa: ')+t);
+      $('dlgService').showModal();
+    }
+    it.addEventListener('click',open);
+    it.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  });
+
+  /* Juegos: lista de nombres -> opciones */
+  function openGame(g){
+    $('gameTitle').textContent=g.n;
+    $('gamePlay').href=LINKS['itch-'+g.k]||LINKS.palabraplay;
+    $('gameHub').href=LINKS.palabraplay;
+    var c=$('gameCover');
+    if(g.img){c.src='assets/img/juegos/'+g.img;c.alt=g.n;c.hidden=false;c.onerror=function(){c.hidden=true;};}else{c.hidden=true;}
+    $('dlgGame').showModal();
+  }
+  var ul=$('glist');
+  if(ul)GAMES.forEach(function(g){
+    var li=document.createElement('li'),b=document.createElement('button');
+    b.className='grow';
+    b.innerHTML='<span class="gname"></span><span class="gtag" data-es="'+g.es+'" data-en="'+g.en+'">'+(isEn()?g.en:g.es)+'</span><span class="garrow">▶</span>';
+    b.querySelector('.gname').textContent=g.n;
+    b.onclick=function(){openGame(g)};
+    li.appendChild(b);ul.appendChild(li);
+  });
+
+  /* Carrusel automático, arrastrable, con flechas */
+  var rail=$('rail'),track=$('railTrack');
+  if(rail&&track){
+    Array.prototype.slice.call(track.children).forEach(function(c){var n=c.cloneNode(true);n.setAttribute('aria-hidden','true');n.tabIndex=-1;track.appendChild(n);});
+    var still=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function fx(cv){var c=cv.getContext('2d'),w=cv.width=cv.offsetWidth||220,h=cv.height=cv.offsetHeight||110,S=w<200?16:20,H=S*Math.sqrt(3),hs=[],r,q;
+      for(r=-1;r<Math.ceil(h/H)+2;r++)for(q=-1;q<Math.ceil(w/(S*1.5))+2;q++)hs.push({x:q*S*1.5,y:r*H+(q%2?H/2:0),sp:.6+Math.random()*1.2,ph:Math.random()*6.28});
+      var f=0;(function d(){f++;c.fillStyle='#0d1117';c.fillRect(0,0,w,h);var t=f*.02;
+        hs.forEach(function(o){var p=.3+.7*Math.abs(Math.sin(t*o.sp+o.ph));c.beginPath();for(var i=0;i<6;i++){var a=Math.PI/180*(60*i-30);c[i?'lineTo':'moveTo'](o.x+(S-2)*Math.cos(a),o.y+(S-2)*Math.sin(a));}c.closePath();c.strokeStyle='rgba(255,'+(100+Math.floor(p*80))+',0,'+(.25+p*.75)+')';c.lineWidth=1+p*.6;c.stroke();});
+        if(!still)requestAnimationFrame(d);})();}
+    track.querySelectorAll('canvas.rfx').forEach(fx);
+    var x=0,hover=false,drag=false,sx=0,sp=0,moved=0,half=0;
+    function measure(){half=track.scrollWidth/2}
+    function wrap(){if(half&&x<=-half)x+=half;if(x>0)x-=half}
+    function draw(){track.style.transform='translate3d('+x+'px,0,0)'}
+    window.addEventListener('load',measure);window.addEventListener('resize',measure);measure();
+    (function tick(){if(!hover&&!drag&&!still){x-=0.5;wrap();draw();}requestAnimationFrame(tick);})();
+    rail.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hover=true});
+    rail.addEventListener('pointerleave',function(){hover=false});
+    rail.addEventListener('pointerdown',function(e){drag=true;moved=0;sx=e.clientX;sp=x;rail.classList.add('drag')});
+    window.addEventListener('pointermove',function(e){if(!drag)return;moved=e.clientX-sx;x=sp+moved;wrap();draw()});
+    window.addEventListener('pointerup',function(){drag=false;rail.classList.remove('drag')});
+    rail.addEventListener('click',function(e){if(Math.abs(moved)>6){e.preventDefault();e.stopPropagation();}},true);
+    rail.addEventListener('dragstart',function(e){e.preventDefault()});
+    function step(d){var from=x,to=x+d*280,t0=performance.now();(function a(t){var p=Math.min((t-t0)/350,1);x=from+(to-from)*(1-Math.pow(1-p,3));wrap();draw();if(p<1)requestAnimationFrame(a)})(t0)}
+    $('railPrev').onclick=function(){step(1)};
+    $('railNext').onclick=function(){step(-1)};
+  }
+})();
 </script>
 </body>
 </html>
