@@ -286,6 +286,17 @@
             .detail-section{padding:60px 20px;}
             .pack-card{min-width:280px;}
         }
+        @media(max-width:600px){
+            html,body{overflow-x:hidden;}
+            .detail-grid{grid-template-columns:minmax(0,1fr);}
+            .detail-grid>*{min-width:0;}
+            .detail-title{font-size:clamp(2rem,11vw,3rem);letter-spacing:2px;word-break:break-word;}
+            .char-card{width:calc(50% - 8px);}
+            nav{padding:12px 14px;gap:8px;flex-wrap:wrap;}
+            .nav-logo{font-size:.78rem;letter-spacing:2px;}
+            .nav-btns{gap:6px;flex-wrap:wrap;}
+            .nav-btn{padding:7px 12px;font-size:.68rem;white-space:nowrap;}
+        }
     </style>
 </head>
 <body>
@@ -597,7 +608,7 @@
             ART PHILIP STUDIO
         </div>
         <p style="font-size:.75rem;letter-spacing:3px;color:#4a7a80;text-transform:uppercase;margin-bottom:40px;">
-            Quito, Ecuador — 2026
+            Web &amp; Games — 2026
         </p>
         <div style="background:linear-gradient(135deg,rgba(0,212,212,.08),rgba(0,163,163,.04));border:1px solid rgba(0,212,212,.2);border-radius:16px;max-width:480px;margin:0 auto 40px;padding:30px 20px;">
             <div style="font-size:.7rem;letter-spacing:3px;color:#4a7a80;text-transform:uppercase;margin-bottom:10px;">🎮 También hago juegos</div>

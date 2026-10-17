@@ -4,9 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Philip — Diseñador Web Freelance | Quito, Ecuador | Entrega en 72h</title>
-<meta name="description" content="Soy Philip, diseñador web freelance en Quito, Ecuador. Landing pages y tiendas online para negocios en México, Colombia, España y todo el mundo. Entrega en 72h desde $150 USD.">
-<meta name="keywords" content="diseño web Ecuador, diseñador web Quito, landing page profesional, tienda online, diseño web Mexico, diseño web Colombia, diseño web España, web designer freelance, Art Philip Studio">
+<title>Philip — Diseñador Web y Juegos HTML5 | Entrega en 72h</title>
+<meta name="description" content="Soy Philip, diseñador web y creador de juegos HTML5. Landing pages y tiendas online para negocios de todo el mundo. Entrega en 72h desde $150 USD.">
+<meta name="keywords" content="juegos HTML5, landing page profesional, tienda online, diseño web Mexico, diseño web Colombia, diseño web España, web designer freelance, Art Philip Studio">
 <meta name="author" content="Art Philip Studio">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://art-philip-studio.github.io/Art-Philip-Studio/">
@@ -853,6 +853,21 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
 .gl-links a{color:var(--text-dim);text-decoration:none;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
 .gl-links a:hover{color:var(--gold)}
 @media(max-width:860px){.games-layout{grid-template-columns:1fr;gap:28px}}
+
+/* ══ CÓMO TRABAJO · FAQ · DATOS CONTACTO (añadido) ══ */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1100px;margin:0 auto}
+.how-step{border:1px solid var(--border-strong);background:var(--card-bg);border-radius:14px;padding:26px}
+.how-n{display:inline-flex;width:38px;height:38px;border-radius:50%;align-items:center;justify-content:center;background:var(--gold);color:#031820;font-weight:800;margin-bottom:12px}
+.how-step h3{margin:0 0 6px;font-size:1.15rem;color:var(--text)}
+.how-step p{margin:0;color:var(--text-mid);font-size:.92rem;line-height:1.6}
+.faq-list{max-width:760px;margin:0 auto}
+.faq-list details{border-bottom:1px solid var(--border-strong);padding:16px 4px}
+.faq-list summary{cursor:pointer;font-weight:600;color:var(--text);list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:'+';color:var(--gold);font-size:1.3rem;line-height:1;transition:transform .25s}
+.faq-list details[open] summary::after{transform:rotate(45deg)}
+.faq-list p{margin:10px 0 0;color:var(--text-mid);font-size:.92rem;line-height:1.7}
+.contact-facts{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px;color:var(--text-mid);font-size:.88rem}
 </style>
 </head>
 <body>
@@ -866,25 +881,6 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
     <div class="story-caption" id="storyCaption"></div>
   </div>
 </div>
-
-<!-- WA FLOAT -->
-<a href="https://wa.me/593968352133?text=Hola%21%20Vi%20tu%20portafolio%20y%20me%20interesa%20tu%20trabajo%20%F0%9F%91%8D" target="_blank" class="wa-float" title="Hablar por WhatsApp">
-  <span class="wa-float-label">¡Hablemos por WhatsApp!</span>
-  <div class="wa-float-btn wa-day">
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:42px;height:42px;">
-      <defs><linearGradient id="waDayG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#25D366"/><stop offset="100%" stop-color="#128C7E"/></linearGradient></defs>
-      <rect x="0" y="0" width="120" height="120" rx="28" fill="url(#waDayG)"/>
-      <path d="M60 22C39 22 22 39 22 60c0 7.2 2.1 13.9 5.7 19.5L22.5 98.5l19.6-5.1C47.6 96.7 54.1 98.5 60 98.5c21 0 38-17 38-38S81 22 60 22Z" fill="white"/>
-      <path d="M44 43s-2 0-2 5 3.5 13 10 19.5S66.5 77.5 71.5 77.5s.5-2 .5-2l2-5.5s.5-1.5-1-2.5l-6-3.5s-1.5-.5-2.5 1L62 68s-1 1-2.5.5c-1.5-.5-7.5-4.5-10.5-10S48 51 49 50l2.5-2.5c1-1 .5-2.5.5-2.5L48.5 39C47.5 37.5 46 38 46 38L44 43Z" fill="#25D366"/>
-    </svg>
-  </div>
-  <div class="wa-float-btn wa-night" style="display:none;background:transparent;box-shadow:0 4px 20px rgba(37,211,102,.25);">
-    <svg viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="width:58px;height:58px;display:block;">
-      <circle cx="29" cy="29" r="28" fill="white"/>
-      <g transform="translate(10,10)"><path fill="#25D366" d="M19 1C8.507 1 0 9.507 0 20c0 3.507.904 6.804 2.483 9.675L0 38l8.647-2.272A18.916 18.916 0 0019 39c10.493 0 19-8.507 19-19S29.493 1 19 1zm0 2.667c9.02 0 16.333 7.313 16.333 16.333S28.02 36.333 19 36.333a16.28 16.28 0 01-8.127-2.165l-.583-.348-5.955 1.372 1.41-5.808-.381-.605A16.24 16.24 0 012.667 20C2.667 10.98 9.98 3.667 19 3.667zm-4.16 8.196c-.353 0-.927.132-1.411.661-.484.529-1.852 1.808-1.852 4.41 0 2.603 1.896 5.115 2.16 5.467.265.353 3.705 5.925 9.127 8.073 1.057.44 1.893.705 2.54.904 1.067.323 2.039.278 2.806.168.856-.123 2.65-1.082 3.023-2.127.373-1.045.373-1.94.264-2.127-.11-.19-.419-.303-.882-.53-.462-.228-2.737-1.35-3.16-1.504-.423-.154-.73-.228-1.036.228-.308.456-1.19 1.504-1.46 1.81-.27.308-.54.347-1.003.115-.462-.232-1.95-.719-3.716-2.293-1.373-1.224-2.3-2.733-2.572-3.194-.27-.462-.029-.712.203-.94.208-.206.462-.536.693-.804.232-.269.309-.461.463-.77.154-.307.077-.577-.039-.807-.116-.229-1.036-2.497-1.42-3.42-.374-.898-.756-.775-1.036-.79-.267-.012-.577-.015-.886-.015z"/></g>
-    </svg>
-  </div>
-</a>
 
 <!-- ══ ROBOT ASISTENTE ══ -->
 <div class="ai-robot-wrap" id="aiRobotWrap">
@@ -974,7 +970,9 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
           <li><a href="#inicio" class="active" data-es="Home" data-en="Home">Home</a></li>
           <li><a href="#demos" data-es="Demos" data-en="Demos">Demos</a></li>
           <li><a href="fondos-animados.html" data-es="Fondos Animados" data-en="Animated Backgrounds">Fondos Animados</a></li>
+          <li><a href="#juegos" data-es="Juegos" data-en="Games">Juegos</a></li>
           <li><a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a></li>
+          <li><a href="#sobre-mi" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
           <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
         </ul>
         <div class="c-nav-right">
@@ -1008,10 +1006,10 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
           </div>
         </div>
         <div class="hero-text">
-          <div class="hero-greeting" id="heroGreeting">Quito, Ecuador — Disponible Ahora</div>
+          <div class="hero-greeting" id="heroGreeting">Disponible ahora</div>
           <h1 class="hero-name">Philip</h1>
           <p class="hero-role" id="heroRole">Philip - Web Designer Internacional<span class="cursor-blink"></span></p>
-          <p class="hero-bio" id="heroBio">Soy Philip, diseñador web en Quito, Ecuador. Desarrollo páginas web para negocios en México, Colombia, España y todo el mundo. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.</p>
+          <p class="hero-bio" id="heroBio">Soy Philip, diseñador web y creador de juegos. Hago páginas web para negocios de todo el mundo y también juegos, que si quieres te entrego en formato HTML5. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.</p>
           <div class="hero-cta-row">
             <a href="#demos" class="btn-ver" id="btnVerDemos">Ver Demos</a>
             <a href="https://wa.me/593968352133?text=Hola%21%20Quiero%20contratar%20tus%20servicios" target="_blank" class="btn-wa-hero" id="btnHire">Contratar</a>
@@ -1116,6 +1114,16 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
     <p class="fiverr-note" data-link-show="fiverr" hidden data-es="Pago protegido por Fiverr" data-en="Payment protected by Fiverr">Pago protegido por Fiverr</p></div>
 </section>
 
+<!-- CÓMO TRABAJO -->
+<section class="how sec" id="como-trabajo">
+  <div class="section-header fade-up"><span class="section-num">✦ /</span><h2 class="section-title" data-es="Cómo trabajo" data-en="How I work">Cómo trabajo</h2><div class="section-line"></div></div>
+  <div class="how-grid">
+    <div class="how-step fade-up"><span class="how-n">1</span><h3 data-es="Me escribes" data-en="You message me">Me escribes</h3><p data-es="Cuéntame tu idea por WhatsApp o Fiverr. Te respondo en menos de 2 horas." data-en="Tell me your idea on WhatsApp or Fiverr. I reply within 2 hours.">Cuéntame tu idea por WhatsApp o Fiverr. Te respondo en menos de 2 horas.</p></div>
+    <div class="how-step fade-up delay-1"><span class="how-n">2</span><h3 data-es="Precio claro" data-en="Clear price">Precio claro</h3><p data-es="Te digo qué incluye y cuánto cuesta antes de empezar. Sin sorpresas." data-en="I tell you what is included and the cost before we start. No surprises.">Te digo qué incluye y cuánto cuesta antes de empezar. Sin sorpresas.</p></div>
+    <div class="how-step fade-up delay-2"><span class="how-n">3</span><h3 data-es="Entrego y ajusto" data-en="I deliver and refine">Entrego y ajusto</h3><p data-es="Tu página lista en 72 h, con 2 revisiones incluidas hasta que quedes feliz." data-en="Your page ready in 72 h, with 2 revisions included until you are happy.">Tu página lista en 72 h, con 2 revisiones incluidas hasta que quedes feliz.</p></div>
+  </div>
+</section>
+
 <!-- SOBRE MÍ -->
 <section class="sobre-mi sec" id="sobre-mi">
   <div class="sobre-mi-bg"></div>
@@ -1130,14 +1138,25 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
       <input type="file" id="storyFileInput" accept="image/*,video/*" onchange="uploadStory(event)">
       <div class="sobre-mi-tag" id="aboutTag">Desarrollador Freelance</div>
       <div class="sobre-mi-name">Philip</div>
-      <div class="sobre-mi-role">Quito, Ecuador</div>
+      <div class="sobre-mi-role">Web &amp; Games</div>
     </div>
     <div class="sobre-mi-text fade-up delay-1">
-      <p id="aboutP1">Soy Philip, desarrollador web freelance con base en Quito. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes.</p>
+      <p id="aboutP1">Soy Philip, desarrollador web freelance. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes. También hago juegos y, si te gusta, te los entrego en <strong>formato HTML5</strong>.</p>
       <p id="aboutP2">No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.</p>
       <p id="aboutP3">Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.</p>
       <div class="sobre-mi-cta"><a href="https://wa.me/593968352133?text=Hola%20Philip%2C%20vi%20tu%20portafolio%20y%20quiero%20hablar%20contigo" target="_blank" class="btn-primary" id="btnTalkPhilip">💬 Hablar con Philip</a></div>
     </div>
+  </div>
+</section>
+
+<!-- PREGUNTAS FRECUENTES -->
+<section class="faq sec" id="faq">
+  <div class="section-header fade-up"><span class="section-num">✦ /</span><h2 class="section-title" data-es="Preguntas frecuentes" data-en="FAQ">Preguntas frecuentes</h2><div class="section-line"></div></div>
+  <div class="faq-list fade-up">
+    <details><summary data-es="¿Cuánto cuesta?" data-en="How much does it cost?">¿Cuánto cuesta?</summary><p data-es="Landing page desde $150, sitio corporativo $350 y tienda online $650. Escríbeme y te confirmo según lo que necesites." data-en="Landing page from $150, corporate site $350 and online store $650. Message me and I will confirm based on what you need.">Landing page desde $150, sitio corporativo $350 y tienda online $650. Escríbeme y te confirmo según lo que necesites.</p></details>
+    <details><summary data-es="¿Cuánto tarda?" data-en="How long does it take?">¿Cuánto tarda?</summary><p data-es="La landing page, 72 horas. El sitio corporativo, de 5 a 7 días." data-en="The landing page takes 72 hours. The corporate site takes 5 to 7 days.">La landing page, 72 horas. El sitio corporativo, de 5 a 7 días.</p></details>
+    <details><summary data-es="¿Cómo pago de forma segura?" data-en="How do I pay safely?">¿Cómo pago de forma segura?</summary><p data-es="Puedes contratarme por Fiverr, que protege tu pago, o acordar los detalles conmigo por WhatsApp." data-en="You can hire me on Fiverr, which protects your payment, or agree the details with me on WhatsApp.">Puedes contratarme por Fiverr, que protege tu pago, o acordar los detalles conmigo por WhatsApp.</p></details>
+    <details><summary data-es="¿Haces juegos?" data-en="Do you make games?">¿Haces juegos?</summary><p data-es="Sí. Hago juegos web y, si te gusta, te los entrego en formato HTML5 para que los subas a donde quieras." data-en="Yes. I make web games and, if you like, I deliver them in HTML5 format so you can upload them anywhere.">Sí. Hago juegos web y, si te gusta, te los entrego en formato HTML5 para que los subas a donde quieras.</p></details>
   </div>
 </section>
 
@@ -1156,7 +1175,8 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
           <a href="#" class="contact-btn secondary" onclick="navigator.clipboard.writeText('studio.art.philip@gmail.com');this.textContent='¡Copiado ✓';setTimeout(()=>this.textContent='studio.art.philip@gmail.com',2000);return false;">studio.art.philip@gmail.com</a>
         </div>
         <div class="contact-divider"><span id="contactOr">o</span></div>
-        <p id="contactNote" style="font-size:.78rem;color:var(--text-dim);line-height:1.7;">Respondo en menos de 2 horas en horario de Quito. Si es urgente, WhatsApp es la vía más rápida.</p>
+        <ul class="contact-facts"><li data-es="⚡ Respuesta en menos de 2 horas" data-en="⚡ Reply in under 2 hours">⚡ Respuesta en menos de 2 horas</li><li data-es="💬 Cotización por WhatsApp" data-en="💬 Quote via WhatsApp">💬 Cotización por WhatsApp</li><li data-es="🔒 Pago protegido en Fiverr" data-en="🔒 Payment protected on Fiverr">🔒 Pago protegido en Fiverr</li></ul>
+        <p id="contactNote" style="font-size:.78rem;color:var(--text-dim);line-height:1.7;">Respondo en menos de 2 horas en horario laboral. Si es urgente, WhatsApp es la vía más rápida.</p>
       </div>
       <div class="contact-form-wrap">
         <h3 id="contactSendMsg">Enviar mensaje</h3>
@@ -1180,7 +1200,7 @@ dialog.aps-dlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
       <img src="assets/logos/logo.png" alt="Art Philip Studio" class="footer-logo-img" width="32" height="32">
       <div class="footer-logo-text">
         <div class="footer-logo">Art Philip Studio</div>
-        <div class="footer-sub">Quito, Ecuador — 2026</div>
+        <div class="footer-sub">Web &amp; Games — 2026</div>
       </div>
     </div>
     <div class="footer-tagline" id="footerTagline">Soluciones Digitales</div>
@@ -1303,7 +1323,7 @@ document.addEventListener('DOMContentLoaded',function(){
 (function(){
   const btn=document.getElementById('toggleLang'),lblEs=document.getElementById('lblEs'),lblEn=document.getElementById('lblEn');
   let isEn=false;
-  const t={navSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},cardSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},heroGreeting:{es:'Quito, Ecuador — Disponible Ahora',en:'Quito, Ecuador — Available Now'},heroRole:{es:'Philip - Web Designer Internacional',en:'Philip - International Web Designer'},heroBio:{es:'Soy Philip, diseñador web en Quito, Ecuador. Desarrollo páginas web para negocios en México, Colombia, España y todo el mundo. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.',en:"I'm Philip, a web designer based in Quito, Ecuador. I build websites for businesses in Mexico, Colombia, Spain and worldwide. Your landing page or online store ready in 72h, professionally designed to get you clients via WhatsApp from any country."},btnVerDemos:{es:'Ver Demos',en:'View Demos'},btnHire:{es:'Contratar',en:'Hire Me'},btnContratar:{es:'↓ Contratar',en:'↓ Hire Me'},flipHint:{es:'clic para girar ↻',en:'click to flip ↻'},stat1:{es:'Entrega garantizada',en:'Guaranteed delivery'},stat2:{es:'Juegos publicados',en:'Published games'},stat3:{es:'Tipos de servicio',en:'Service types'},stat4:{es:'Revisiones incluidas',en:'Revisions included'},demosTag:{es:'Mi colección',en:'My collection'},demosTitle1:{es:'Diseños que',en:'Designs that'},demosTitle2:{es:'consiguen',en:'get you'},demosTitle3:{es:'clientes',en:'clients'},demosSub:{es:'Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.',en:'Scroll through each demo. Click "View Demo" to see it in full.'},secServicios:{es:'Servicios',en:'Services'},srv1title:{es:'Landing Page<br>Premium',en:'Premium<br>Landing Page'},srv1desc:{es:'Tu negocio online en 72 horas. Diseño exclusivo, adaptado a celular y pensado para que los visitantes te llamen o escriban. Incluye 2 revisiones hasta que quedes 100% satisfecho.',en:"Your business online in 72 hours. Exclusive design, mobile-ready and built to make visitors call or message you. Includes 2 revisions until you're 100% happy."},srv1sub:{es:'/ página',en:'/ page'},srv2title:{es:'Sitio Web<br>Corporativo',en:'Corporate<br>Website'},srv2desc:{es:'Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.',en:'Your company looks professional on Google and any device. Includes contact form, photo gallery, basic SEO optimization and delivery in 5–7 days.'},srv2sub:{es:'/ proyecto',en:'/ project'},srv3title:{es:'Tienda<br>Online',en:'Online<br>Store'},srv3desc:{es:'Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.',en:'Start selling your products online. Your store with catalog, shopping cart, secure payments and a dashboard so you manage everything yourself.'},srv3sub:{es:'/ proyecto',en:'/ project'},btnQuote:{es:'💬 Cotizar por WhatsApp',en:'💬 Get a Quote on WhatsApp'},secAbout:{es:'Sobre mí',en:'About Me'},aboutTag:{es:'Desarrollador Freelance',en:'Freelance Developer'},aboutP1:{es:'Soy Philip, desarrollador web freelance con base en Quito. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes.',en:"I'm Philip, a freelance web developer based in Quito. I specialize in building websites for <strong>small businesses and entrepreneurs</strong> who want to look professional online and get more clients."},aboutP2:{es:'No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.',en:"I'm not an agency. When you hire me, <strong>you work directly with me</strong> — from the first conversation until your site is live. That means direct communication, no middlemen, no surprise fees and no delays."},aboutP3:{es:'Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.',en:"I take every project seriously because I know that behind every business there's a person who bet on something. My job is to make that bet visible and felt online."},btnTalkPhilip:{es:'💬 Hablar con Philip',en:'💬 Talk to Philip'},contactTitle1:{es:'¿Listo para',en:'Ready to'},contactTitle2:{es:'empezar?',en:'start?'},contactSub:{es:'Tu negocio merece una presencia digital que realmente funcione. Escríbeme directamente o usa el formulario y te respondo hoy.',en:"Your business deserves a digital presence that really works. Message me directly or use the form and I'll reply today."},contactDirect:{es:'Contacto directo',en:'Direct contact'},contactOr:{es:'o',en:'or'},contactNote:{es:'Respondo en menos de 2 horas en horario de Quito. Si es urgente, WhatsApp es la vía más rápida.',en:'I reply within 2 hours during Quito business hours. For urgent matters, WhatsApp is fastest.'},contactSendMsg:{es:'Enviar mensaje',en:'Send a message'},labelName:{es:'Nombre',en:'Name'},labelEmail:{es:'Correo',en:'Email'},labelMsg:{es:'Mensaje',en:'Message'},submitBtn:{es:'Enviar mensaje',en:'Send message'},footerTagline:{es:'Soluciones Digitales',en:'Digital Solutions'}};
+  const t={navSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},cardSub:{es:'Dev & Soluciones Digitales',en:'Dev & Digital Solutions'},heroGreeting:{es:'Disponible ahora',en:'Available now'},heroRole:{es:'Philip - Web Designer Internacional',en:'Philip - International Web Designer'},heroBio:{es:'Soy Philip, diseñador web y creador de juegos. Hago páginas web para negocios de todo el mundo y también juegos, que si quieres te entrego en formato HTML5. Tu landing page o tienda online lista en 72h, con diseño profesional para que consigas clientes por WhatsApp desde cualquier país.',en:"I'm Philip, a web designer and game maker. I build websites for businesses worldwide and I also make games, which I can deliver in HTML5 format if you like. Your landing page or online store ready in 72h, professionally designed to get you clients via WhatsApp from any country."},btnVerDemos:{es:'Ver Demos',en:'View Demos'},btnHire:{es:'Contratar',en:'Hire Me'},btnContratar:{es:'↓ Contratar',en:'↓ Hire Me'},flipHint:{es:'clic para girar ↻',en:'click to flip ↻'},stat1:{es:'Entrega garantizada',en:'Guaranteed delivery'},stat2:{es:'Juegos publicados',en:'Published games'},stat3:{es:'Tipos de servicio',en:'Service types'},stat4:{es:'Revisiones incluidas',en:'Revisions included'},demosTag:{es:'Mi colección',en:'My collection'},demosTitle1:{es:'Diseños que',en:'Designs that'},demosTitle2:{es:'consiguen',en:'get you'},demosTitle3:{es:'clientes',en:'clients'},demosSub:{es:'Desliza para explorar cada demo. Haz clic en "Ver Demo" para verlo completo.',en:'Scroll through each demo. Click "View Demo" to see it in full.'},secServicios:{es:'Servicios',en:'Services'},srv1title:{es:'Landing Page<br>Premium',en:'Premium<br>Landing Page'},srv1desc:{es:'Tu negocio online en 72 horas. Diseño exclusivo, adaptado a celular y pensado para que los visitantes te llamen o escriban. Incluye 2 revisiones hasta que quedes 100% satisfecho.',en:"Your business online in 72 hours. Exclusive design, mobile-ready and built to make visitors call or message you. Includes 2 revisions until you're 100% happy."},srv1sub:{es:'/ página',en:'/ page'},srv2title:{es:'Sitio Web<br>Corporativo',en:'Corporate<br>Website'},srv2desc:{es:'Tu empresa aparece profesional en Google y en cualquier dispositivo. Incluye formulario de contacto, galería de fotos, optimización básica para buscadores y entrega en 5–7 días.',en:'Your company looks professional on Google and any device. Includes contact form, photo gallery, basic SEO optimization and delivery in 5–7 days.'},srv2sub:{es:'/ proyecto',en:'/ project'},srv3title:{es:'Tienda<br>Online',en:'Online<br>Store'},srv3desc:{es:'Empieza a vender tus productos online. Tu tienda con catálogo, carrito de compras, pagos seguros y panel para que administres todo tú solo — sin depender de nadie.',en:'Start selling your products online. Your store with catalog, shopping cart, secure payments and a dashboard so you manage everything yourself.'},srv3sub:{es:'/ proyecto',en:'/ project'},btnQuote:{es:'💬 Cotizar por WhatsApp',en:'💬 Get a Quote on WhatsApp'},secAbout:{es:'Sobre mí',en:'About Me'},aboutTag:{es:'Desarrollador Freelance',en:'Freelance Developer'},aboutP1:{es:'Soy Philip, desarrollador web freelance. Me especializo en crear páginas web para <strong>pequeños negocios y emprendedores</strong> que quieren verse profesionales online y conseguir más clientes. También hago juegos y, si te gusta, te los entrego en <strong>formato HTML5</strong>.',en:"I'm Philip, a freelance web developer. I specialize in building websites for <strong>small businesses and entrepreneurs</strong> who want to look professional online and get more clients. I also make games and, if you like, I can deliver them in <strong>HTML5 format</strong>."},aboutP2:{es:'No soy una agencia. Cuando me contratas, <strong>trabajas directamente conmigo</strong> — desde la primera conversación hasta que la página está publicada. Eso significa comunicación directa, sin intermediarios, sin sorpresas en el precio y sin demoras.',en:"I'm not an agency. When you hire me, <strong>you work directly with me</strong> — from the first conversation until your site is live. That means direct communication, no middlemen, no surprise fees and no delays."},aboutP3:{es:'Cada proyecto lo tomo en serio porque sé que detrás de cada negocio hay una persona que apostó por algo. Mi trabajo es que esa apuesta se vea y se sienta en digital.',en:"I take every project seriously because I know that behind every business there's a person who bet on something. My job is to make that bet visible and felt online."},btnTalkPhilip:{es:'💬 Hablar con Philip',en:'💬 Talk to Philip'},contactTitle1:{es:'¿Listo para',en:'Ready to'},contactTitle2:{es:'empezar?',en:'start?'},contactSub:{es:'Tu negocio merece una presencia digital que realmente funcione. Escríbeme directamente o usa el formulario y te respondo hoy.',en:"Your business deserves a digital presence that really works. Message me directly or use the form and I'll reply today."},contactDirect:{es:'Contacto directo',en:'Direct contact'},contactOr:{es:'o',en:'or'},contactNote:{es:'Respondo en menos de 2 horas en horario laboral. Si es urgente, WhatsApp es la vía más rápida.',en:'I reply within 2 hours during business hours. For urgent matters, WhatsApp is fastest.'},contactSendMsg:{es:'Enviar mensaje',en:'Send a message'},labelName:{es:'Nombre',en:'Name'},labelEmail:{es:'Correo',en:'Email'},labelMsg:{es:'Mensaje',en:'Message'},submitBtn:{es:'Enviar mensaje',en:'Send message'},footerTagline:{es:'Soluciones Digitales',en:'Digital Solutions'}};
   function applyLang(en){isEn=en;btn.classList.toggle('on',en);btn.setAttribute('aria-checked',en?'true':'false');if(lblEs)lblEs.classList.toggle('on',!en);if(lblEn)lblEn.classList.toggle('on',en);const lang=en?'en':'es';document.documentElement.lang=lang;Object.keys(t).forEach(function(id){const el=document.getElementById(id);if(!el)return;const val=t[id][lang];if(id==='submitBtn'){if(!el.disabled)el.textContent=val;}else if(val&&val.includes('<'))el.innerHTML=val;else if(val)el.textContent=val;});document.querySelectorAll('[data-es][data-en]').forEach(function(el){el.innerHTML=el.getAttribute('data-'+lang);});const ci=document.getElementById('chatInput');if(ci)ci.placeholder=en?'Type your question...':'Escribe tu pregunta...';try{localStorage.setItem('aps-lang',en?'en':'es');}catch(e){}}
   try{const s=localStorage.getItem('aps-lang');if(s==='en')applyLang(true);}catch(e){}
   btn.addEventListener('click',function(){applyLang(!isEn);});
@@ -1323,7 +1343,7 @@ document.addEventListener('DOMContentLoaded',updateWaLogo);
 // ══════════════════════════════════════════
 //   SISTEMA CHAT — ALE (Art Philip Studio)
 // ══════════════════════════════════════════
-const APS_SYSTEM=`Eres Ale, la asistente virtual de Art Philip Studio, el portafolio de Philip, diseñador web freelance en Quito, Ecuador.
+const APS_SYSTEM=`Eres Ale, la asistente virtual de Art Philip Studio, el portafolio de Philip, diseñador web freelance y creador de juegos. Nunca reveles ni confirmes la ubicación de Philip; si preguntan, di que trabaja con clientes de todo el mundo.
 
 Tu personalidad: amigable, directa, profesional pero cercana. Hablas en el mismo idioma que el usuario (español o inglés). Eres concisa — máximo 3 párrafos. No uses asteriscos ni markdown.
 
@@ -1335,7 +1355,8 @@ SERVICIOS Y PRECIOS:
 
 CONTACTO:
 - WhatsApp: +593 96 835 2133
-- Quito, Ecuador — respuesta en menos de 2 horas
+- Respuesta en menos de 2 horas
+- Juegos: también hace juegos web y puede entregarlos en formato HTML5
 
 Si detectas intención de compra → responde con alegría (emoción: happy).
 Si el usuario dice gracias → responde con cariño (emoción: heart).
@@ -1485,7 +1506,7 @@ const APS_INTENTS=[
   {re:/contact|whatsapp|escrib|hablar|contratar|hire|correo|mail|llamar/i,go:'#contacto',label:'Ir a Contacto',emo:'mail',
    es:'Lo más rápido es WhatsApp: +593 96 835 2133 (respuesta en menos de 2 horas). También puedes usar el formulario.'},
   {re:/sobre|quién|quien|about|philip|experiencia/i,go:'#sobre-mi',label:'Sobre mí',emo:'smile',
-   es:'Philip es diseñador web en Quito, Ecuador, y trabaja con clientes de todo el mundo. Te llevo a conocerlo 😊'},
+   es:'Philip es diseñador web y creador de juegos, y trabaja con clientes de todo el mundo. Te llevo a conocerlo 😊'},
   {re:/servicio|service|ofreces|qué haces|que haces/i,go:'#servicios',label:'Ver Servicios',emo:'smile',
    es:'Hago landing pages, sitios corporativos y tiendas online, todo pensado para móvil y para que te escriban por WhatsApp.'}
 ];
